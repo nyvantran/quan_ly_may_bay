@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/quan_ly_may_bay/Main.cpp
+/quan_ly_may_bay/Main.cpp

@@ -8,4 +8,5 @@ void in() {
 
 void test() {
 	cout << "hello meo meo";
+	cout<<1;
 }

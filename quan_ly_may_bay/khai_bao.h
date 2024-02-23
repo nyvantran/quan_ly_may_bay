@@ -1,4 +1,6 @@
 #pragma once
+#define MAX_MB 300
+///////////struct chuyen bay
 struct Ve
 {
 	char cmnd[225];
@@ -36,7 +38,31 @@ struct ChuyenBay
 	Ve* ds_ve;
 	ChuyenBay();
 };
-struct Ds_Chuyen_Bay
+struct NodeChuyenBay
 {
-
+	ChuyenBay cb;
+	NodeChuyenBay* next;
+	//NodeChuyenBay();
+	//~NodeChuyenBay();
 };
+typedef NodeChuyenBay* PTRChuyenBay;
+void KhoiDauCB(PTRChuyenBay& fist);
+PTRChuyenBay KhoiTaoCB();
+void ThemDauCB(PTRChuyenBay& fist, NodeChuyenBay x);
+void ThemSauCB(PTRChuyenBay p, NodeChuyenBay x);
+PTRChuyenBay TimCB(PTRChuyenBay fist);
+///////////
+//////////struct may bay
+struct MayBay
+{
+	char sh_Mb[15];
+	char loai_may_bay[40];
+	int so_day, so_dong, so_cho;
+};
+typedef struct DSMayBay {
+	int so_MB;
+	MayBay* maybay[MAX_MB];
+};
+//////
+/////struct khanh hang
+//////

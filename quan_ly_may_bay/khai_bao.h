@@ -59,10 +59,25 @@ struct MayBay
 	char loai_may_bay[40];
 	int so_day, so_dong, so_cho;
 };
-typedef struct DSMayBay {
+struct DSMayBay {
 	int so_MB;
 	MayBay* maybay[MAX_MB];
 };
 //////
 /////struct khanh hang
+struct KhachHang
+{
+	char cmnd[225];
+	char ho[225];
+	char ten[225];
+	bool phai;
+};
+struct NodeKhachHang
+{
+	int key;
+	KhachHang info;
+	int bf;
+	NodeKhachHang* left, * right;
+};
+typedef NodeKhachHang* PTRkhachhang;
 //////

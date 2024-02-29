@@ -1,4 +1,5 @@
 #pragma once
+#include<iostream>
 #define MAX_MB 300
 ///////////struct chuyen bay
 struct Ve

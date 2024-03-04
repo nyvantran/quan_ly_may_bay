@@ -133,6 +133,9 @@
   <ItemGroup>
     <ClInclude Include="khai_bao.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dlmaybay.dat" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

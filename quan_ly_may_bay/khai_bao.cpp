@@ -27,6 +27,34 @@ void DSMayBay::xoa()
 		delete maybay[i];
 	}
 }
+//==========them may bay vao danh sach=======
+void ThemMayBay(MayBay maybay,DSMayBay &DSMayBay)
+{	
+	if (DSMayBay.so_MB < MAX_MB) {
+		MayBay* p = new MayBay;
+		p->sh_Mb[15	] = maybay.sh_Mb[15];
+		p->loai_may_bay[40] = maybay.loai_may_bay[40];
+		p->so_day = maybay.so_day;
+		p->so_dong = maybay.so_dong;
+		int temp = DSMayBay.so_MB++;
+		DSMayBay.maybay[temp] = p;
+		DSMayBay.so_MB++;
+	}
+}
+//========xoa may bay khoi danh sach may bay====
+
+
+void XoaMayBay(DSMayBay &DSMayBay,int i)
+{
+	delete DSMayBay.maybay[i];
+}
+//==========hieu chinh may bay trong danh sach=======
+
+void HieuChinhMB(DSMayBay &DSMayBay,int i,MayBay maybay)
+{
+	MayBay* p = new MayBay;
+
+}
 
 void napFileChuyenBay(const char file[], PTRChuyenBay &fist)/*se sua them*/
 {
@@ -53,4 +81,6 @@ PTRChuyenBay KhoiTaoCB()
 	PTRChuyenBay p = new NodeChuyenBay;
 	return p;
 }
+
+
 

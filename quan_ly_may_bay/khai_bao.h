@@ -19,11 +19,11 @@ struct DSMayBay {
 	void xoa();
 };
 //========thao tac voi danh sach may bay=====
-void ThemMayBay();
-void XoaMayBay();
-void HieuChinhMB();
+void ThemMayBay(MayBay, DSMayBay&);
+void HieuChinhMB(DSMayBay&);
 void XoaMayBay(DSMayBay& , char[]);
 MayBay *TimSoHieu(char[], DSMayBay);
+int MenuHC();
 //////
 ///////////struct chuyen bay
 struct Ve

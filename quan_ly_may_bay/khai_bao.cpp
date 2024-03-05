@@ -50,24 +50,26 @@ void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 	strcpy_s(x, sohieu); 
 	int so;
 	MayBay *temp =TimSoHieu(x, DSMayBay);
-	for (int i=0;i<DSMayBay.so_MB;i++){
-		if (DSMayBay.maybay[i] == temp) {
-			so = i;
-			delete temp;
-			break;
+	if (temp != NULL) {
+		for (int i = 0; i < DSMayBay.so_MB; i++) {
+			if (DSMayBay.maybay[i] == temp) {
+				so = i;
+				delete temp;
+				break;
+			}
 		}
-	}
-	DSMayBay.so_MB--;
-	while (so < DSMayBay.so_MB) {
-		DSMayBay.maybay[so] = DSMayBay.maybay[so + 1];
-		so++;
+		DSMayBay.so_MB--;
+		while (so < DSMayBay.so_MB) {
+			DSMayBay.maybay[so] = DSMayBay.maybay[so + 1];
+			so++;
+		}
 	}
 }
 //==========hieu chinh may bay trong danh sach=======
 
 void HieuChinhMB(MayBay* maybay,char sohieu[15],char loai[40],int soday,int sodong)
 {
-	char check[1];	
+	char check[1]{}; check[0] = '\0';
 	if (strcmp(check, sohieu) != 0) {
 		strcpy_s(maybay->sh_Mb, sohieu);
 	}

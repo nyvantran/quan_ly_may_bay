@@ -20,7 +20,7 @@ struct DSMayBay {
 };
 //========thao tac voi danh sach may bay=====
 void ThemMayBay(MayBay, DSMayBay&);
-void HieuChinhMB(DSMayBay&);
+void HieuChinhMB(MayBay* maybay, char sohieu[15], char loai[40], int soday, int sodong);
 void XoaMayBay(DSMayBay& , char[]);
 MayBay *TimSoHieu(char[], DSMayBay);
 //////

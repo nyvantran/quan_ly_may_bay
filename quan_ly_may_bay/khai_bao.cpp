@@ -29,7 +29,6 @@ void DSMayBay::xoa() const
 }
 
 /*doc file chuyen bay*/
-=======
 //==========them may bay vao danh sach=======
 
 void ThemMayBay(MayBay maybay,DSMayBay &DSMayBay)

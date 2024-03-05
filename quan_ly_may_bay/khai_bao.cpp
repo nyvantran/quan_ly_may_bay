@@ -47,16 +47,20 @@ void ThemMayBay(MayBay maybay,DSMayBay &DSMayBay)
 void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 {
 	char x[15];
-	strcpy_s(x, sohieu);
-	int temp =TimSoHieu(x, DSMayBay);
-	if (temp != -1) {
-		delete DSMayBay.maybay[temp];
-		while (temp < MAX_MB) {
-			DSMayBay.maybay[temp] = DSMayBay.maybay[temp + 1];
-			temp++;
+	strcpy_s(x, sohieu); 
+	int so;
+	MayBay *temp =TimSoHieu(x, DSMayBay);
+	for (int i=0;i<DSMayBay.so_MB;i++){
+		if (DSMayBay.maybay[i] == temp) {
+			so = i;
+			delete temp;
+			break;
 		}
 	}
-	
+	while (so < DSMayBay.so_MB) {
+		DSMayBay.maybay[so] = DSMayBay.maybay[so + 1];
+		so++;
+	}
 }
 //==========hieu chinh may bay trong danh sach=======
 
@@ -66,14 +70,14 @@ void HieuChinhMB(DSMayBay &DSMayBay,int i,MayBay maybay)
 
 }
 // ======search theo so hieu may bay=======
-int TimSoHieu(char x[15],DSMayBay DSmaybay) {
+MayBay *TimSoHieu (char x[15], DSMayBay DSmaybay) {
 	for (int i = 0; i <DSmaybay.so_MB; i++) {
 		if (strcmp(x, DSmaybay.maybay[i]->sh_Mb) == 0) {
-			return i;
+			return DSmaybay.maybay[i];
 			
 		}
 	}
-	return -1;
+	return NULL;
 }
 
 void napFileChuyenBay(const char file[], PTRChuyenBay &fist)/*se sua them*/

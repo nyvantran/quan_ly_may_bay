@@ -22,6 +22,7 @@ struct DSMayBay {
 void ThemMayBay();
 void XoaMayBay();
 void HieuChinhMB();
+void TimSoHieu();
 
 //////
 ///////////struct chuyen bay

@@ -1,5 +1,5 @@
 #include"khai_bao.h"
-//#include<fstream>
+#include<fstream>
 void DSMayBay::napFile(const char file[])
 {
 	fstream file1(file, ios::binary | ios::in);
@@ -28,25 +28,35 @@ void DSMayBay::xoa()
 	}
 }
 //==========them may bay vao danh sach=======
+
 void ThemMayBay(MayBay maybay,DSMayBay &DSMayBay)
 {	
 	if (DSMayBay.so_MB < MAX_MB) {
 		MayBay* p = new MayBay;
-		p->sh_Mb[15	] = maybay.sh_Mb[15];
-		p->loai_may_bay[40] = maybay.loai_may_bay[40];
+		strcpy_s(p->sh_Mb, maybay.sh_Mb);
+		strcpy_s(p->loai_may_bay,maybay.loai_may_bay);
 		p->so_day = maybay.so_day;
 		p->so_dong = maybay.so_dong;
-		int temp = DSMayBay.so_MB++;
-		DSMayBay.maybay[temp] = p;
 		DSMayBay.so_MB++;
+		DSMayBay.maybay[DSMayBay.so_MB] = p;
+		
 	}
 }
 //========xoa may bay khoi danh sach may bay====
+void XoaMayBay(DSMayBay& DSMayBay, char sohieu[15]);
 
-
-void XoaMayBay(DSMayBay &DSMayBay,int i)
+void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 {
-	delete DSMayBay.maybay[i];
+	int temp = 0;
+	temp=TimSoHieu(sohieu,DSMayBay);
+	if (temp != -1) {
+		delete DSMayBay.maybay[temp];
+		while (temp < MAX_MB) {
+			DSMayBay.maybay[temp] = DSMayBay.maybay[temp + 1];
+			temp++;
+		}
+	}
+	
 }
 //==========hieu chinh may bay trong danh sach=======
 
@@ -54,6 +64,15 @@ void HieuChinhMB(DSMayBay &DSMayBay,int i,MayBay maybay)
 {
 	MayBay* p = new MayBay;
 
+}
+// ======search theo so hieu may bay=======
+int TimSoHieu(char x[15],DSMayBay DSmaybay) {
+	for (int i = 0; i < MAX_MB; i++) {
+		if (strcmp(x, DSmaybay.maybay[i]->sh_Mb) == 0) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 void napFileChuyenBay(const char file[], PTRChuyenBay &fist)/*se sua them*/

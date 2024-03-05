@@ -43,12 +43,12 @@ void ThemMayBay(MayBay maybay,DSMayBay &DSMayBay)
 	}
 }
 //========xoa may bay khoi danh sach may bay====
-void XoaMayBay(DSMayBay& DSMayBay, char sohieu[15]);
 
 void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 {
-	int temp = 0;
-	temp=TimSoHieu(sohieu,DSMayBay);
+	char x[15];
+	strcpy_s(x, sohieu);
+	int temp =TimSoHieu(x, DSMayBay);
 	if (temp != -1) {
 		delete DSMayBay.maybay[temp];
 		while (temp < MAX_MB) {
@@ -67,9 +67,10 @@ void HieuChinhMB(DSMayBay &DSMayBay,int i,MayBay maybay)
 }
 // ======search theo so hieu may bay=======
 int TimSoHieu(char x[15],DSMayBay DSmaybay) {
-	for (int i = 0; i < MAX_MB; i++) {
+	for (int i = 0; i <DSmaybay.so_MB; i++) {
 		if (strcmp(x, DSmaybay.maybay[i]->sh_Mb) == 0) {
 			return i;
+			
 		}
 	}
 	return -1;

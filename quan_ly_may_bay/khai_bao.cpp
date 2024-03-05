@@ -57,6 +57,7 @@ void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 			break;
 		}
 	}
+	DSMayBay.so_MB--;
 	while (so < DSMayBay.so_MB) {
 		DSMayBay.maybay[so] = DSMayBay.maybay[so + 1];
 		so++;

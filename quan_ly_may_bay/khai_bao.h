@@ -18,6 +18,11 @@ struct DSMayBay {
 	void ghiFile(const char file[]) const;
 	void xoa() const;
 };
+//========thao tac voi danh sach may bay=====
+void ThemMayBay(MayBay, DSMayBay&);
+void HieuChinhMB(MayBay* maybay, char sohieu[15], char loai[40], int soday, int sodong);
+void XoaMayBay(DSMayBay& , char[]);
+MayBay *TimSoHieu(char[], DSMayBay);
 //////
 ///////////struct chuyen bay
 struct Ve

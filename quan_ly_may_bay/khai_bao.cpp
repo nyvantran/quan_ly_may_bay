@@ -1,5 +1,5 @@
 #include"khai_bao.h"
-//#include<fstream>
+#include<fstream>
 void DSMayBay::napFile(const char file[])
 {
 	fstream file1(file, ios::binary | ios::in);
@@ -28,33 +28,72 @@ void DSMayBay::xoa()
 	}
 }
 //==========them may bay vao danh sach=======
+
 void ThemMayBay(MayBay maybay,DSMayBay &DSMayBay)
 {	
 	if (DSMayBay.so_MB < MAX_MB) {
 		MayBay* p = new MayBay;
-		p->sh_Mb[15	] = maybay.sh_Mb[15];
-		p->loai_may_bay[40] = maybay.loai_may_bay[40];
+		strcpy_s(p->sh_Mb, maybay.sh_Mb);
+		strcpy_s(p->loai_may_bay,maybay.loai_may_bay);
 		p->so_day = maybay.so_day;
 		p->so_dong = maybay.so_dong;
-		int temp = DSMayBay.so_MB++;
-		DSMayBay.maybay[temp] = p;
 		DSMayBay.so_MB++;
+		DSMayBay.maybay[DSMayBay.so_MB] = p;
+		
 	}
 }
 //========xoa may bay khoi danh sach may bay====
 
-
-void XoaMayBay(DSMayBay &DSMayBay,int i)
+void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 {
-	delete DSMayBay.maybay[i];
+	char x[15];
+	strcpy_s(x, sohieu); 
+	int so;
+	MayBay *temp =TimSoHieu(x, DSMayBay);
+	if (temp != NULL) {
+		for (int i = 0; i < DSMayBay.so_MB; i++) {
+			if (DSMayBay.maybay[i] == temp) {
+				so = i;
+				delete temp;
+				break;
+			}
+		}
+		DSMayBay.so_MB--;
+		while (so < DSMayBay.so_MB) {
+			DSMayBay.maybay[so] = DSMayBay.maybay[so + 1];
+			so++;
+		}
+	}
 }
 //==========hieu chinh may bay trong danh sach=======
 
-void HieuChinhMB(DSMayBay &DSMayBay,int i,MayBay maybay)
+void HieuChinhMB(MayBay* maybay,char sohieu[15],char loai[40],int soday,int sodong)
 {
-	MayBay* p = new MayBay;
-
+	char check[1]{}; check[0] = '\0';
+	if (strcmp(check, sohieu) != 0) {
+		strcpy_s(maybay->sh_Mb, sohieu);
+	}
+	if (strcmp(check, loai) != 0) {
+		strcpy_s(maybay->loai_may_bay, loai);
+	}
+	if (soday > 0) {
+		maybay->so_day = soday;
+	}
+	if (sodong > 0) {
+		maybay->so_dong = sodong;
+	}
 }
+
+// ======search theo so hieu may bay=======
+MayBay *TimSoHieu (char x[15], DSMayBay DSmaybay) {
+	for (int i = 0; i <DSmaybay.so_MB; i++) {
+		if (strcmp(x, DSmaybay.maybay[i]->sh_Mb) == 0) {
+			return DSmaybay.maybay[i];
+		}
+	}
+	return NULL;
+}
+
 
 void napFileChuyenBay(const char file[], PTRChuyenBay &fist)/*se sua them*/
 {

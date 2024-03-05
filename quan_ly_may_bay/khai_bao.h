@@ -12,11 +12,11 @@ struct MayBay
 };
 struct DSMayBay {
 	int so_MB = 0;
-	MayBay* maybay[MAX_MB]
+	MayBay* maybay[MAX_MB];
 	/*function*/;
-	void napFile(const char file[]);
-	void ghiFile(const char file[]);
-	void xoa();
+	void napFile(const char file[]) ;
+	void ghiFile(const char file[]) const;
+	void xoa() const;
 };
 //////
 ///////////struct chuyen bay
@@ -32,19 +32,20 @@ enum TrangThai {
 	HOAN_TAT,
 };
 struct Ngay {
-	int ngay;
-	int thang;
-	int nam;
+	int ngay = -1;
+	int thang = -1;
+	int nam = -1;
 };
 
 struct Gio {
-	int gio;
-	int phut;
+	int gio = -1;
+	int phut = -1;
 };
 struct NgayGio
 {
 	Ngay ngay_kh;
 	Gio gio_kh;
+	void datNgayGio(int gio, int phut, int ngay, int thang, int nam);
 };
 struct ChuyenBay
 {
@@ -54,6 +55,7 @@ struct ChuyenBay
 	char sh_Mb[15];
 	TrangThai trang_thai_cb;
 	Ve* ds_ve = NULL;
+	ChuyenBay();
 };
 struct NodeChuyenBay
 {
@@ -64,11 +66,19 @@ typedef NodeChuyenBay* PTRChuyenBay;
 ///chuyen bay function 
 void napFileChuyenBay(const char file[],PTRChuyenBay &fist);
 void ghiFileChuyenBay(const char file[],PTRChuyenBay fist);
+bool themChuyenBay(PTRChuyenBay&, ChuyenBay);
+void xoahetChuyenBay(PTRChuyenBay&);
+bool xoaChuyenBay(PTRChuyenBay&, PTRChuyenBay);
+/*xoa nodechuyenbay*/
+bool xoadauNodeChuyenBay(PTRChuyenBay& fist);
+bool xoasauNodeChuyenBay(PTRChuyenBay p);
+//////////////
+PTRChuyenBay timChuyenBay(PTRChuyenBay fist, char x[]);
+void chinhsuaChuyenBay(PTRChuyenBay& p, NgayGio time, char sbd[], char shmb[]);
 /*void KhoiDauCB(PTRChuyenBay& fist);*/
 PTRChuyenBay KhoiTaoCB();
-void ThemDauCB(PTRChuyenBay& fist, NodeChuyenBay x);
-void ThemSauCB(PTRChuyenBay p, NodeChuyenBay x);
-PTRChuyenBay TimCB(PTRChuyenBay fist);
+void ThemDauCB(PTRChuyenBay& fist, ChuyenBay x);
+void ThemSauCB(PTRChuyenBay p, ChuyenBay x);
 ///////////
 /////struct khanh hang
 struct KhachHang

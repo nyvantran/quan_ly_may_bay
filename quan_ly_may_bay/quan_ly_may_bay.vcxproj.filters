@@ -21,13 +21,25 @@
     <ClCompile Include="khai_bao.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="do_hoa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="khai_bao.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="do_hoa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="dlmaybay.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="graphics.lib" />
   </ItemGroup>
 </Project>

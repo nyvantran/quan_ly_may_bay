@@ -23,7 +23,6 @@ void ThemMayBay(MayBay, DSMayBay&);
 void HieuChinhMB(DSMayBay&);
 void XoaMayBay(DSMayBay& , char[]);
 MayBay *TimSoHieu(char[], DSMayBay);
-int MenuHC();
 //////
 ///////////struct chuyen bay
 struct Ve

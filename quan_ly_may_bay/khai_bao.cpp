@@ -65,35 +65,20 @@ void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 }
 //==========hieu chinh may bay trong danh sach=======
 
-void HieuChinhMB(DSMayBay &DSMayBay)
+void HieuChinhMB(MayBay* maybay,char sohieu[15],char loai[40],int soday,int sodong)
 {
-	cout << "Nhap so hieu may bay can dieu chinh: " << endl;
-	char sohieu[15];
-	cin >> sohieu;
-	MayBay* p = TimSoHieu(sohieu, DSMayBay);
-	int menu = MenuHC();
-	switch (menu)
-	{
-	case 1:
-		cin >> sohieu;
-		strcpy_s(p->sh_Mb, sohieu);
-		break;
-	case 2:
-		char loai_may_bay[40];
-		cin >> loai_may_bay;
-		strcpy_s(p->loai_may_bay, loai_may_bay);
-		break;
-	case 3:
-		int so_day;
-		cin >> so_day;
-		p->so_day = so_day;
-		break;
-	case 4:
-		int so_dong;
-		cin >> so_dong;
-		p->so_dong = so_dong;
-	case 0: 
-		break;
+	char check[1];	
+	if (strcmp(check, sohieu) != 0) {
+		strcpy_s(maybay->sh_Mb, sohieu);
+	}
+	if (strcmp(check, loai) != 0) {
+		strcpy_s(maybay->loai_may_bay, loai);
+	}
+	if (soday > 0) {
+		maybay->so_day = soday;
+	}
+	if (sodong > 0) {
+		maybay->so_dong = sodong;
 	}
 }
 
@@ -106,21 +91,7 @@ MayBay *TimSoHieu (char x[15], DSMayBay DSmaybay) {
 	}
 	return NULL;
 }
-//=========menu hieu chinh========
-int MenuHC()
-{
-	int x;
-	while (true){
-		cout << "1.So hieu may bay " << endl;
-		cout << "2.Loai May Bay " << endl;
-		cout << "3.So day" << endl;
-		cout << "4.So dong " << endl;
-		cout << "0.Dung dieu chinh " << endl;
-		cout << "So can dieu chinh la: ";
-	}
-	cin >> x;
-	return x;
-}
+
 
 void napFileChuyenBay(const char file[], PTRChuyenBay &fist)/*se sua them*/
 {

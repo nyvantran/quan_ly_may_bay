@@ -3,6 +3,9 @@
 void* Menu()
 {
 	void* q = malloc(imagesize(0, 0, getmaxx(), getmaxy()));
+	line(getmaxx() / 2 - 50, 0, getmaxx() / 2 - 50, getmaxy());
+	setfillstyle(1, 4);
+	bar(getmaxx() - 50, 0, getmaxx(), 50);
 	settextstyle(4, HORIZ_DIR, 1);
 	setfillstyle(1, 1);
 	setbkcolor(1);
@@ -81,6 +84,7 @@ void* nhanhMenu2()
 	putimage(x - 50, y, q, 1);
 	return q;
 }
+/*======================mouse=====================*/
 int checkMouse1(int old, int x, int y)
 {
 	int xg = 20, yg = 50;
@@ -93,7 +97,19 @@ int checkMouse1(int old, int x, int y)
 	return old;
 }
 
-int checkMouse2(int old, int x, int y)
+int checkMouse21(int x, int y)
+{
+	int xg = 0, yg = 50;
+	int n = (y - yg) / 88;
+	if ((xg + 425 + 50 < x) && (x < xg + 425 + 50 + 200)) {
+		if ((yg + 88 * n <= y) && (y <= yg + 88 * n + 70)) {
+			return n;
+		}
+	}
+	return -1;
+}
+
+int checkMouse22(int x, int y)
 {
 	return 0;
 }
@@ -105,11 +121,12 @@ void mouse(int* x, int* y)
 		if (ismouseclick(WM_LBUTTONDOWN) == 1) {
 			getmouseclick(WM_LBUTTONDOWN, *x, *y);
 		}
-		if ((*x >= getmaxx() - 100) && (*y >= 0) && (*x <= getmaxx()) && (*y <= 100)) {
+		if ((*x >= getmaxx() - 50) && (*y >= 0) && (*x <= getmaxx()) && (*y <= 50)) {
 			break;
 		}
 	}
 }
+///===================================================================================
 void chayDoHoa(DSMayBay ds_may_bay, PTRChuyenBay dau_chuyen_bay, PTRKhachhang goc_khach_hang)
 {
 	int xg = 0, yg = 50;
@@ -119,6 +136,7 @@ void chayDoHoa(DSMayBay ds_may_bay, PTRChuyenBay dau_chuyen_bay, PTRKhachhang go
 	putimage(0, 0, p1, 0);
 	int x=0, y=0;
 	int n = -1, tam;
+	MayBay tam1{};
 	thread nhanh1(mouse, &x, &y);
 	while (1) {
 		tam = n;
@@ -131,6 +149,15 @@ void chayDoHoa(DSMayBay ds_may_bay, PTRChuyenBay dau_chuyen_bay, PTRKhachhang go
 					putimage(xg + 425, yg + 88 * 1, p3, 1);
 				}
 				putimage(xg + 425, yg + 88 * n, p2, 0);
+			}
+			switch (checkMouse21(x,y))
+			{
+			case 0: {
+				DHThemMB(ds_may_bay, &x, &y);
+				break;
+			}
+			default:
+				break;
 			}
 			break;
 		}
@@ -150,7 +177,145 @@ void chayDoHoa(DSMayBay ds_may_bay, PTRChuyenBay dau_chuyen_bay, PTRKhachhang go
 	nhanh1.join();
 }
 
+void DHThemMB(DSMayBay ds_may_bay, int* x,int* y)
+{
+	int xg = 0, yg = 10;
+	char text[4][40]{};
+	settextstyle(3, HORIZ_DIR, 1);
+	strcpy_s(text[0], 40, "So hieu may bay:");
+	strcpy_s(text[1], 40, "Loai may bay:");
+	strcpy_s(text[2], 40, "So day:");
+	strcpy_s(text[3], 40, "So dong:");
+	void* p1 = malloc(imagesize(getmaxx() / 2 - 25, yg + 45, getmaxx() / 2 - 25 + 750, yg + 45 + 200));
+	rectangle(getmaxx() / 2 - 25, yg + 45, getmaxx() / 2 - 25 + 750, yg + 45 + 200);
+	setbkcolor(0);
+	///============================================================================///
+	outtextxy(getmaxx() / 2, yg + 45 + 30, text[0]);
+	bar(textwidth(text[0]) + getmaxx() / 2, yg + 45 + 30 - textheight(text[0]) / 2,
+		textwidth(text[0]) + getmaxx() / 2 + 250, yg + 45 + 30 + 40 - textheight(text[0]) / 2);
+	///============================================================================///
+	outtextxy(getmaxx() / 2, yg + 45 + 30 + 50, text[1]);
+	bar(textwidth(text[0]) + getmaxx() / 2, yg + 45 + 80 - textheight(text[1]) / 2,
+		textwidth(text[0]) + getmaxx() / 2 + 500, yg + 45 + 80 + 40 - textheight(text[1]) / 2);
+	///============================================================================///
+	outtextxy(getmaxx() / 2, yg + 45 + 30 + 100, text[2]);
+	bar(textwidth(text[0]) + getmaxx() / 2, yg + 45 + 130 - textheight(text[1]) / 2,
+		textwidth(text[0]) + getmaxx() / 2 + 60, yg + 45 + 130 + 40 - textheight(text[1]) / 2);
+	///============================================================================///
+	outtextxy(textwidth(text[0]) + getmaxx() / 2 + 150, yg + 45 + 30 + 100, text[3]);
+	bar(textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]), yg + 45 + 130 - textheight(text[1]) / 2,
+		textwidth(text[0]) + getmaxx() / 2 + 150 + 60 + textwidth(text[3]), yg + 45 + 130 + 40 - textheight(text[1]) / 2);
+	getimage(getmaxx() / 2 - 25, yg + 45, getmaxx() / 2 - 25 + 750, yg + 45 + 200, p1);
+	char nhap;
+	char shmb[15]{}, lmb[40]{}, soday[2]{}, sodong[2]{}; shmb[0] = '\0'; 
+	lmb[0] = '\0'; soday[0] = '\0'; sodong[0] = '\0';
+	int i0 = 0, i1 = 0, i2 = 0, i3 = 0;
+	setbkcolor(1);
+		
+	while (1) {
+		if (((int)(nhap = getch()) != 0) && ((int)nhap != 0) && (mouseThemMb(*x, *y) == 0)) {
+			if (i0 < 15) if ((('a' <= nhap) && (nhap <= 'z')) || (('A' <= nhap) && (nhap <= 'Z'))
+				|| (('0' <= nhap) && (nhap <= '9'))) {
+				nhap = toupper(nhap);
+				shmb[i0 + 1] = shmb[i0];
+				shmb[i0] = nhap; i0++;
+				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 30 - textheight(text[0]) / 2 + 10, shmb);
+			}
+			if ((int)nhap == 8) {
+				xoachu(shmb, textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 30 - textheight(text[0]) / 2 + 10);
+				if (i0 > 0) {
+					shmb[i0 - 1] = shmb[i0--];
+				}
+				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 30 - textheight(text[0]) / 2 + 10, shmb);
+			}
+		}
+		else if (mouseThemMb(*x, *y) == 1) {
+			if (i1 < 40) if ((('a' <= nhap) && (nhap <= 'z')) || (('A' <= nhap) && (nhap <= 'Z'))
+				|| (('0' <= nhap) && (nhap <= '9'))) {
+				nhap = toupper(nhap);
+				lmb[i1 + 1] = lmb[i1];
+				lmb[i1] = nhap; i1++;
+				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 80 - textheight(text[1]) / 2 + 10, lmb);
+			}
+			if ((int)nhap == 8) {
+				xoachu(lmb, textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 80 - textheight(text[1]) / 2 + 10);
+				if (i1 > 0) {
+					lmb[i1 - 1] = lmb[i1--];
+				}
+				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 80 - textheight(text[1]) / 2 + 10, lmb);
+			}
+		}
+		else if (mouseThemMb(*x, *y) == 2) {
+			if (i2 < 2) if (('0' <= nhap) && (nhap <= '9')) {
+				soday[i2 + 1] = soday[i2];
+				soday[i2] = nhap; i2++;
+				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, soday);
+			}
+			if ((int)nhap == 8) {
+				xoachu(soday, textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10);
+				if (i2 > 0) {
+					soday[i2 - 1] = soday[i2--];
+				}
+				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, soday);
+			}
+		}
+		else if (mouseThemMb(*x, *y) == 3) {
+			if (i3 < 2) if (('0' <= nhap) && (nhap <= '9')) {
+				sodong[i3 + 1] = sodong[i3];
+				sodong[i3] = nhap; i3++;
+				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]) + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, sodong);
+			}
+			if ((int)nhap == 8) {
+				xoachu(sodong, textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]) + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10);
+				if (i3 > 0) {
+					sodong[i3 - 1] = sodong[i3--];
+				}
+				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]) + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, sodong);
+			}
+		}
+	}
 
+	getch();
+}
+///==============================xoa chu============================================///
+void xoachu(char* n, int x, int y) {
+	int tam = getcolor();
+	setcolor(getbkcolor());
+	outtextxy(x, y, n);
+	setcolor(tam);
+}
+///=================================================================================///
+int mouseThemMb(int x, int y)
+{
+	int xg = 0, yg = 10;
+	char text[4][40]{};
+	strcpy_s(text[0], 40, "So hieu may bay:");
+	strcpy_s(text[1], 40, "Loai may bay:");
+	strcpy_s(text[2], 40, "So day:");
+	strcpy_s(text[3], 40, "So dong:");
+	///=============///
+	if ((textwidth(text[0]) + getmaxx() / 2 <= x) && (x <= textwidth(text[0]) + getmaxx() / 2 + 250)) {
+		if ((yg + 45 + 30 - textheight(text[0]) / 2 <= y) && (y <= yg + 45 + 30 + 40 - textheight(text[0]) / 2)) {
+			return 0;
+		}
+	}
+	if ((textwidth(text[0]) + getmaxx() / 2 <= x) && (x <= textwidth(text[0]) + getmaxx() / 2 + 500)) {
+		if ((yg + 45 + 80 - textheight(text[1]) / 2 <= y) && (y <= yg + 45 + 80 + 40 - textheight(text[1]) / 2)) {
+			return 1;
+		}
+	}
+	if ((textwidth(text[0]) + getmaxx() / 2 <= x) && (x <= textwidth(text[0]) + getmaxx() / 2 + 60)) {
+		if ((yg + 45 + 130 - textheight(text[1]) / 2 <= y) && (y <= yg + 45 + 130 + 40 - textheight(text[1]) / 2)) {
+			return 2;
+		}
+	}
+	if ((textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]) <= x) && (x <= textwidth(text[0]) + getmaxx() / 2 + 150 + 60 + textwidth(text[3]))) {
+		if ((yg + 45 + 130 - textheight(text[1]) / 2 <= y) && (y <= yg + 45 + 130 + 40 - textheight(text[1]) / 2)) {
+			return 3;
+		}
+	}
+	return -1;
+}
 
 void KhoiDong()
 {

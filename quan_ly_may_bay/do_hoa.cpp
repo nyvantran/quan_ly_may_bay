@@ -155,7 +155,7 @@ void chayDoHoa(DSMayBay ds_may_bay, PTRChuyenBay dau_chuyen_bay, PTRKhachhang go
 			{
 			case 0: {
 				thread nhanh(DHThemMB, ds_may_bay, &x, &y);
-				outtextxy(500, 500, const_cast<char*>("hello"));
+
 				nhanh.join();
 				break;
 			}
@@ -285,7 +285,7 @@ void DHThemMB(DSMayBay ds_may_bay, int* x,int* y)
 		}
 		if ((int)nhap == 13) {
 			if ((shmb[0] == '\0') || (lmb[0] == '\0')
-				|| (soday[0] == '\0') || (sodong[0] == '\0') /*|| (atoi(soday) * atoi(sodong) < 20)*/)
+				|| (soday[0] == '\0') || (sodong[0] == '\0') || (atoi(soday) * atoi(sodong) < 20))
 			{
 				int mt = getbkcolor();
 				setbkcolor(0);
@@ -297,18 +297,30 @@ void DHThemMB(DSMayBay ds_may_bay, int* x,int* y)
 				setbkcolor(mt);
 			}
 			else {
-				MayBay tam;
-				strcpy_s(tam.sh_Mb, 15, shmb);
-				strcpy_s(tam.loai_may_bay, 40, lmb);
-				tam.so_day = atoi(soday);
-				tam.so_dong = atoi(sodong);
-				ThemMayBay(tam, ds_may_bay);
-				putimage(getmaxx() / 2 - 25, yg + 45, p1, 1);
-				setfillstyle(1, 0);
-				bar(getmaxx() / 2 - 25, yg + 45, getmaxx() / 2 - 25 + 750, yg + 45 + 200);
-				setbkcolor(1);
-				*x = -1; *y = -1;
-				break;
+				if (TimSoHieu(shmb, ds_may_bay) != NULL) {
+					MayBay tam;
+					strcpy_s(tam.sh_Mb, 15, shmb);
+					strcpy_s(tam.loai_may_bay, 40, lmb);
+					tam.so_day = atoi(soday);
+					tam.so_dong = atoi(sodong);
+					ThemMayBay(tam, ds_may_bay);
+					putimage(getmaxx() / 2 - 25, yg + 45, p1, 1);
+					setfillstyle(1, 0);
+					bar(getmaxx() / 2 - 25, yg + 45, getmaxx() / 2 - 25 + 750, yg + 45 + 200);
+					setbkcolor(1);
+					*x = -1; *y = -1;
+					break;
+				}
+				else {
+					int mt = getbkcolor();
+					setbkcolor(0);
+					outtextxy(textwidth(text[0]) + getmaxx() / 2, yg + 45 + 130 - textheight(text[1]) / 2 + 90,
+						const_cast<char*>("so hieu may bay da trung"));
+					Sleep(500);
+					xoachu(const_cast<char*>("so hieu may bay da trung"),
+						textwidth(text[0]) + getmaxx() / 2, yg + 45 + 130 - textheight(text[1]) / 2 + 90);
+					setbkcolor(mt);
+				}
 			}
 		}
 		else if ((int)nhap == 27) {

@@ -145,6 +145,7 @@ void chayDoHoa(DSMayBay ds_may_bay, PTRChuyenBay dau_chuyen_bay, PTRKhachhang go
 		{
 		case 0: {
 			if (n != tam) {
+				settextstyle(3, HORIZ_DIR, 1);
 				if (getpixel(xg + 425, yg + 88 * 1 + 35) != 0) {
 					putimage(xg + 425, yg + 88 * 1, p3, 1);
 				}
@@ -153,9 +154,12 @@ void chayDoHoa(DSMayBay ds_may_bay, PTRChuyenBay dau_chuyen_bay, PTRKhachhang go
 			switch (checkMouse21(x,y))
 			{
 			case 0: {
-				DHThemMB(ds_may_bay, &x, &y);
+				thread nhanh(DHThemMB, ds_may_bay, &x, &y);
+				outtextxy(500, 500, const_cast<char*>("hello"));
+				nhanh.join();
 				break;
 			}
+
 			default:
 				break;
 			}
@@ -182,6 +186,7 @@ void DHThemMB(DSMayBay ds_may_bay, int* x,int* y)
 	int xg = 0, yg = 10;
 	char text[4][40]{};
 	settextstyle(3, HORIZ_DIR, 1);
+	setfillstyle(1, 1);
 	strcpy_s(text[0], 40, "So hieu may bay:");
 	strcpy_s(text[1], 40, "Loai may bay:");
 	strcpy_s(text[2], 40, "So day:");
@@ -205,77 +210,116 @@ void DHThemMB(DSMayBay ds_may_bay, int* x,int* y)
 	outtextxy(textwidth(text[0]) + getmaxx() / 2 + 150, yg + 45 + 30 + 100, text[3]);
 	bar(textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]), yg + 45 + 130 - textheight(text[1]) / 2,
 		textwidth(text[0]) + getmaxx() / 2 + 150 + 60 + textwidth(text[3]), yg + 45 + 130 + 40 - textheight(text[1]) / 2);
+	///============================================================================///
+	outtextxy(textwidth(text[0]) + getmaxx() / 2, yg + 45 + 130 - textheight(text[1]) / 2 + 50,
+		const_cast<char*>("nhap esc de thoat       nhap enter de xac nhan"));
 	getimage(getmaxx() / 2 - 25, yg + 45, getmaxx() / 2 - 25 + 750, yg + 45 + 200, p1);
+	
 	char nhap;
-	char shmb[15]{}, lmb[40]{}, soday[2]{}, sodong[2]{}; shmb[0] = '\0'; 
-	lmb[0] = '\0'; soday[0] = '\0'; sodong[0] = '\0';
+	char shmb[16]{}, lmb[41]{}, soday[3]{}, sodong[3]{}; 
+	shmb[0] = '\0'; lmb[0] = '\0'; soday[0] = '\0'; sodong[0] = '\0';
 	int i0 = 0, i1 = 0, i2 = 0, i3 = 0;
 	setbkcolor(1);
-		
 	while (1) {
-		if (((int)(nhap = getch()) != 0) && ((int)nhap != 0) && (mouseThemMb(*x, *y) == 0)) {
-			if (i0 < 15) if ((('a' <= nhap) && (nhap <= 'z')) || (('A' <= nhap) && (nhap <= 'Z'))
-				|| (('0' <= nhap) && (nhap <= '9'))) {
-				nhap = toupper(nhap);
-				shmb[i0 + 1] = shmb[i0];
-				shmb[i0] = nhap; i0++;
-				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 30 - textheight(text[0]) / 2 + 10, shmb);
-			}
-			if ((int)nhap == 8) {
-				xoachu(shmb, textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 30 - textheight(text[0]) / 2 + 10);
-				if (i0 > 0) {
-					shmb[i0 - 1] = shmb[i0--];
+		if (((int)(nhap = getch()) != 13) && ((int)nhap != 27)) {
+			if (mouseThemMb(*x, *y) == 0) {
+				if (i0 < 15) if ((('a' <= nhap) && (nhap <= 'z')) || (('A' <= nhap) && (nhap <= 'Z'))
+					|| (('0' <= nhap) && (nhap <= '9'))) {
+					nhap = toupper(nhap);
+					shmb[i0 + 1] = shmb[i0];
+					shmb[i0] = nhap; i0++;
+					outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 30 - textheight(text[0]) / 2 + 10, shmb);
 				}
-				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 30 - textheight(text[0]) / 2 + 10, shmb);
+				if ((int)nhap == 8) {
+					xoachu(shmb, textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 30 - textheight(text[0]) / 2 + 10);
+					if (i0 > 0) {
+						shmb[i0 - 1] = shmb[i0--];
+					}
+					outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 30 - textheight(text[0]) / 2 + 10, shmb);
+				}
+			}
+			if ( mouseThemMb(*x, *y) == 1) {
+				if (i1 < 40) if ((('a' <= nhap) && (nhap <= 'z')) || (('A' <= nhap) && (nhap <= 'Z'))
+					|| (('0' <= nhap) && (nhap <= '9'))) {
+					nhap = toupper(nhap);
+					lmb[i1 + 1] = lmb[i1];
+					lmb[i1] = nhap; i1++;
+					outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 80 - textheight(text[1]) / 2 + 10, lmb);
+				}
+				if ((int)nhap == 8) {
+					xoachu(lmb, textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 80 - textheight(text[1]) / 2 + 10);
+					if (i1 > 0) {
+						lmb[i1 - 1] = lmb[i1--];
+					}
+					outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 80 - textheight(text[1]) / 2 + 10, lmb);
+				}
+			}
+			if (mouseThemMb(*x, *y) == 2) {
+				if (i2 < 2) if (('0' <= nhap) && (nhap <= '9')) {
+					soday[i2 + 1] = soday[i2];
+					soday[i2] = nhap; i2++;
+					outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, soday);
+				}
+				if ((int)nhap == 8) {
+					xoachu(soday, textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10);
+					if (i2 > 0) {
+						soday[i2 - 1] = soday[i2--];
+					}
+					outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, soday);
+				}
+			}
+			if (mouseThemMb(*x, *y) == 3) {
+				if (i3 < 2) if (('0' <= nhap) && (nhap <= '9')) {
+					sodong[i3 + 1] = sodong[i3];
+					sodong[i3] = nhap; i3++;
+					outtextxy(textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]) + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, sodong);
+				}
+				if ((int)nhap == 8) {
+					xoachu(sodong, textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]) + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10);
+					if (i3 > 0) {
+						sodong[i3 - 1] = sodong[i3--];
+					}
+					outtextxy(textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]) + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, sodong);
+				}
 			}
 		}
-		else if (mouseThemMb(*x, *y) == 1) {
-			if (i1 < 40) if ((('a' <= nhap) && (nhap <= 'z')) || (('A' <= nhap) && (nhap <= 'Z'))
-				|| (('0' <= nhap) && (nhap <= '9'))) {
-				nhap = toupper(nhap);
-				lmb[i1 + 1] = lmb[i1];
-				lmb[i1] = nhap; i1++;
-				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 80 - textheight(text[1]) / 2 + 10, lmb);
+		if ((int)nhap == 13) {
+			if ((shmb[0] == '\0') || (lmb[0] == '\0')
+				|| (soday[0] == '\0') || (sodong[0] == '\0') /*|| (atoi(soday) * atoi(sodong) < 20)*/)
+			{
+				int mt = getbkcolor();
+				setbkcolor(0);
+				outtextxy(textwidth(text[0]) + getmaxx() / 2, yg + 45 + 130 - textheight(text[1]) / 2 + 90,
+					const_cast<char*>("khong de thong tin trong"));
+				Sleep(500);
+				xoachu(const_cast<char*>("khong de thong tin trong"), 
+					textwidth(text[0]) + getmaxx() / 2, yg + 45 + 130 - textheight(text[1]) / 2 + 90);
+				setbkcolor(mt);
 			}
-			if ((int)nhap == 8) {
-				xoachu(lmb, textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 80 - textheight(text[1]) / 2 + 10);
-				if (i1 > 0) {
-					lmb[i1 - 1] = lmb[i1--];
-				}
-				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 80 - textheight(text[1]) / 2 + 10, lmb);
-			}
-		}
-		else if (mouseThemMb(*x, *y) == 2) {
-			if (i2 < 2) if (('0' <= nhap) && (nhap <= '9')) {
-				soday[i2 + 1] = soday[i2];
-				soday[i2] = nhap; i2++;
-				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, soday);
-			}
-			if ((int)nhap == 8) {
-				xoachu(soday, textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10);
-				if (i2 > 0) {
-					soday[i2 - 1] = soday[i2--];
-				}
-				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, soday);
+			else {
+				MayBay tam;
+				strcpy_s(tam.sh_Mb, 15, shmb);
+				strcpy_s(tam.loai_may_bay, 40, lmb);
+				tam.so_day = atoi(soday);
+				tam.so_dong = atoi(sodong);
+				ThemMayBay(tam, ds_may_bay);
+				putimage(getmaxx() / 2 - 25, yg + 45, p1, 1);
+				setfillstyle(1, 0);
+				bar(getmaxx() / 2 - 25, yg + 45, getmaxx() / 2 - 25 + 750, yg + 45 + 200);
+				setbkcolor(1);
+				*x = -1; *y = -1;
+				break;
 			}
 		}
-		else if (mouseThemMb(*x, *y) == 3) {
-			if (i3 < 2) if (('0' <= nhap) && (nhap <= '9')) {
-				sodong[i3 + 1] = sodong[i3];
-				sodong[i3] = nhap; i3++;
-				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]) + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, sodong);
-			}
-			if ((int)nhap == 8) {
-				xoachu(sodong, textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]) + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10);
-				if (i3 > 0) {
-					sodong[i3 - 1] = sodong[i3--];
-				}
-				outtextxy(textwidth(text[0]) + getmaxx() / 2 + 150 + textwidth(text[3]) + 5, yg + 45 + 130 - textheight(text[1]) / 2 + 10, sodong);
-			}
+		else if ((int)nhap == 27) {
+			putimage(getmaxx() / 2 - 25, yg + 45, p1, 1);
+			setfillstyle(1, 0);
+			bar(getmaxx() / 2 - 25, yg + 45, getmaxx() / 2 - 25 + 750, yg + 45 + 200);
+			setbkcolor(1);
+			*x = -1; *y = -1;
+			return;
 		}
 	}
-
-	getch();
 }
 ///==============================xoa chu============================================///
 void xoachu(char* n, int x, int y) {
@@ -283,6 +327,21 @@ void xoachu(char* n, int x, int y) {
 	setcolor(getbkcolor());
 	outtextxy(x, y, n);
 	setcolor(tam);
+}
+///==================================================================================///
+void hienDS(int* x, int* y)
+{
+	int xg = 0, yg = 10;
+	int old = -1;
+	while (1) {
+		old = checkMouse1(old, *x, *y);
+		/*if(ismouseclick(WM_LBUTTONDOWN)==1)*/
+		if (checkMouse1(old, *x, *y) == 0) {
+			outtextxy(getmaxx() / 2 - 25, yg + 45 + 250, const_cast<char*>("hello my friend"));
+		}
+			
+	}
+	
 }
 ///=================================================================================///
 int mouseThemMb(int x, int y)

@@ -18,6 +18,7 @@ void chayDoHoa(DSMayBay ds_may_bay, PTRChuyenBay dau_chuyen_bay, PTRKhachhang go
 void DHThemMB(DSMayBay ds_may_bay, int*, int*);
 int mouseThemMb(int x, int y);
 void xoachu(char* n, int x, int y);
+void hienDS(int* x, int* y);
 void KetThuc();
 void KhoiDong();
 

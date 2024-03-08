@@ -297,7 +297,7 @@ void DHThemMB(DSMayBay ds_may_bay, int* x,int* y)
 				setbkcolor(mt);
 			}
 			else {
-				if (TimSoHieu(shmb, ds_may_bay) != NULL) {
+				if (TimSoHieu(shmb, ds_may_bay) == NULL) {
 					MayBay tam;
 					strcpy_s(tam.sh_Mb, 15, shmb);
 					strcpy_s(tam.loai_may_bay, 40, lmb);

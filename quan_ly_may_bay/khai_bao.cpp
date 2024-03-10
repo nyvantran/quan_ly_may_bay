@@ -21,11 +21,12 @@ void DSMayBay::ghiFile(const char file[]) const
 	file1.close();
 }
 /*giai phong bo nho*/
-void DSMayBay::xoa() const
+void DSMayBay::xoa()
 {
 	for (int i = 0; i < so_MB; i++) {
 		delete maybay[i];
 	}
+	this->so_MB = 0;;
 }
 
 /*doc file chuyen bay*/
@@ -39,9 +40,7 @@ void ThemMayBay(MayBay maybay,DSMayBay &DSMayBay)
 		strcpy_s(p->loai_may_bay,maybay.loai_may_bay);
 		p->so_day = maybay.so_day;
 		p->so_dong = maybay.so_dong;
-		DSMayBay.so_MB++;
-		DSMayBay.maybay[DSMayBay.so_MB] = p;
-		
+		DSMayBay.maybay[DSMayBay.so_MB++] = p;
 	}
 }
 //========xoa may bay khoi danh sach may bay====
@@ -50,7 +49,7 @@ void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 {
 	char x[15];
 	strcpy_s(x, sohieu); 
-	int so;
+	int so = 0;
 	MayBay *temp =TimSoHieu(x, DSMayBay);
 	if (temp != NULL) {
 		for (int i = 0; i < DSMayBay.so_MB; i++) {
@@ -96,25 +95,33 @@ MayBay *TimSoHieu (char x[15], DSMayBay DSmaybay) {
 	return NULL;
 }
 
-
-
-void napFileChuyenBay(const char file[], PTRChuyenBay &fist)/*se sua them*/
+void napFileChuyenBay(const char file[], PTRChuyenBay &fist,DSMayBay ds)/*se sua them*/
 {
 	fstream file1(file, ios::binary | ios::in);
 	ChuyenBay doc;
-	PTRChuyenBay here = NULL;
+	MayBay *tam;
+	int n;
+	while (!file1.eof()) {
+		file1.read(reinterpret_cast<char*>(&doc), sizeof(ChuyenBay));
+		tam = TimSoHieu(doc.sh_Mb, ds);
+		n = tam->so_day * tam->so_dong;
+		doc.ds_ve = new Ve[n];
+		for (int i = 0; i < doc.so_ve; i++) {
+			file1.read(reinterpret_cast<char*>(&doc.ds_ve[i]), sizeof(Ve));
+		}
+		themChuyenBay(fist, doc);
+	}
 }
 /*ghi file chuyen bay*/
 void ghiFileChuyenBay(const char file[], PTRChuyenBay fist)
 {
 	fstream file1(file, ios::binary | ios::out);
 	PTRChuyenBay p;
-	for (p = fist; p->next != NULL; p = p->next) {
-		/*file1.write(reinterpret_cast<char*>(p->cb.ma_cb), sizeof(char*));
-		file1.write(reinterpret_cast<char*>(&p->cb.ngay_gio_kh), sizeof(NgayGio));
-		file1.write(reinterpret_cast<char*>(p->cb.san_bay_den), sizeof(char*));
-		file1.write(reinterpret_cast<char*>(p->cb.sh_Mb), sizeof(char*));
-		file1.write(reinterpret_cast<char*>(&p->cb.trang_thai_cb), sizeof(TrangThai));*/
+	for (p = fist; p != NULL; p = p->next) {
+		file1.write(reinterpret_cast<char*>(&p->cb), sizeof(ChuyenBay));
+		for (int i = 0; i < p->cb.so_ve; i++) {
+			file1.write(reinterpret_cast<char*>(&p->cb.ds_ve[i]), sizeof(Ve));
+		}
 	}
 }
 /*them chuyen bay*/
@@ -152,13 +159,10 @@ bool themChuyenBay(PTRChuyenBay &fist, ChuyenBay x)/*co sua them*/
 /*giai phong bo nho*/
 void xoahetChuyenBay(PTRChuyenBay& fist)
 {
-	PTRChuyenBay p = fist, tam;
-	while (p != NULL) {
-		tam = p->next;
-		delete p;
-		p = tam;
+	while (fist != NULL) {
+		delete fist->cb.ds_ve;
+		xoadauNodeChuyenBay(fist);
 	}
-	fist = NULL;
 }
 /*xoa 1 chuyen bay*/
 bool xoaChuyenBay(PTRChuyenBay &fist, PTRChuyenBay p)
@@ -265,6 +269,19 @@ void ThemSauCB(PTRChuyenBay p, ChuyenBay x)
 		p->next = q;
 	}
 }
+/*dat chuyen bay*/
+void ChuyenBay::datChuyenBay(char macb[15], NgayGio ngay, char sanbay[100], char somb[15], TrangThai trangthai,DSMayBay ds)
+{
+	if (TimSoHieu(somb, ds) != NULL) {	
+		strcpy_s(this->ma_cb, 15, macb);
+		this->ngay_gio_kh = ngay;
+		strcpy_s(this->san_bay_den, 100, sanbay);
+		strcpy_s(this->sh_Mb, 15, somb);
+		MayBay *tam = TimSoHieu(somb, ds);
+		this->ds_ve = new Ve[tam->so_day * tam->so_dong];
+		this->trang_thai_cb = trangthai;
+	}	
+}
 
 ChuyenBay::ChuyenBay()
 {
@@ -290,4 +307,10 @@ void NgayGio::datNgayGio(int gio, int phut, int ngay, int thang, int nam)
 	if (nam > 0) {
 		this->ngay_kh.nam = nam;
 	}
+}
+
+Ve::Ve()
+{
+	cmnd[0] = '\0';
+	vitri[0] = '\0';
 }

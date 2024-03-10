@@ -16,7 +16,7 @@ struct DSMayBay {
 	/*function*/;
 	void napFile(const char file[]) ;
 	void ghiFile(const char file[]) const;
-	void xoa() const;
+	void xoa();
 };
 //========thao tac voi danh sach may bay=====
 void ThemMayBay(MayBay, DSMayBay&);
@@ -27,8 +27,9 @@ MayBay *TimSoHieu(char[], DSMayBay);
 ///////////struct chuyen bay
 struct Ve
 {
-	char cmnd[225];
-	char vitri[5];
+	char cmnd[225]; 
+	char vitri[5]; 
+	Ve();
 };
 enum TrangThai {
 	HUY_CHUYEN,
@@ -59,7 +60,9 @@ struct ChuyenBay
 	char san_bay_den[100];
 	char sh_Mb[15];
 	TrangThai trang_thai_cb;
+	int so_ve = 0;
 	Ve* ds_ve = NULL;
+	void datChuyenBay(char macb[15], NgayGio ngay, char sanbay[100], char somb[15], TrangThai trangthai, DSMayBay ds);
 	ChuyenBay();
 };
 struct NodeChuyenBay
@@ -69,8 +72,8 @@ struct NodeChuyenBay
 };
 typedef NodeChuyenBay* PTRChuyenBay;
 ///chuyen bay function 
-void napFileChuyenBay(const char file[],PTRChuyenBay &fist);
-void ghiFileChuyenBay(const char file[],PTRChuyenBay fist);
+void napFileChuyenBay(const char file[], PTRChuyenBay& fist, DSMayBay ds);
+void ghiFileChuyenBay(const char file[], PTRChuyenBay fist);
 bool themChuyenBay(PTRChuyenBay&, ChuyenBay);
 void xoahetChuyenBay(PTRChuyenBay&);
 bool xoaChuyenBay(PTRChuyenBay&, PTRChuyenBay);

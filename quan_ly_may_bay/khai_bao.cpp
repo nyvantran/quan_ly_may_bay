@@ -72,10 +72,10 @@ void HieuChinhMB(MayBay* maybay,char sohieu[15],char loai[40],int soday,int sodo
 {
 	char check[1]{}; check[0] = '\0';
 	if (strcmp(check, sohieu) != 0) {
-		strcpy_s(maybay->sh_Mb, sohieu);
+		strcpy_s(maybay->sh_Mb,15, sohieu);
 	}
 	if (strcmp(check, loai) != 0) {
-		strcpy_s(maybay->loai_may_bay, loai);
+		strcpy_s(maybay->loai_may_bay,40, loai);
 	}
 	if (soday > 0) {
 		maybay->so_day = soday;

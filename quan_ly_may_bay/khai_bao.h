@@ -95,12 +95,13 @@ struct KhachHang
 	char ho[100];
 	char ten[10];
 	bool phai;
+	KhachHang();
 };
 struct NodeKhachHang
 {
 	KhachHang info;
 	int bf;
-	NodeKhachHang* left, * right;
+	NodeKhachHang* left=NULL, * right=NULL;
 };
 typedef NodeKhachHang* PTRKhachhang;
 //////

@@ -111,7 +111,14 @@ int checkMouse21(int x, int y)
 
 int checkMouse22(int x, int y)
 {
-	return 0;
+	int xg = 0, yg = 138;
+	int n = (y - yg) / 88;
+	if ((xg + 240 + 50 <= x) && (x <= xg + 240 + 50 + 120)) {
+		if ((yg + 88 * n <= y) && (y <= yg + 88 * n + 70)) {
+			return n;
+		}
+	}
+	return -1;
 }
 
 void mouse(int* x, int* y)
@@ -184,6 +191,23 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay dau_chuyen_bay, PTRKhachhang g
 					putimage(xg + 240, yg + 88 * 0, p2, 1);
 				}
 				putimage(xg + 240, yg + 88 * n, p3, 0);				
+			}
+			switch (checkMouse22(x,y))
+			{
+			case 0: {
+
+				break;
+			}
+			case 1: {
+
+				break;
+			}
+			case 2: {
+
+				break;
+			}
+			default:
+				break;
 			}
 			break;
 		}
@@ -632,19 +656,7 @@ void DHhieuchinhMB(DSMayBay& ds_may_bay, int* x, int* y, int* ii,int &ki,int&hi)
 			}
 		}
 		if ((int)nhap == 13) {
-			if ((shmb[0] == '\0') || (lmb[0] == '\0')
-				|| (soday[0] == '\0') || (sodong[0] == '\0') || (atoi(soday) * atoi(sodong) < 20))
-			{
-
-				outtextxy(xg + textwidth(text[0]) + getmaxx() / 2+100, yg + 20 + 130 - textheight(text[1]) / 2 + 50,
-					const_cast<char*>("khong de thong tin trong"));
-				Sleep(500);
-				bar(1019, 205,1019 + textwidth(const_cast<char*>("khong de thong tin trong")), 205 + textheight(const_cast<char*>("khong de thong tin trong")));
-				/*xoachu(const_cast<char*>("khong de thong tin trong"),
-					xg + textwidth(text[0]) + getmaxx() / 2+100, yg + 20 + 130 - textheight(text[1]) / 2 + 50);*/
-	
-			}
-			else {
+			
 				int t1 = -1, t2 = -1;
 				if (soday[0] != '\0')t1 = atoi(soday);
 				if (sodong[0] != '\0')	t2 = atoi(sodong);
@@ -659,7 +671,7 @@ void DHhieuchinhMB(DSMayBay& ds_may_bay, int* x, int* y, int* ii,int &ki,int&hi)
 						bar(1019, 200, 1019 + textwidth(const_cast<char*>("so hieu may bay trung")), 200 + textheight(const_cast<char*>("so hieu may bay trung")));
 					}
 				}
-			}
+			
 		}
 		if ((int)nhap == 27) {
 			getimage(xg + getmaxx() / 2 - 25 - 310, yg + 45, getmaxx() / 2 - 25 + 750, yg + 45 + 200, p1);

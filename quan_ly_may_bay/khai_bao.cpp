@@ -314,3 +314,10 @@ Ve::Ve()
 	cmnd[0] = '\0';
 	vitri[0] = '\0';
 }
+
+KhachHang::KhachHang()
+{
+	this->cmnd[0] = '\0';
+	this->ho[0] = '\0';
+	this->ten[0] = '\0';
+}

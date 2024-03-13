@@ -325,3 +325,15 @@ void CCCDNN(char cccd[])
 	}
 	cccd[10] = NULL;
 }
+// sap ve theo so day so dong
+void sap_ve(char ve[],int ghe_day,int ghe_dong)
+{
+	ve[0] = ghe_day + (90 - 26);
+	if (ghe_dong < 10) {
+		ve[1] = ghe_dong + (57 - 9);
+	}
+	else if (ghe_dong >= 10) {
+		ve[1] = ghe_dong + 55;
+	}
+	ve[2] = NULL;
+}

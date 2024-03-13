@@ -273,7 +273,7 @@ void ThemSauCB(PTRChuyenBay p, ChuyenBay x)
 void ChuyenBay::datChuyenBay(char macb[15], NgayGio ngay, char sanbay[100], char somb[15], TrangThai trangthai,DSMayBay ds)
 {
 	if (TimSoHieu(somb, ds) != NULL) {	
-		strcpy_s(this->ma_cb, 15, macb);
+		strcpy_s(this->ma_cb, 16, macb);
 		this->ngay_gio_kh = ngay;
 		strcpy_s(this->san_bay_den, 100, sanbay);
 		strcpy_s(this->sh_Mb, 15, somb);

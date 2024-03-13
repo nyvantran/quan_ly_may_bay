@@ -269,6 +269,7 @@ void ThemSauCB(PTRChuyenBay p, ChuyenBay x)
 		p->next = q;
 	}
 }
+
 /*dat chuyen bay*/
 void ChuyenBay::datChuyenBay(char macb[15], NgayGio ngay, char sanbay[100], char somb[15], TrangThai trangthai,DSMayBay ds)
 {
@@ -315,9 +316,21 @@ Ve::Ve()
 	vitri[0] = '\0';
 }
 
+
 KhachHang::KhachHang()
 {
 	this->cmnd[0] = '\0';
 	this->ho[0] = '\0';
 	this->ten[0] = '\0';
 }
+//tao cccd ngau nhien
+void CCCDNN(char cccd[])
+{
+	srand(time(NULL));
+	cccd[0] = rand() % (90 - 65 + 1) + 65;
+	for (int i = 1; i < 10; i++) {
+		cccd[i] = rand() % (57 - 48 + 1) + 48;
+	}
+	cccd[10] = NULL;
+}
+

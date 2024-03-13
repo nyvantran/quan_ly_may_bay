@@ -2,6 +2,8 @@
 #include<iostream>
 #include<fstream>
 using namespace std;
+#include <cstdlib>
+#include <time.h>
 #define MAX_MB 300
 //////////struct may bay
 struct MayBay
@@ -105,3 +107,4 @@ struct NodeKhachHang
 };
 typedef NodeKhachHang* PTRKhachhang;
 //////
+void CCCDNN(char cccd[10]);

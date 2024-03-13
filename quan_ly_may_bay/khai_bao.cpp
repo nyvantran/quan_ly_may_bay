@@ -72,10 +72,10 @@ void HieuChinhMB(MayBay* maybay,char sohieu[15],char loai[40],int soday,int sodo
 {
 	char check[1]{}; check[0] = '\0';
 	if (strcmp(check, sohieu) != 0) {
-		strcpy_s(maybay->sh_Mb, sohieu);
+		strcpy_s(maybay->sh_Mb,15, sohieu);
 	}
 	if (strcmp(check, loai) != 0) {
-		strcpy_s(maybay->loai_may_bay, loai);
+		strcpy_s(maybay->loai_may_bay,40, loai);
 	}
 	if (soday > 0) {
 		maybay->so_day = soday;
@@ -274,7 +274,7 @@ void ThemSauCB(PTRChuyenBay p, ChuyenBay x)
 void ChuyenBay::datChuyenBay(char macb[15], NgayGio ngay, char sanbay[100], char somb[15], TrangThai trangthai,DSMayBay ds)
 {
 	if (TimSoHieu(somb, ds) != NULL) {	
-		strcpy_s(this->ma_cb, 15, macb);
+		strcpy_s(this->ma_cb, 16, macb);
 		this->ngay_gio_kh = ngay;
 		strcpy_s(this->san_bay_den, 100, sanbay);
 		strcpy_s(this->sh_Mb, 15, somb);
@@ -315,6 +315,14 @@ Ve::Ve()
 	cmnd[0] = '\0';
 	vitri[0] = '\0';
 }
+
+
+KhachHang::KhachHang()
+{
+	this->cmnd[0] = '\0';
+	this->ho[0] = '\0';
+	this->ten[0] = '\0';
+}
 //tao cccd ngau nhien
 void CCCDNN(char cccd[])
 {
@@ -325,3 +333,4 @@ void CCCDNN(char cccd[])
 	}
 	cccd[10] = NULL;
 }
+

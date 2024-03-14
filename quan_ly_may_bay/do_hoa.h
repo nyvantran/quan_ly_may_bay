@@ -17,7 +17,7 @@ int checkMouse22(int x, int y);
 void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay dau_chuyen_bay, PTRKhachhang goc_khach_hang);
 ///=========================them may bay===========================================///
 void DHThemMB(DSMayBay& ds_may_bay, int*, int*);
-void DHxoaMB(DSMayBay& ds_may_bay, int* x, int* y, int* ii);
+void DHxoaMB(DSMayBay& ds_may_bay, PTRChuyenBay fist, int* x, int* y, int* ii);
 void DHhieuchinhMB(DSMayBay& ds_may_bay, int* x, int* y, int* ii, int& ki,int&hi);
 void hienDSMb1(int* x, int* y, int* ii, DSMayBay& ds_may_bay);
 void hienDSMb2(int* x, int* y, int* ii, int& ki, int& hi, DSMayBay& ds_may_bay);

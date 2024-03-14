@@ -11,11 +11,11 @@ int main() {
 	PTRKhachhang goc_khach_hang = NULL;
 	ds_may_bay.napFile(DLMAYBAY);
 	napFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay, ds_may_bay);
-	/*napFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay, ds_may_bay);*/
 	KhoiDong();
 	chayDoHoa(ds_may_bay,dau_chuyen_bay,goc_khach_hang);
+	ds_may_bay.ghiFile(DLMAYBAY);
+	ghiFileChuyenBay(DLCHUYENBAY,dau_chuyen_bay);
 	KetThuc();
-	
 }
 
 

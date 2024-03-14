@@ -337,3 +337,160 @@ void sap_ve(char ve[],int ghe_day,int ghe_dong)
 	}
 	ve[2] = NULL;
 }
+// chuan hoa ngay
+void sua_ngay(Ngay& day) {
+	if (day.nam % 4 == 0) {
+		switch (day.thang) {
+		case 1:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 2:
+			if (day.ngay > 29) {
+				day.ngay = day.ngay - 29;
+				day.thang++;
+			}
+			break;
+		case 3:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 4:
+			if (day.ngay > 30) {
+				day.ngay = day.ngay - 30;
+				day.thang++;
+			}
+			break;
+		case 5:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 6:
+			if (day.ngay > 30) {
+				day.ngay = day.ngay - 30;
+				day.thang++;
+			}
+			break;
+		case 7:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 8:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 9:
+			if (day.ngay > 30) {
+				day.ngay = day.ngay - 30;
+				day.thang++;
+			}
+			break;
+		case 10:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 11:
+			if (day.ngay > 30) {
+				day.ngay = day.ngay - 30;
+				day.thang++;
+			}
+			break;
+		case 12:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang = 1;
+				day.nam = day.nam + 1;
+			}
+			break;
+		}
+	}
+	else if (day.nam % 4 != 0) {
+		switch (day.thang) {
+		case 1:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 2:
+			if (day.ngay > 28) {
+				day.ngay = day.ngay - 28;
+				day.thang++;
+			}
+			break;
+		case 3:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 4:
+			if (day.ngay > 30) {
+				day.ngay = day.ngay - 30;
+				day.thang++;
+			}
+			break;
+		case 5:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 6:
+			if (day.ngay > 30) {
+				day.ngay = day.ngay - 30;
+				day.thang++;
+			}
+			break;
+		case 7:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 8:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 9:
+			if (day.ngay > 30) {
+				day.ngay = day.ngay - 30;
+				day.thang++;
+			}
+			break;
+		case 10:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang++;
+			}
+			break;
+		case 11:
+			if (day.ngay > 30) {
+				day.ngay = day.ngay - 30;
+				day.thang++;
+			}
+			break;
+		case 12:
+			if (day.ngay > 31) {
+				day.ngay = day.ngay - 31;
+				day.thang = 1;
+				day.nam = day.nam + 1;
+			}
+			break;
+		}
+	}
+}

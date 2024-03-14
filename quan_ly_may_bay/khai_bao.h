@@ -108,6 +108,6 @@ typedef NodeKhachHang* PTRKhachhang;
 //////cccd sinh ngau nhien
 void CCCDNN(char cccd[10]);
 //ve sinh theo so day va so dong 
-void sap_ve(char[], int, int );
+void SapVe(char[], int, int );
 //chuan hoa ngay
-void sua_ngay(Ngay&);
+void SuaNgay(Ngay&);

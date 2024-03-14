@@ -326,7 +326,7 @@ void CCCDNN(char cccd[])
 	cccd[10] = NULL;
 }
 // sap ve theo so day so dong
-void sap_ve(char ve[],int ghe_day,int ghe_dong)
+void SapVe(char ve[],int ghe_day,int ghe_dong)
 {
 	ve[0] = ghe_day + (90 - 26);
 	if (ghe_dong < 10) {
@@ -338,7 +338,7 @@ void sap_ve(char ve[],int ghe_day,int ghe_dong)
 	ve[2] = NULL;
 }
 // chuan hoa ngay
-void sua_ngay(Ngay& day) {
+void SuaNgay(Ngay& day) {
 	if (day.nam % 4 == 0) {
 		switch (day.thang) {
 		case 1:

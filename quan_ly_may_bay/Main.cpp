@@ -15,7 +15,6 @@ int main() {
 	KhoiDong();
 	chayDoHoa(ds_may_bay,dau_chuyen_bay,goc_khach_hang);
 	KetThuc();
-	
 }
 
 

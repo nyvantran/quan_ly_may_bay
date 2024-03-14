@@ -106,5 +106,9 @@ struct NodeKhachHang
 	NodeKhachHang* left=NULL, * right=NULL;
 };
 typedef NodeKhachHang* PTRKhachhang;
-//////
+//////cccd sinh ngau nhien
 void CCCDNN(char cccd[10]);
+//ve sinh theo so day va so dong 
+void SapVe(char[], int, int );
+//chuan hoa ngay
+void SuaNgay(Ngay&);

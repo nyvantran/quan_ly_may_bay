@@ -288,6 +288,7 @@ void ThemSauCB(PTRChuyenBay p, ChuyenBay x)
 		p->next = q;
 	}
 }
+
 TrangThai capNhapTT(NgayGio thoigian)
 {
 	time_t now = time(0);
@@ -370,4 +371,15 @@ Ve::Ve()
 	cmnd[0] = '\0';
 	vitri[0] = '\0';
 }
+//tao cccd ngau nhien
+void CCCDNN(char cccd[])
+{
+	srand(time(NULL));
+	cccd[0] = rand() % (90 - 65 + 1) + 65;
+	for (int i = 1; i < 10; i++) {
+		cccd[i] = rand() % (57 - 48 + 1) + 48;
+	}
+	cccd[10] = NULL;
+}
+
 

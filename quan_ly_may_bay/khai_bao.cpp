@@ -68,14 +68,14 @@ void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 }
 //==========hieu chinh may bay trong danh sach=======
 
-void HieuChinhMB(MayBay* maybay,char sohieu[15],char loai[40],int soday,int sodong)
+void HieuChinhMB(MayBay* maybay,char sohieu[],char loai[],int soday,int sodong)
 {
 	char check[1]{}; check[0] = '\0';
 	if (strcmp(check, sohieu) != 0) {
-		strcpy_s(maybay->sh_Mb,15, sohieu);
+		strcpy_s(maybay->sh_Mb,16, sohieu);
 	}
 	if (strcmp(check, loai) != 0) {
-		strcpy_s(maybay->loai_may_bay,40, loai);
+		strcpy_s(maybay->loai_may_bay,41, loai);
 	}
 	if (soday > 0) {
 		maybay->so_day = soday;
@@ -109,12 +109,18 @@ void napFileChuyenBay(const char file[], PTRChuyenBay &fist,DSMayBay ds)/*se sua
 			doc.trang_thai_cb = capNhapTT(doc.ngay_gio_kh);
 		}
 		tam = TimSoHieu(doc.sh_Mb, ds);
-		n = tam->so_day * tam->so_dong;
-		doc.ds_ve = new Ve[n];
-		for (int i = 0; i < doc.so_ve; i++) {
-			file1.read(reinterpret_cast<char*>(&doc.ds_ve[i]), sizeof(Ve));
+		if (tam != NULL) {
+			n = tam->so_day * tam->so_dong;
+			doc.ds_ve = new Ve[n];
+			for (int i = 0; i < doc.so_ve; i++) {
+				file1.read(reinterpret_cast<char*>(&doc.ds_ve[i]), sizeof(Ve));
+			}
+			themChuyenBay(fist, doc);
 		}
-		themChuyenBay(fist, doc);
+		else {
+
+		}
+		
 	}
 }
 /*ghi file chuyen bay*/
@@ -243,13 +249,13 @@ void chinhsuaChuyenBay(PTRChuyenBay &p, NgayGio time, char sbd[], char shmb[])
 		if (time.gio_kh.phut >= 0) {
 			p->cb.ngay_gio_kh.gio_kh.phut = time.gio_kh.phut;
 		}
-		if (time.ngay_kh.nam >= 0) {
+		if (time.ngay_kh.nam > 0) {
 			p->cb.ngay_gio_kh.ngay_kh.nam = time.ngay_kh.nam;
 		}
-		if (time.ngay_kh.ngay >= 0) {
+		if (time.ngay_kh.ngay > 0) {
 			p->cb.ngay_gio_kh.ngay_kh.ngay = time.ngay_kh.ngay;
 		}
-		if (time.ngay_kh.thang >= 0) {
+		if (time.ngay_kh.thang > 0) {
 			p->cb.ngay_gio_kh.ngay_kh.thang = time.ngay_kh.thang;
 		}
 		if (sbd[0] != '\0') {
@@ -287,6 +293,12 @@ void ThemSauCB(PTRChuyenBay p, ChuyenBay x)
 		q->next = p->next;
 		p->next = q;
 	}
+}
+
+void Ve::DatVe(char cmnd[], char vt[])
+{
+	strcpy_s(this->cmnd, 13, cmnd);
+	strcpy_s(this->vitri, 5, vt);
 }
 
 TrangThai capNhapTT(NgayGio thoigian)
@@ -339,13 +351,35 @@ void ChuyenBay::datChuyenBay(char macb[], NgayGio ngay, char sanbay[], char somb
 		this->trang_thai_cb = trangthai;
 	}	
 }
-
-//ChuyenBay::ChuyenBay()
-//{
-//	this->ma_cb[0] = '\0';
-//	this->san_bay_den[0] = '\0';
-//	this->sh_Mb[0] = '\0';
-//}
+Ve* ChuyenBay::timVe(char cmnd[]) const
+{
+	for (int i = 0; i < this->so_ve; i++) {
+		if (strcmp(cmnd, this->ds_ve[i].cmnd) == 0) {
+			return this->ds_ve + i;
+			break;
+		}
+	}
+	return NULL;
+}
+bool ChuyenBay::huyVe(char cmnd[])
+{
+	Ve* xoa = this->timVe(cmnd);
+	int xoa1 = 0;
+	if (xoa == NULL) {
+		return false;
+	}
+	for (int i = 0; i < this->so_ve; i++) {
+		if (&this->ds_ve[i] == xoa) {
+			xoa1 = i;
+			break;
+		}
+	}
+	for (int i = xoa1+1; i < this->so_ve; i++) {
+		this->ds_ve[i-1] = this->ds_ve[i];
+	}
+	this->so_ve--;
+	return true;
+}
 /*setup ngay gio*/
 void NgayGio::datNgayGio(int gio, int phut, int ngay, int thang, int nam)
 {
@@ -364,12 +398,6 @@ void NgayGio::datNgayGio(int gio, int phut, int ngay, int thang, int nam)
 	if (nam > 0) {
 		this->ngay_kh.nam = nam;
 	}
-}
-
-Ve::Ve()
-{
-	cmnd[0] = '\0';
-	vitri[0] = '\0';
 }
 //tao cccd ngau nhien
 void CCCDNN(char cccd[])
@@ -550,5 +578,229 @@ void SuaNgay(Ngay& day) {
 		}
 	}
 }
+
+void NodeChuyenBay::capnhap()
+{
+	/*if (this->cb.trang_thai_cb != HUY_CHUYEN) */
+		this->cb.trang_thai_cb = capNhapTT(this->cb.ngay_gio_kh);
+	
+}
+
+void NodeChuyenBay::capNhapVe(DSMayBay ds, char shmb[], bool d)
+{
+	MayBay* n;
+	if (shmb[0]='\0') {
+		strcpy_s(this->cb.sh_Mb, shmb);
+	}
+	if (d == 1) {
+		n = TimSoHieu(this->cb.sh_Mb, ds);
+		Ve* tam = new Ve[n->so_day * n->so_dong];
+		for (int i = 0; i < this->cb.so_ve; i++) {
+			tam[0] = this->cb.ds_ve[i];
+		}
+		delete[] this->cb.ds_ve;
+		this->cb.ds_ve = tam;
+	}
+}
+///======================Khach Hang===================================///
+void KhachHang::datKhachHang(char cmnd[], char ho[], char ten[], bool phai)
+{
+	strcpy_s(this->cmnd, 13, cmnd);
+	strcpy_s(this->ho, 25, ho);
+	strcpy_s(this->ten, 10, ten);
+	this->phai = phai;
+}
+void napFileKhachHang(PTRKhachhang& goc, const char file[])
+{
+	fstream file1(file, ios::binary | ios::in);
+	KhachHang tam;
+	do {
+		file1.read(reinterpret_cast<char*>(&tam), sizeof(KhachHang));
+		if(tam.cmnd[0]!='\0')themKhachHang(goc, tam);
+	} while (!file1.eof());
+}
+void ghiFileKhangHang(PTRKhachhang goc, char file[])
+{
+	fstream file1(file, ios::binary | ios::out);
+	file1.write(reinterpret_cast<char*>(&goc->info), sizeof(KhachHang));
+	ghiFileKhangHang(goc->left, file);
+	ghiFileKhangHang(goc->right, file);
+}
+PTRKhachhang latTraiKhachHang(PTRKhachhang goc)
+{
+	PTRKhachhang p{};
+	if (goc == NULL) {
+
+	}
+	else {
+		if (goc->right == NULL) {
+		}
+		else {
+			p = goc->right;
+			goc->right = p->left;
+			p->left = goc;
+		}
+	}
+	return p;
+}
+PTRKhachhang latPhaiKhachHang(PTRKhachhang goc)
+{
+	PTRKhachhang p{};
+	if (goc == NULL) {
+
+	}
+	else {
+		if (goc->left == NULL) {
+		}
+		else {
+			p = goc->left;
+			goc->left = p->right;
+			p->right = goc;
+		}
+	}
+	return p;
+}
+void duyetLNR(PTRKhachhang goc)
+{
+	if (goc == NULL) {
+
+	}
+	else {
+		cout << goc->info.cmnd << endl;
+		duyetLNR(goc->left);
+		duyetLNR(goc->right);
+		
+	}
+}
+PTRKhachhang timKhachHang(PTRKhachhang goc, char cmnd[])
+{
+	PTRKhachhang p;
+	p = goc;
+	while (p != NULL && strcmp(cmnd, p->info.cmnd) != 0) {
+		if (strcmp(cmnd, p->info.cmnd) < 0) {
+			p = p->left;
+		}
+		if (strcmp(cmnd, p->info.cmnd) > 0) {
+			p = p->right;
+		}
+	}
+	return p;
+}
+void themKhachHang(PTRKhachhang& goc, KhachHang x)
+{
+	PTRKhachhang fp, p, q, ya, fya, s;
+	int imbal;
+	///
+	fp = NULL; p = goc;
+	fya = NULL; ya = p;
+	if (goc == NULL) {
+		goc = new NodeKhachHang;
+		goc->bf = 0;
+		goc->info = x;
+		goc->left = NULL;
+		goc->right = NULL;
+		return;
+	}
+	///tim vi tri them
+	while (p != NULL) {
+		if (strcmp(x.cmnd, p->info.cmnd) == 0) {
+			return;
+		}
+		if (strcmp(x.cmnd, p->info.cmnd) < 0) {
+			q = p->left;
+		}
+		else {
+			q = p->right;
+		}
+		if (q != NULL) 
+			if (q->bf != 0) {
+				fya = p;
+				ya = q;
+			}
+		fp = p;
+		p = q;
+	}
+	///////
+	q = new NodeKhachHang;
+	q->info = x; q->bf = 0; 
+	q->left = NULL; q->right = NULL;
+	if (strcmp(x.cmnd, fp->info.cmnd) < 0)fp->left = q;
+	else fp->right = q;
+	////hieu chinh
+	if (strcmp(x.cmnd, ya->info.cmnd) < 0) {
+		p = ya->left;
+	}
+	else {
+		p = ya->right; 
+	}
+	s = p; 
+	while (p != q) {
+		if (strcmp(x.cmnd, p->info.cmnd) < 0) {
+			p->bf = 1;         
+			p = p->left;
+		}
+		else {
+			p->bf = -1; 	
+			p = p->right;
+		}
+	}
+	///xac dinh huong lenh
+	if (strcmp(x.cmnd, ya->info.cmnd) < 0) {
+		imbal = 1;
+	}
+	else {
+		imbal = -1;
+	}
+	if (ya->bf == 0){
+		ya->bf = imbal;
+		return;
+	}
+	if (ya->bf != imbal){
+		ya->bf = 0;
+		return;
+	}
+	///cay mat can bang
+	if (s->bf == imbal) {
+		if (imbal == 1) {
+			p = latPhaiKhachHang(ya);
+		}
+		else {	
+			p = latTraiKhachHang(ya);	
+		}
+		ya->bf = 0;
+		s->bf = 0;
+	}
+	else {
+		if (imbal == 1) {
+			ya->left = latTraiKhachHang(s);
+			p = latPhaiKhachHang(ya);
+		}
+		else {
+			ya->right = latPhaiKhachHang(s);
+			p = latTraiKhachHang(ya);
+		}
+		if (p->bf == 0) {
+			ya->bf = 0;
+			s->bf = 0;
+		}
+		else if (p->bf == imbal) {
+			ya->bf = -imbal;
+			s->bf = 0;
+		}
+		else {
+			ya->bf = 0;
+			s->bf = imbal;
+		}
+		p->bf = 0;
+	}
+	if (fya == NULL) {
+		goc = p;
+	}
+	else if (ya == fya->right) {
+		fya->right = p;
+	}
+	else fya->left = p;
+}
+//////////
 
 

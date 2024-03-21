@@ -29,8 +29,8 @@ MayBay *TimSoHieu(char[], DSMayBay);
 ///////////struct chuyen bay
 struct Ve
 {
-	char cmnd[225]; 
-	char vitri[5]; 
+	char cmnd[20]{};
+	char vitri[5]{};
 	Ve();
 };
 enum TrangThai {
@@ -57,15 +57,15 @@ struct NgayGio
 };
 struct ChuyenBay
 {
-	char ma_cb[15];
+	char ma_cb[15]{};
 	NgayGio ngay_gio_kh;
-	char san_bay_den[100];
-	char sh_Mb[15];
+	char san_bay_den[100]{};
+	char sh_Mb[15]{};
 	TrangThai trang_thai_cb;
 	int so_ve = 0;
 	Ve* ds_ve = NULL;
-	void datChuyenBay(char macb[15], NgayGio ngay, char sanbay[100], char somb[15], TrangThai trangthai, DSMayBay ds);
-	ChuyenBay();
+	void datChuyenBay(char macb[], NgayGio ngay, char sanbay[], char somb[], TrangThai trangthai, DSMayBay ds);
+	//ChuyenBay();
 };
 struct NodeChuyenBay
 {
@@ -84,25 +84,27 @@ bool xoadauNodeChuyenBay(PTRChuyenBay& fist);
 bool xoasauNodeChuyenBay(PTRChuyenBay p);
 //////////////
 PTRChuyenBay timChuyenBay(PTRChuyenBay fist, char x[]);
+int timCBtheoSHMB(PTRChuyenBay fist, char x[], int& m);
 void chinhsuaChuyenBay(PTRChuyenBay& p, NgayGio time, char sbd[], char shmb[]);
 /*void KhoiDauCB(PTRChuyenBay& fist);*/
 PTRChuyenBay KhoiTaoCB();
 void ThemDauCB(PTRChuyenBay& fist, ChuyenBay x);
 void ThemSauCB(PTRChuyenBay p, ChuyenBay x);
+TrangThai capNhapTT(NgayGio);
 ///////////
 /////struct khanh hang
 struct KhachHang
 {
-	char cmnd[20];
-	char ho[100];
-	char ten[10];
+	char cmnd[20]{};
+	char ho[100]{};
+	char ten[10]{};
 	bool phai;
 };
 struct NodeKhachHang
 {
 	KhachHang info;
 	int bf;
-	NodeKhachHang* left, * right;
+	NodeKhachHang* left=NULL, * right=NULL;
 };
 typedef NodeKhachHang* PTRKhachhang;
 //////cccd sinh ngau nhien

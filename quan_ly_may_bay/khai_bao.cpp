@@ -72,10 +72,10 @@ void HieuChinhMB(MayBay* maybay,char sohieu[15],char loai[40],int soday,int sodo
 {
 	char check[1]{}; check[0] = '\0';
 	if (strcmp(check, sohieu) != 0) {
-		strcpy_s(maybay->sh_Mb, sohieu);
+		strcpy_s(maybay->sh_Mb,15, sohieu);
 	}
 	if (strcmp(check, loai) != 0) {
-		strcpy_s(maybay->loai_may_bay, loai);
+		strcpy_s(maybay->loai_may_bay,40, loai);
 	}
 	if (soday > 0) {
 		maybay->so_day = soday;
@@ -84,6 +84,8 @@ void HieuChinhMB(MayBay* maybay,char sohieu[15],char loai[40],int soday,int sodo
 		maybay->so_dong = sodong;
 	}
 }
+
+
 
 // ======search theo so hieu may bay=======
 MayBay *TimSoHieu (char x[15], DSMayBay DSmaybay) {
@@ -103,6 +105,9 @@ void napFileChuyenBay(const char file[], PTRChuyenBay &fist,DSMayBay ds)/*se sua
 	int n;
 	while (!file1.eof()) {
 		file1.read(reinterpret_cast<char*>(&doc), sizeof(ChuyenBay));
+		if (doc.trang_thai_cb != HUY_CHUYEN) {
+			doc.trang_thai_cb = capNhapTT(doc.ngay_gio_kh);
+		}
 		tam = TimSoHieu(doc.sh_Mb, ds);
 		n = tam->so_day * tam->so_dong;
 		doc.ds_ve = new Ve[n];
@@ -214,6 +219,20 @@ PTRChuyenBay timChuyenBay(PTRChuyenBay fist, char x[])
 	}
 	return NULL;
 }
+int timCBtheoSHMB(PTRChuyenBay fist, char x[], int& m)
+{
+	int n1 = 0, n2 = 0;
+	for (PTRChuyenBay i = fist; i != NULL; i = i->next) {
+		if (strcmp(i->cb.sh_Mb, x) == 0) {
+			n1++;
+			if (i->cb.trang_thai_cb == HOAN_TAT) {
+				n2++;
+			}
+		}
+	}
+	m = n2++;
+	return n1;
+}
 /*chinh sua chuyen bay*/
 void chinhsuaChuyenBay(PTRChuyenBay &p, NgayGio time, char sbd[], char shmb[])
 {
@@ -270,11 +289,48 @@ void ThemSauCB(PTRChuyenBay p, ChuyenBay x)
 	}
 }
 
+TrangThai capNhapTT(NgayGio thoigian)
+{
+	time_t now = time(0);
+	tm th;
+	localtime_s(&th, &now);
+	if (th.tm_year % 100 > thoigian.ngay_kh.nam) {
+		return HOAN_TAT;
+	}
+	else if (th.tm_year % 100 < thoigian.ngay_kh.nam) {
+		return CON_VE;
+	}
+	else if (thoigian.ngay_kh.thang > th.tm_mon + 1) {
+		return CON_VE;
+	}
+	else if (thoigian.ngay_kh.thang < th.tm_mon + 1) {
+		return HOAN_TAT;
+	}
+	else if (thoigian.ngay_kh.ngay > th.tm_mday) {
+		return CON_VE;
+	}
+	else if (thoigian.ngay_kh.ngay < th.tm_mday) {
+		return HOAN_TAT;
+	}
+	else if (thoigian.gio_kh.gio > th.tm_hour) {
+		return CON_VE;
+	}
+	else if (thoigian.gio_kh.gio < th.tm_hour) {
+		return HOAN_TAT;
+	}
+	else if (thoigian.gio_kh.phut > th.tm_min) {
+		return CON_VE;
+	}
+	else if (thoigian.gio_kh.phut < th.tm_min) {
+		return HOAN_TAT;
+	}
+	return CON_VE;
+}
 /*dat chuyen bay*/
-void ChuyenBay::datChuyenBay(char macb[15], NgayGio ngay, char sanbay[100], char somb[15], TrangThai trangthai,DSMayBay ds)
+void ChuyenBay::datChuyenBay(char macb[], NgayGio ngay, char sanbay[], char somb[], TrangThai trangthai,DSMayBay ds)
 {
 	if (TimSoHieu(somb, ds) != NULL) {	
-		strcpy_s(this->ma_cb, 15, macb);
+		strcpy_s(this->ma_cb, 16, macb);
 		this->ngay_gio_kh = ngay;
 		strcpy_s(this->san_bay_den, 100, sanbay);
 		strcpy_s(this->sh_Mb, 15, somb);
@@ -284,19 +340,19 @@ void ChuyenBay::datChuyenBay(char macb[15], NgayGio ngay, char sanbay[100], char
 	}	
 }
 
-ChuyenBay::ChuyenBay()
-{
-	this->ma_cb[0] = '\0';
-	this->san_bay_den[0] = '\0';
-	this->sh_Mb[0] = '\0';
-}
+//ChuyenBay::ChuyenBay()
+//{
+//	this->ma_cb[0] = '\0';
+//	this->san_bay_den[0] = '\0';
+//	this->sh_Mb[0] = '\0';
+//}
 /*setup ngay gio*/
 void NgayGio::datNgayGio(int gio, int phut, int ngay, int thang, int nam)
 {
 	if (gio >= 0) {
 		this->gio_kh.gio = gio;
 	}
-	if (phut > 0) {
+	if (phut >= 0) {
 		this->gio_kh.phut = phut;
 	}
 	if (ngay > 0) {
@@ -494,6 +550,7 @@ void SuaNgay(Ngay& day) {
 		}
 	}
 }
+
 //chuan hoa ten
 void SuaTen(char ten[])
 {
@@ -542,3 +599,7 @@ void SuaTen(char ten[])
 	}
 	ten[0] = ten[0] - 32;
 }
+
+
+
+

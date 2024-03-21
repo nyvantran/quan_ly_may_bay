@@ -551,4 +551,55 @@ void SuaNgay(Ngay& day) {
 	}
 }
 
+//chuan hoa ten
+void SuaTen(char ten[])
+{
+	int dem = 0;
+	while (ten[dem] == ' ') {
+		dem++;
+	}
+
+	for (int i = 0; i < strlen(ten); i++) {
+		ten[i] = ten[dem + i];
+	}
+
+	dem = 0;
+	for (int i = 0; i < strlen(ten); i++) {
+		if (ten[i] == ' ' && ten[i + 1] == ' ') {
+			dem = i + 1;
+			while (ten[dem] == ' ') {
+				dem = dem + 1;
+			}
+			dem = dem - i - 1;
+			for (int j = i + 1; j < strlen(ten); j++) {
+				ten[j] = ten[dem + j];
+			}
+		}
+	}
+	if (ten[strlen(ten) - 1] == ' ') {
+		ten[strlen(ten) - 1] = '\0';
+	}
+	if (ten[0] >= 97 && ten[0] <= 122) {
+		ten[0] = ten[0] - 32;
+	}
+	for (int i = 0; i < strlen(ten); i++) {
+		if (ten[i] == ' ') {
+			if (ten[i + 1] >= 97 && ten[i + 1] <= 122) {
+				ten[i + 1] = ten[i + 1] - 32;
+			}
+		}
+	}
+
+	for (int i = strlen(ten) - 1; i >= 0; i--) {
+		if (ten[i - 1] != ' ') {
+			if (ten[i] > 65 && ten[i] < 90) {
+				ten[i] = ten[i] + 32;
+			}
+		}
+	}
+	ten[0] = ten[0] - 32;
+}
+
+
+
 

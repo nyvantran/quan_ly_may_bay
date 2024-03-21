@@ -113,3 +113,5 @@ void CCCDNN(char cccd[10]);
 void SapVe(char[], int, int );
 //chuan hoa ngay
 void SuaNgay(Ngay&);
+// chuan hoa ten
+void SuaTen(char[]);

@@ -22,16 +22,16 @@ struct DSMayBay {
 };
 //========thao tac voi danh sach may bay=====
 void ThemMayBay(MayBay, DSMayBay&);
-void HieuChinhMB(MayBay* maybay, char sohieu[15], char loai[40], int soday, int sodong);
+void HieuChinhMB(MayBay* maybay, char sohieu[], char loai[], int soday, int sodong);
 void XoaMayBay(DSMayBay& , char[]);
 MayBay *TimSoHieu(char[], DSMayBay);
 //////
 ///////////struct chuyen bay
 struct Ve
 {
-	char cmnd[20]{};
+	char cmnd[13]{};
 	char vitri[5]{};
-	Ve();
+	void DatVe(char cmnd[], char vt[]);
 };
 enum TrangThai {
 	HUY_CHUYEN,
@@ -65,12 +65,16 @@ struct ChuyenBay
 	int so_ve = 0;
 	Ve* ds_ve = NULL;
 	void datChuyenBay(char macb[], NgayGio ngay, char sanbay[], char somb[], TrangThai trangthai, DSMayBay ds);
+	Ve* timVe(char cmnd[]) const;
+	bool huyVe(char cmnd[]);
 	//ChuyenBay();
 };
 struct NodeChuyenBay
 {
 	ChuyenBay cb;
 	NodeChuyenBay* next = NULL;
+	void capnhap();
+	void capNhapVe(DSMayBay ds, char shmb[], bool);
 };
 typedef NodeChuyenBay* PTRChuyenBay;
 ///chuyen bay function 
@@ -95,18 +99,28 @@ TrangThai capNhapTT(NgayGio);
 /////struct khanh hang
 struct KhachHang
 {
-	char cmnd[20]{};
-	char ho[100]{};
+	char cmnd[13]{};
+	char ho[40]{};
 	char ten[10]{};
 	bool phai;
+	void datKhachHang(char cmnd[], char ho[], char ten[], bool phai);
 };
 struct NodeKhachHang
 {
 	KhachHang info;
-	int bf;
-	NodeKhachHang* left=NULL, * right=NULL;
+	int bf=0;
+	NodeKhachHang* left = NULL, * right = NULL;
 };
 typedef NodeKhachHang* PTRKhachhang;
+/*function khach hang*/
+void napFileKhachHang(PTRKhachhang& goc, const char file[]);
+void ghiFileKhangHang(PTRKhachhang goc, char file[]);
+PTRKhachhang latTraiKhachHang(PTRKhachhang goc);
+PTRKhachhang latPhaiKhachHang(PTRKhachhang goc);
+void duyetLNR(PTRKhachhang);
+PTRKhachhang timKhachHang(PTRKhachhang goc, char[]);
+void themKhachHang(PTRKhachhang&, KhachHang);
+//////////////////////////////////////////////////////////
 //////cccd sinh ngau nhien
 void CCCDNN(char cccd[10]);
 //ve sinh theo so day va so dong 

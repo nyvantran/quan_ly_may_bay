@@ -115,3 +115,5 @@ void SapVe(char[], int, int );
 void SuaNgay(Ngay&);
 // chuan hoa ten
 void SuaTen(char[]);
+// ghe tra dong day 
+void TraDongDay(char ve[], int& , int& );

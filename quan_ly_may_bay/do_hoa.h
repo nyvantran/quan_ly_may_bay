@@ -34,10 +34,12 @@ void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay &ht, int* x, int* 
 void hienDSCB2(int* x, int* y, int* ii, PTRChuyenBay& ht, PTRChuyenBay& dau_chuyen_bay, DSMayBay ds_may_bay);
 int mouseHieuChinhCB(int old, int x, int y);
 ///===========================khach hang==============================================///
-void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* y);
+void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& goc_khach_hang, int* x, int* y);
 void chonChuyenBay(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, int* x, int* y, int* ii);
 void hienDSCB3(int* x, int* y, int* ii, PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay);
 int mouseChonCB(int x, int y);
+int mouseDatVe(int x, int y);
+void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& goc_khach_hang, int* x, int* y);
 ///===================================================================================///
 void xoachu(char* n, int x, int y);
 void KetThuc();

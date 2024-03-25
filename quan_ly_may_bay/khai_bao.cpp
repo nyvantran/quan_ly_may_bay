@@ -412,14 +412,17 @@ void CCCDNN(char cccd[])
 // sap ve theo so day so dong
 void SapVe(char ve[],int ghe_day,int ghe_dong)
 {
-	ve[0] = ghe_day + (90 - 26);
-	if (ghe_dong < 10) {
-		ve[1] = ghe_dong + (57 - 9);
+	char day[22]{}, dong[22]{};
+	if (ghe_day < 26) {
+		ghe_day = ghe_day + 64;
+		day[0] = (char)ghe_day;
 	}
-	else if (ghe_dong >= 10) {
-		ve[1] = ghe_dong + 55;
+	else {
+
 	}
-	ve[2] = NULL;
+	_itoa_s(ghe_dong, dong, 20, 10);
+	strcpy_s(ve, 2, day);
+	strcat_s(ve, 10, dong);
 }
 // chuan hoa ngay
 void SuaNgay(Ngay& day) {
@@ -620,12 +623,25 @@ void napFileKhachHang(PTRKhachhang& goc, const char file[])
 		if(tam.cmnd[0]!='\0')themKhachHang(goc, tam);
 	} while (!file1.eof());
 }
-void ghiFileKhangHang(PTRKhachhang goc, char file[])
+void ghiFileKhangHang(PTRKhachhang goc,const char file[])
 {
 	fstream file1(file, ios::binary | ios::out);
-	file1.write(reinterpret_cast<char*>(&goc->info), sizeof(KhachHang));
-	ghiFileKhangHang(goc->left, file);
-	ghiFileKhangHang(goc->right, file);
+	const int	STAIZE = 1000;
+	PTRKhachhang Stack[STAIZE]{};
+	PTRKhachhang p = goc;
+	int sp = -1;
+	do {
+		while (p != NULL) {
+			Stack[++sp] = p;
+			p = p->left;
+		}
+		if (sp != -1) {
+			p = Stack[sp--];
+			file1.write(reinterpret_cast<char*>(&p->info), sizeof(KhachHang));
+			p = p->right;
+		}
+		else break;
+	} while (1);
 }
 PTRKhachhang latTraiKhachHang(PTRKhachhang goc)
 {
@@ -667,10 +683,18 @@ void duyetLNR(PTRKhachhang goc)
 
 	}
 	else {
-		cout << goc->info.cmnd << endl;
+		cout << goc->info.cmnd << goc->info.ten<< endl;
 		duyetLNR(goc->left);
 		duyetLNR(goc->right);
 		
+	}
+}
+void xoaHetKhachHang(PTRKhachhang& goc)
+{
+	if (goc != NULL) {
+		xoaHetKhachHang(goc->left);
+		xoaHetKhachHang(goc->right);
+		delete goc;
 	}
 }
 PTRKhachhang timKhachHang(PTRKhachhang goc, char cmnd[])
@@ -678,12 +702,16 @@ PTRKhachhang timKhachHang(PTRKhachhang goc, char cmnd[])
 	PTRKhachhang p;
 	p = goc;
 	while (p != NULL && strcmp(cmnd, p->info.cmnd) != 0) {
-		if (strcmp(cmnd, p->info.cmnd) < 0) {
-			p = p->left;
+		if (p != NULL) {
+			if (strcmp(cmnd, p->info.cmnd) < 0) {
+				p = p->left;
+			}else
+			if (strcmp(cmnd, p->info.cmnd) > 0) {
+				p = p->right;
+			}
 		}
-		if (strcmp(cmnd, p->info.cmnd) > 0) {
-			p = p->right;
-		}
+		else return NULL;
+		
 	}
 	return p;
 }
@@ -833,12 +861,12 @@ void SuaTen(char ten[])
 		ten[strlen(ten) - 1] = '\0';
 	}
 	if (ten[0] >= 97 && ten[0] <= 122) {
-		ten[0] = ten[0] - 32;
+		ten[0] = toupper(ten[0]);
 	}
 	for (int i = 0; i < strlen(ten); i++) {
 		if (ten[i] == ' ') {
 			if (ten[i + 1] >= 97 && ten[i + 1] <= 122) {
-				ten[i + 1] = ten[i + 1] - 32;
+				ten[i + 1] = toupper(ten[i + 1]);
 			}
 		}
 	}
@@ -846,11 +874,11 @@ void SuaTen(char ten[])
 	for (int i = strlen(ten) - 1; i >= 0; i--) {
 		if (ten[i - 1] != ' ') {
 			if (ten[i] > 65 && ten[i] < 90) {
-				ten[i] = ten[i] + 32;
+				ten[i] = tolower(ten[i]);
 			}
 		}
 	}
-	ten[0] = ten[0] - 32;
+	ten[0] = toupper(ten[0]);
 }
 
 

@@ -19,8 +19,10 @@ int main() {
 	//////////////
 	ds_may_bay.ghiFile(DLMAYBAY);
 	ghiFileChuyenBay(DLCHUYENBAY,dau_chuyen_bay);
+	ghiFileKhangHang(goc_khach_hang, DLKHACHHANG);
 	ds_may_bay.xoa();
 	xoahetChuyenBay(dau_chuyen_bay);
+	xoaHetKhachHang(goc_khach_hang);
 	///////////////////
 	KetThuc();
 }

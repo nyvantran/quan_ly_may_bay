@@ -114,10 +114,11 @@ struct NodeKhachHang
 typedef NodeKhachHang* PTRKhachhang;
 /*function khach hang*/
 void napFileKhachHang(PTRKhachhang& goc, const char file[]);
-void ghiFileKhangHang(PTRKhachhang goc, char file[]);
+void ghiFileKhangHang(PTRKhachhang goc, const char file[]);
 PTRKhachhang latTraiKhachHang(PTRKhachhang goc);
 PTRKhachhang latPhaiKhachHang(PTRKhachhang goc);
 void duyetLNR(PTRKhachhang);
+void xoaHetKhachHang(PTRKhachhang& goc);
 PTRKhachhang timKhachHang(PTRKhachhang goc, char[]);
 void themKhachHang(PTRKhachhang&, KhachHang);
 //////////////////////////////////////////////////////////

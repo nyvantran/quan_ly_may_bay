@@ -14,7 +14,7 @@ struct MayBay
 };
 struct DSMayBay {
 	int so_MB = 0;
-	MayBay* maybay[MAX_MB];
+	MayBay* maybay[MAX_MB]{};
 	/*function*/;
 	void napFile(const char file[]) ;
 	void ghiFile(const char file[]) const;
@@ -130,3 +130,5 @@ void SapVe(char[], int, int );
 void SuaNgay(Ngay&);
 // chuan hoa ten
 void SuaTen(char[]);
+// nguoc ve
+void SapVeNguoc(char[], int&, int&);

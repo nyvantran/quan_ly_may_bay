@@ -14,7 +14,7 @@ struct MayBay
 };
 struct DSMayBay {
 	int so_MB = 0;
-	MayBay* maybay[MAX_MB];
+	MayBay* maybay[MAX_MB]{};
 	/*function*/;
 	void napFile(const char file[]) ;
 	void ghiFile(const char file[]) const;
@@ -130,5 +130,10 @@ void SapVe(char[], int, int );
 void SuaNgay(Ngay&);
 // chuan hoa ten
 void SuaTen(char[]);
-// ghe tra dong day 
-void TraDongDay(char ve[], int& , int& );
+// nguoc ve
+void SapVeNguoc(char[], int&, int&);
+// so sanh ngay thang
+int SSNgayThang(NgayGio t1, NgayGio t2);
+//check ngay gio
+bool checkNgayGio(NgayGio t1, NgayGio t2);
+

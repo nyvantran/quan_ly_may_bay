@@ -130,6 +130,7 @@ void SapVe(char[], int, int );
 void SuaNgay(Ngay&);
 // chuan hoa ten
 void SuaTen(char[]);
+
 // nguoc ve
 void SapVeNguoc(char[], int&, int&);
 // so sanh ngay thang

@@ -881,7 +881,16 @@ void SuaTen(char ten[])
 	ten[0] = toupper(ten[0]);
 }
 
-
+// ghe tra dong day 
+void TraDongDay(char ve[], int& day, int& dong) {
+	day = ve[0] - 64;
+	if (ve[1] >= 49 && ve[1] <= 57) {
+		dong = ve[1] - 48;
+	}
+	else if (ve[1] >= 65 && ve[1] <= 90) {
+		dong = ve[1] - 55;
+	}
+}
 
 
 

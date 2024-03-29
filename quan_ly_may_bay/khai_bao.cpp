@@ -14,7 +14,7 @@ void DSMayBay::napFile(const char file[])
 /*ghi file may bay*/
 void DSMayBay::ghiFile(const char file[]) const
 {
-	fstream file1(file, ios::binary | ios::out);
+	fstream file1(file, ios::binary | ios::out|ios::trunc);
 	for (int i = 0; i < so_MB; i++) {
 		file1.write(reinterpret_cast<char*>(maybay[i]), sizeof(MayBay));
 	}
@@ -31,7 +31,6 @@ void DSMayBay::xoa()
 
 /*doc file chuyen bay*/
 //==========them may bay vao danh sach=======
-
 void ThemMayBay(MayBay maybay,DSMayBay &DSMayBay)
 {	
 	if (DSMayBay.so_MB < MAX_MB) {
@@ -44,7 +43,6 @@ void ThemMayBay(MayBay maybay,DSMayBay &DSMayBay)
 	}
 }
 //========xoa may bay khoi danh sach may bay====
-
 void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 {
 	char x[15];
@@ -84,9 +82,6 @@ void HieuChinhMB(MayBay* maybay,char sohieu[],char loai[],int soday,int sodong)
 		maybay->so_dong = sodong;
 	}
 }
-
-
-
 // ======search theo so hieu may bay=======
 MayBay *TimSoHieu (char x[15], DSMayBay DSmaybay) {
 	for (int i = 0; i <DSmaybay.so_MB; i++) {
@@ -126,7 +121,7 @@ void napFileChuyenBay(const char file[], PTRChuyenBay &fist,DSMayBay ds)/*se sua
 /*ghi file chuyen bay*/
 void ghiFileChuyenBay(const char file[], PTRChuyenBay fist)
 {
-	fstream file1(file, ios::binary | ios::out);
+	fstream file1(file, ios::binary | ios::out|ios::trunc);
 	PTRChuyenBay p;
 	for (p = fist; p != NULL; p = p->next) {
 		file1.write(reinterpret_cast<char*>(&p->cb), sizeof(ChuyenBay));
@@ -306,10 +301,10 @@ TrangThai capNhapTT(NgayGio thoigian)
 	time_t now = time(0);
 	tm th;
 	localtime_s(&th, &now);
-	if (th.tm_year % 100 > thoigian.ngay_kh.nam) {
+	if (th.tm_year + 1900 > thoigian.ngay_kh.nam) {
 		return HOAN_TAT;
 	}
-	else if (th.tm_year % 100 < thoigian.ngay_kh.nam) {
+	else if (th.tm_year + 1900 < thoigian.ngay_kh.nam) {
 		return CON_VE;
 	}
 	else if (thoigian.ngay_kh.thang > th.tm_mon + 1) {
@@ -398,6 +393,7 @@ void NgayGio::datNgayGio(int gio, int phut, int ngay, int thang, int nam)
 	if (nam > 0) {
 		this->ngay_kh.nam = nam;
 	}
+	SuaNgay(this->ngay_kh);
 }
 //tao cccd ngau nhien
 void CCCDNN(char cccd[])
@@ -413,15 +409,21 @@ void CCCDNN(char cccd[])
 void SapVe(char ve[],int ghe_day,int ghe_dong)
 {
 	char day[22]{}, dong[22]{};
-	if (ghe_day < 26) {
+	int n, m;
+	if (ghe_day <= 26) {
 		ghe_day = ghe_day + 64;
 		day[0] = (char)ghe_day;
 	}
 	else {
-
+		n = ghe_day / 26;
+		m = ghe_day % 26;
+		n += 64;
+		m += 64;
+		day[0] = (char)n;
+		day[1] = (char)m;
 	}
 	_itoa_s(ghe_dong, dong, 20, 10);
-	strcpy_s(ve, 2, day);
+	strcpy_s(ve, 3, day);
 	strcat_s(ve, 10, dong);
 }
 // chuan hoa ngay
@@ -585,7 +587,7 @@ void SuaNgay(Ngay& day) {
 
 void NodeChuyenBay::capnhap()
 {
-	/*if (this->cb.trang_thai_cb != HUY_CHUYEN) */
+	if (this->cb.trang_thai_cb != HUY_CHUYEN) 
 		this->cb.trang_thai_cb = capNhapTT(this->cb.ngay_gio_kh);
 	
 }
@@ -593,7 +595,7 @@ void NodeChuyenBay::capnhap()
 void NodeChuyenBay::capNhapVe(DSMayBay ds, char shmb[], bool d)
 {
 	MayBay* n;
-	if (shmb[0]='\0') {
+	if (shmb[0] == '\0') {
 		strcpy_s(this->cb.sh_Mb, shmb);
 	}
 	if (d == 1) {
@@ -625,7 +627,7 @@ void napFileKhachHang(PTRKhachhang& goc, const char file[])
 }
 void ghiFileKhangHang(PTRKhachhang goc,const char file[])
 {
-	fstream file1(file, ios::binary | ios::out);
+	fstream file1(file, ios::binary | ios::out | ios::trunc);
 	const int	STAIZE = 1000;
 	PTRKhachhang Stack[STAIZE]{};
 	PTRKhachhang p = goc;
@@ -879,6 +881,98 @@ void SuaTen(char ten[])
 		}
 	}
 	ten[0] = toupper(ten[0]);
+}
+/////////
+void SapVeNguoc(char ve[], int& x, int& y)
+{
+	int i = 0, ix = 0, iy = 0;
+	char day[3]{}, dong[3]{};
+	while (i < strlen(ve) && 'A' <= ve[i] && ve[i] <= 'Z') {
+		if (ix + 1 > 2) {
+			x = 0; y = 0;
+			return;
+		}
+		day[ix++] = ve[i++];
+	}
+	while (i < strlen(ve) && '0' <= ve[i] && ve[i] <= '9') {
+		if (iy + 1 > 2) {
+			x = 0; y = 0;
+			return;
+		}
+		dong[iy++] = ve[i++];
+	}
+	if (i != strlen(ve)) {
+		x = 0; y = 0;
+		return;
+	}
+	x = 0; y = 0;
+	for (i = 0; i < strlen(day); i++) {
+		x += pow(26, strlen(day) - i - 1) * ((int)day[i] - 64);
+	}
+	y=atoi(dong);
+}
+
+int SSNgayThang(NgayGio t1, NgayGio t2)
+{
+	int tn1, tn2, tg1, tg2;
+	tn1 = t1.ngay_kh.ngay;
+	tn2 = t2.ngay_kh.ngay;
+	//
+	tn1 += t1.ngay_kh.thang * pow(10, 2);
+	tn2 += t2.ngay_kh.thang * pow(10, 2);
+	//
+	tn1 += t1.ngay_kh.nam * pow(10, 4);
+	tn2 += t2.ngay_kh.nam * pow(10, 4);
+	if (tn1 > tn2) return 1;
+	if (tn1 < tn2) return -1;
+	if (tn1 == tn2) {
+		tg1 = t1.gio_kh.phut;
+		tg2 = t2.gio_kh.phut;
+		//
+		tg1 += t1.gio_kh.gio * pow(10, 2);
+		tg2 += t2.gio_kh.gio * pow(10, 2);
+		if (tg1 > tg2) return 1;
+		if (tg1 < tg2) return -1;
+		if (tg1 == tg2) return -1;
+	}
+}
+
+bool checkNgayGio(NgayGio t1, NgayGio t2)
+{
+	NgayGio t;
+	//if (SSNgayThang(t1, t2) == 0)return 1;
+	if (SSNgayThang(t1, t2) == 1) {
+		t = t2;
+		t.gio_kh.gio += 6;
+		if (t.gio_kh.gio > 23) {
+			t.gio_kh.gio -= 24;
+			t.ngay_kh.ngay++;
+			SuaNgay(t.ngay_kh);
+		}
+		if (SSNgayThang(t1, t) == -1) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+	else if (SSNgayThang(t1, t2) == -1) {
+		t = t1;
+		t.gio_kh.gio += 6;
+		if (t.gio_kh.gio > 23) {
+			t.gio_kh.gio -= 24;
+			t.ngay_kh.ngay++;
+			SuaNgay(t.ngay_kh);
+		}
+		if (SSNgayThang(t2, t) == -1) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+	
+
 }
 
 

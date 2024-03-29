@@ -14,7 +14,7 @@ struct MayBay
 };
 struct DSMayBay {
 	int so_MB = 0;
-	MayBay* maybay[MAX_MB];
+	MayBay* maybay[MAX_MB]{};
 	/*function*/;
 	void napFile(const char file[]) ;
 	void ghiFile(const char file[]) const;
@@ -22,16 +22,16 @@ struct DSMayBay {
 };
 //========thao tac voi danh sach may bay=====
 void ThemMayBay(MayBay, DSMayBay&);
-void HieuChinhMB(MayBay* maybay, char sohieu[15], char loai[40], int soday, int sodong);
+void HieuChinhMB(MayBay* maybay, char sohieu[], char loai[], int soday, int sodong);
 void XoaMayBay(DSMayBay& , char[]);
 MayBay *TimSoHieu(char[], DSMayBay);
 //////
 ///////////struct chuyen bay
 struct Ve
 {
-	char cmnd[20]{};
+	char cmnd[13]{};
 	char vitri[5]{};
-	Ve();
+	void DatVe(char cmnd[], char vt[]);
 };
 enum TrangThai {
 	HUY_CHUYEN,
@@ -65,12 +65,16 @@ struct ChuyenBay
 	int so_ve = 0;
 	Ve* ds_ve = NULL;
 	void datChuyenBay(char macb[], NgayGio ngay, char sanbay[], char somb[], TrangThai trangthai, DSMayBay ds);
+	Ve* timVe(char cmnd[]) const;
+	bool huyVe(char cmnd[]);
 	//ChuyenBay();
 };
 struct NodeChuyenBay
 {
 	ChuyenBay cb;
 	NodeChuyenBay* next = NULL;
+	void capnhap();
+	void capNhapVe(DSMayBay ds, char shmb[], bool);
 };
 typedef NodeChuyenBay* PTRChuyenBay;
 ///chuyen bay function 
@@ -95,18 +99,29 @@ TrangThai capNhapTT(NgayGio);
 /////struct khanh hang
 struct KhachHang
 {
-	char cmnd[20]{};
-	char ho[100]{};
+	char cmnd[13]{};
+	char ho[40]{};
 	char ten[10]{};
 	bool phai;
+	void datKhachHang(char cmnd[], char ho[], char ten[], bool phai);
 };
 struct NodeKhachHang
 {
 	KhachHang info;
-	int bf;
-	NodeKhachHang* left=NULL, * right=NULL;
+	int bf=0;
+	NodeKhachHang* left = NULL, * right = NULL;
 };
 typedef NodeKhachHang* PTRKhachhang;
+/*function khach hang*/
+void napFileKhachHang(PTRKhachhang& goc, const char file[]);
+void ghiFileKhangHang(PTRKhachhang goc, const char file[]);
+PTRKhachhang latTraiKhachHang(PTRKhachhang goc);
+PTRKhachhang latPhaiKhachHang(PTRKhachhang goc);
+void duyetLNR(PTRKhachhang);
+void xoaHetKhachHang(PTRKhachhang& goc);
+PTRKhachhang timKhachHang(PTRKhachhang goc, char[]);
+void themKhachHang(PTRKhachhang&, KhachHang);
+//////////////////////////////////////////////////////////
 //////cccd sinh ngau nhien
 void CCCDNN(char cccd[10]);
 //ve sinh theo so day va so dong 
@@ -115,5 +130,10 @@ void SapVe(char[], int, int );
 void SuaNgay(Ngay&);
 // chuan hoa ten
 void SuaTen(char[]);
-// ghe tra dong day 
-void TraDongDay(char ve[], int& , int& );
+
+// nguoc ve
+void SapVeNguoc(char[], int&, int&);
+// so sanh ngay thang
+int SSNgayThang(NgayGio t1, NgayGio t2);
+//check ngay gio
+bool checkNgayGio(NgayGio t1, NgayGio t2);

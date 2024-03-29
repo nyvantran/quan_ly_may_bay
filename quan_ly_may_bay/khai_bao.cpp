@@ -587,7 +587,7 @@ void SuaNgay(Ngay& day) {
 
 void NodeChuyenBay::capnhap()
 {
-	/*if (this->cb.trang_thai_cb != HUY_CHUYEN) */
+	if (this->cb.trang_thai_cb != HUY_CHUYEN) 
 		this->cb.trang_thai_cb = capNhapTT(this->cb.ngay_gio_kh);
 	
 }
@@ -595,7 +595,7 @@ void NodeChuyenBay::capnhap()
 void NodeChuyenBay::capNhapVe(DSMayBay ds, char shmb[], bool d)
 {
 	MayBay* n;
-	if (shmb[0]='\0') {
+	if (shmb[0] == '\0') {
 		strcpy_s(this->cb.sh_Mb, shmb);
 	}
 	if (d == 1) {

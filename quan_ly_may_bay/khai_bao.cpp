@@ -912,6 +912,69 @@ void SapVeNguoc(char ve[], int& x, int& y)
 	y=atoi(dong);
 }
 
+int SSNgayThang(NgayGio t1, NgayGio t2)
+{
+	int tn1, tn2, tg1, tg2;
+	tn1 = t1.ngay_kh.ngay;
+	tn2 = t2.ngay_kh.ngay;
+	//
+	tn1 += t1.ngay_kh.thang * pow(10, 2);
+	tn2 += t2.ngay_kh.thang * pow(10, 2);
+	//
+	tn1 += t1.ngay_kh.nam * pow(10, 4);
+	tn2 += t2.ngay_kh.nam * pow(10, 4);
+	if (tn1 > tn2) return 1;
+	if (tn1 < tn2) return -1;
+	if (tn1 == tn2) {
+		tg1 = t1.gio_kh.phut;
+		tg2 = t2.gio_kh.phut;
+		//
+		tg1 += t1.gio_kh.gio * pow(10, 2);
+		tg2 += t2.gio_kh.gio * pow(10, 2);
+		if (tg1 > tg2) return 1;
+		if (tg1 < tg2) return -1;
+		if (tg1 == tg2) return -1;
+	}
+}
+
+bool checkNgayGio(NgayGio t1, NgayGio t2)
+{
+	NgayGio t;
+	//if (SSNgayThang(t1, t2) == 0)return 1;
+	if (SSNgayThang(t1, t2) == 1) {
+		t = t2;
+		t.gio_kh.gio += 6;
+		if (t.gio_kh.gio > 23) {
+			t.gio_kh.gio -= 24;
+			t.ngay_kh.ngay++;
+			SuaNgay(t.ngay_kh);
+		}
+		if (SSNgayThang(t1, t) == -1) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+	else if (SSNgayThang(t1, t2) == -1) {
+		t = t1;
+		t.gio_kh.gio += 6;
+		if (t.gio_kh.gio > 23) {
+			t.gio_kh.gio -= 24;
+			t.ngay_kh.ngay++;
+			SuaNgay(t.ngay_kh);
+		}
+		if (SSNgayThang(t2, t) == -1) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+	
+
+}
+
 
 
 

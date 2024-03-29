@@ -132,3 +132,7 @@ void SuaNgay(Ngay&);
 void SuaTen(char[]);
 // nguoc ve
 void SapVeNguoc(char[], int&, int&);
+// so sanh ngay thang
+int SSNgayThang(NgayGio t1, NgayGio t2);
+//check ngay gio
+bool checkNgayGio(NgayGio t1, NgayGio t2);

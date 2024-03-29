@@ -1131,19 +1131,28 @@ void DHThemCB(PTRChuyenBay& dau_chuyen_bay,DSMayBay& ds_may_bay, int* x, int* y)
 				if (timChuyenBay(dau_chuyen_bay, mcb) == NULL && TimSoHieu(shmb, ds_may_bay) != NULL) {
 					ChuyenBay tam1;
 					NgayGio tam2;
+					bool d = 0;
 					tam2.datNgayGio(atoi(gio), atoi(phut), atoi(ngay), atoi(thang), atoi(nam));
 					tam1.datChuyenBay(mcb, tam2, sbd, shmb, capNhapTT(tam2), ds_may_bay);
-					/*for (PTRChuyenBay p = dau_chuyen_bay; p != NULL; p = p->next) {
-						if (strcmp(p->cb.sh_Mb, shmb) == 0) {
-							
+					for (PTRChuyenBay p = dau_chuyen_bay; p != NULL; p = p->next) {
+						if (strcmp(p->cb.sh_Mb, shmb) == 0 && checkNgayGio(p->cb.ngay_gio_kh, tam2) == 1) {
+							d = 1;
+							break;
 						}
-					}*/
-					///SE SUA THEM 
-					themChuyenBay(dau_chuyen_bay, tam1);
-					getimage(xg, yg, xg + 975, yg + 150, p);
-					putimage(xg, yg, p, 1);
-					free(p);
-					return;
+					}
+					if (d == 1) {
+						outtextxy(xg + 200, yg + 90, const_cast<char*>("thoi gian chuyen bay xung voi chuyen bay khac"));
+						Sleep(700);
+						xoachu(const_cast<char*>("thoi gian chuyen bay xung voi chuyen bay khac"), xg + 200, yg + 90);
+					}
+					else {
+						themChuyenBay(dau_chuyen_bay, tam1);
+						///SE SUA THEM 
+						getimage(xg, yg, xg + 975, yg + 150, p);
+						putimage(xg, yg, p, 1);
+						free(p);
+						return;
+					}
 				}
 				else {
 					int mt = getbkcolor();
@@ -1602,7 +1611,9 @@ void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay &ht, int* x, int* 
 				if ((int)nhap == 13 ) {
 					if (ht != NULL) {
 						NgayGio tam1;
-						int gi = -1, ph = -1, ng = -1, th = -1, na = -1;
+						bool d = 0;
+						int gi = ht->cb.ngay_gio_kh.gio_kh.gio, ph = ht->cb.ngay_gio_kh.gio_kh.phut;
+						int ng = ht->cb.ngay_gio_kh.ngay_kh.ngay, th = ht->cb.ngay_gio_kh.ngay_kh.thang, na = ht->cb.ngay_gio_kh.ngay_kh.nam;
 						if (gio[0] != '\0') {
 							gi = atoi(gio);
 						}
@@ -1618,13 +1629,26 @@ void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay &ht, int* x, int* 
 						if (nam[0] != '\0') {
 							na = atoi(nam);
 						}
+						if (shmb[0] == '\0') strcpy_s(shmb, 15, ht->cb.sh_Mb);
 						tam1.datNgayGio(gi, ph, ng, th, na);
-						//tam1.datNgayGio(-1, -1, -1, -1, -1);
-						chinhsuaChuyenBay(ht, tam1, sbd, shmb);
-						ht->capnhap();
-						outtextxy(xg + 100, yg + 100, const_cast<char*>("hieu chinh tc"));
-						Sleep(250);
-						xoachu(const_cast<char*>("hieu chinh tc"), xg + 100, yg + 100);
+						for (PTRChuyenBay p = dau_chuyen_bay; p != NULL; p = p->next) {
+							if (strcmp(p->cb.sh_Mb, shmb) == 0 && checkNgayGio(p->cb.ngay_gio_kh, tam1) == 1) {
+								d = 1;
+								break;
+							}
+						}
+						if (d == 1) {
+							outtextxy(xg + 100, yg + 100, const_cast<char*>("thoi gian chuyen bay xung dot voi chuyen bay khac"));
+							Sleep(250);
+							xoachu(const_cast<char*>("thoi gian chuyen bay xung dot voi chuyen bay khac"), xg + 100, yg + 100);
+						}
+						else {
+							chinhsuaChuyenBay(ht, tam1, sbd, shmb);
+							ht->capnhap();
+							outtextxy(xg + 100, yg + 100, const_cast<char*>("hieu chinh TC"));
+							Sleep(250);
+							xoachu(const_cast<char*>("hieu chinh TC"), xg + 100, yg + 100);
+						}
 					}
 					else {
 						outtextxy(xg + 100, yg + 100, const_cast<char*>("vui long chon CB"));

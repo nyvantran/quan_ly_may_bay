@@ -16,16 +16,18 @@ int checkMouse21(int x, int y);
 int checkMouse22(int x, int y);
 void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang& goc_khach_hang);
 ///=========================them may bay===========================================///
-void DHThemMB(DSMayBay& ds_may_bay, int*, int*);
+void DHThemMB(DSMayBay& ds_may_bay, int* x, int* y, int* ii);
 void DHxoaMB(DSMayBay& ds_may_bay, PTRChuyenBay fist, int* x, int* y, int* ii);
 void DHhieuchinhMB(DSMayBay& ds_may_bay, MayBay*& ht, PTRChuyenBay& fist,int* x, int* y, int* ii);
+void hienDSMb0(int* x, int* y, int* ii, DSMayBay& ds_may_bay);
 void hienDSMb1(int* x, int* y, int* ii, DSMayBay& ds_may_bay);
 void hienDSMb2(int* x, int* y, int* ii, MayBay*& ht, DSMayBay& ds_may_bay);
 int mouseThemMb(int x, int y);
 int mouseXoaMb(int x, int y);
 int mouseHieuChinhMb(int x, int y, int old);
 ///===========================them chuyen bay=======================================///
-void DHThemCB(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int*, int*);
+void DHThemCB(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int*, int*, int* ii, int* ip);
+void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, DSMayBay ds_may_bay);
 int mouseThemCB(int x, int y);
 void DHHuyChuyen(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int*, int*,int*);
 void hienDSCB1(int* x, int* y, int* ii, PTRChuyenBay& dau_chuyen_bay,DSMayBay& ds_may_bay);
@@ -35,8 +37,8 @@ void hienDSCB2(int* x, int* y, int* ii, PTRChuyenBay& ht, PTRChuyenBay& dau_chuy
 int mouseHieuChinhCB(int old, int x, int y);
 ///===========================khach hang==============================================///
 void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& goc_khach_hang, int* x, int* y);
-void chonChuyenBay(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, int* x, int* y, int* ii);
-void hienDSCB3(int* x, int* y, int* ii, PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay);
+void chonChuyenBay(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, int* x, int* y, int* ii, bool huy, PTRChuyenBay chay[],int &cd);
+void hienDSCB3(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* y, int* ii, bool huy, PTRChuyenBay chay[],int &cd);
 int mouseChonCB(int x, int y);
 int mouseDatVe(int x, int y);
 void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& goc_khach_hang, int* x, int* y);

@@ -322,7 +322,9 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang&
 				if (getpixel(xg + 240, yg + 88 * 0 + 35) != 0) {
 					putimage(xg + 240, yg + 88 * 0, p2, 1);
 				}
-			}
+			}			
+			xuatSoCBHT(&x,&y,dau_chuyen_bay,ds_may_bay);
+			n = -1;
 			break;
 		}
 		default:
@@ -3494,3 +3496,102 @@ void KetThuc()
 {
 	closegraph();
 }
+//=================================================================
+void xuatSoCBHT(int* x, int* y, PTRChuyenBay chuyenBay,DSMayBay DsMayBay)
+{
+	int max;
+	char tam[100];
+	int i = 0;
+	int page = 0;
+	int slin = 0;
+	int xg = 50, yg = 10;
+	int itam = 0;
+	char text[4][40]{};
+	settextstyle(3, HORIZ_DIR, 1);
+	setfillstyle(1, 1);
+	bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+	settextstyle(9, 0, 2);
+	outtextxy(xg + getmaxx() - 1000, yg + 50, (char*)"SO HIEU MAY BAY");
+	outtextxy(getmaxx() - 470, yg + 50, (char*)"SO CHUYEN BAY HOAN TAT");
+	settextstyle(4, 0, 2);
+	outtextxy(xg + getmaxx() - 900, yg + 600, (char*)"SU DUNG 2 NUT TRAI PHAI DE QUA TRANG");
+	
+	settextstyle(9, 0, 2);
+	line(getmaxx() - 500, 55, getmaxx() - 500,yg+70);
+	line(xg +450, yg+80, xg+getmaxx() - 50, yg + 80);
+	char nhap;
+	Bublesort(chuyenBay, DsMayBay);
+	//_itoa_s(chuyenBay->dem,tam[i], 10, 10);
+
+
+	/*while (chuyenBay != NULL && i<10) {
+		outtextxy(getmaxx() - 950, yg + 100, chuyenBay->cb.sh_Mb);
+		_itoa_s(chuyenBay->dem, tam, 10, 10);
+		outtextxy(getmaxx() - 450, yg + 100, tam);
+		yg = yg + 50;
+		chuyenBay = chuyenBay->next;
+		i++;
+	}
+	*/
+	
+	
+//========================
+	while (1) {
+		line(getmaxx() - 500, 55, getmaxx() - 500, yg + 70);
+		line(xg + 450, yg + 80, xg + getmaxx() - 50, yg + 80);
+		while (i<DsMayBay.so_MB && slin<10) {
+			outtextxy(getmaxx() - 950, yg + 100, DsMayBay.maybay[i]->sh_Mb);
+			timCBtheoSHMB(chuyenBay, DsMayBay.maybay[i]->sh_Mb, max);
+			_itoa_s(max, tam, 10, 10);
+			outtextxy(getmaxx() - 450, yg + 100, tam);
+			line(getmaxx() - 500, 60, getmaxx() - 500, yg + 120);
+			line(xg + 450, yg + 120, xg + getmaxx() - 50, yg + 120);
+			yg = yg + 50;
+			i++;
+			slin++;
+			Sleep(50);
+		}
+
+
+
+
+//===============================================================
+			yg = 10;
+			nhap = getch();
+			if ((int)nhap == 75 && page>0) {
+				i = itam;
+				page--;
+				slin = 0;
+				bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+				itam = i-10;
+				bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+				settextstyle(9, 0, 2);
+				outtextxy(xg + getmaxx() - 1000, yg + 50, (char*)"SO HIEU MAY BAY");
+				outtextxy(getmaxx() - 470, yg + 50, (char*)"SO CHUYEN BAY HOAN TAT");
+				settextstyle(4, 0, 2);
+				outtextxy(xg + getmaxx() - 900, yg + 600, (char*)"SU DUNG 2 NUT TRAI PHAI DE QUA TRANG");
+				settextstyle(9, 0, 2);
+			}
+
+			if ((int)nhap == 77&& i<DsMayBay.so_MB) {
+				slin = 0;
+				page++;
+				bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+				settextstyle(9, 0, 2);
+				outtextxy(xg + getmaxx() - 1000, yg + 50, (char*)"SO HIEU MAY BAY");
+				outtextxy(getmaxx() - 470, yg + 50, (char*)"SO CHUYEN BAY HOAN TAT");
+				settextstyle(4, 0, 2);
+				outtextxy(xg + getmaxx() - 900, yg + 600, (char*)"SU DUNG 2 NUT TRAI PHAI DE QUA TRANG");
+				settextstyle(9, 0, 2);
+				itam = i-10;
+			}
+
+			if ((int)nhap == 27) {
+				setfillstyle(1, 0);
+				bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+				*x = -1;
+				*y = -1;
+				return;
+			}
+		}
+	}

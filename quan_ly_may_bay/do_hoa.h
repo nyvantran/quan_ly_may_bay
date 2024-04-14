@@ -47,5 +47,7 @@ void hienDSCB4(int* x, int* y, PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_ba
 int mouseHienDSCB(int x, int y);
 ///===================================================================================///
 void xoachu(char* n, int x, int y);
-void KetThuc();
 void KhoiDong();
+void KetThuc();
+//==================================================================================
+void xuatSoCBHT(int*,int*,PTRChuyenBay,DSMayBay);

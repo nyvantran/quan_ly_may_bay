@@ -14,6 +14,7 @@ struct MayBay
 	char sh_Mb[15];
 	char loai_may_bay[40];
 	int so_day, so_dong;
+	//int demcb = 0;
 };
 struct DSMayBay {
 	int so_MB = 0;
@@ -76,6 +77,7 @@ struct NodeChuyenBay
 {
 	ChuyenBay cb;
 	NodeChuyenBay* next = NULL;
+	int dem = 0;
 	void capnhap();
 	void capNhapVe(DSMayBay ds, char shmb[], bool);
 };
@@ -140,3 +142,7 @@ void SapVeNguoc(char[], int&, int&);
 int SSNgayThang(NgayGio t1, NgayGio t2);
 //check ngay gio
 bool checkNgayGio(NgayGio t1, NgayGio t2);
+//  in chuyen bay hoan tat
+void demChuyenBayHT(PTRChuyenBay);
+// Bublesort
+void Bublesort(PTRChuyenBay, DSMayBay&);

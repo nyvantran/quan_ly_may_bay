@@ -48,6 +48,6 @@ void xoachu(char* n, int x, int y);
 void KetThuc();
 void KhoiDong();
 //==================================================================================
-void xuatSoCBHT(int*,int*,PTRChuyenBay);
+void xuatSoCBHT(int*,int*,PTRChuyenBay,DSMayBay);
 
 

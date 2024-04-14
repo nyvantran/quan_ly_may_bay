@@ -141,3 +141,5 @@ int SSNgayThang(NgayGio t1, NgayGio t2);
 bool checkNgayGio(NgayGio t1, NgayGio t2);
 //  in chuyen bay hoan tat
 void demChuyenBayHT(PTRChuyenBay);
+// Bublesort
+void Bublesort(PTRChuyenBay, DSMayBay&);

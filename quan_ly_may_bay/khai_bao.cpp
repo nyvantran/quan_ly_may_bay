@@ -1004,30 +1004,27 @@ void demChuyenBayHT (PTRChuyenBay dau_chuyen_bay)
 	dau_chuyen_bay = tam1;
 
 
-	
-
-	/*while (dau_chuyen_bay != NULL) {
-		bool isDuplicate = false;
-		PTRChuyenBay current = dau_chuyen_bay->next;
-
-		// Check if the current node's 'dem' value is duplicate
-		while (current != NULL) {
-			if (current->dem == dau_chuyen_bay->dem) {
-				isDuplicate = true;
-				break;
+}
+// Bublesort
+void Bublesort(PTRChuyenBay chuyenBay, DSMayBay &DsMayBay)
+{
+	MayBay* MBtemp;
+	int max;
+	int ss;
+	for (int i = 0; i < DsMayBay.so_MB; i++) {
+		timCBtheoSHMB(chuyenBay, DsMayBay.maybay[i]->sh_Mb, max);
+		for (int j = 0; j < DsMayBay.so_MB; j++) {
+			timCBtheoSHMB(chuyenBay, DsMayBay.maybay[j]->sh_Mb, ss);
+			if (max > ss) {
+				MBtemp = DsMayBay.maybay[i];
+				DsMayBay.maybay[i] = DsMayBay.maybay[j];
+				DsMayBay.maybay[j] = MBtemp;
 			}
-			current = current->next;
 		}
-
-		// Print the value if it's not a duplicate
-		if (!isDuplicate) {
-			cout << dau_chuyen_bay->dem << endl;
-		}
-
-		dau_chuyen_bay = dau_chuyen_bay->next;
-	}*/
+		
+	}
 	
-
+	
 }
 
 

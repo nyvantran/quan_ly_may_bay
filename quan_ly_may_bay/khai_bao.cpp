@@ -40,6 +40,8 @@ void ThemMayBay(MayBay maybay,DSMayBay &DSMayBay)
 		p->so_day = maybay.so_day;
 		p->so_dong = maybay.so_dong;
 		DSMayBay.maybay[DSMayBay.so_MB++] = p;
+		///ghi file///
+		DSMayBay.ghiFile(DLMAYBAY);
 	}
 }
 //========xoa may bay khoi danh sach may bay====
@@ -62,11 +64,13 @@ void XoaMayBay(DSMayBay &DSMayBay,char sohieu[15])
 			DSMayBay.maybay[so] = DSMayBay.maybay[so + 1];
 			so++;
 		}
+		///ghi file///
+		DSMayBay.ghiFile(DLMAYBAY);
 	}
 }
 //==========hieu chinh may bay trong danh sach=======
 
-void HieuChinhMB(MayBay* maybay,char sohieu[],char loai[],int soday,int sodong)
+void HieuChinhMB(DSMayBay& DSMayBay, MayBay* maybay, char sohieu[], char loai[], int soday, int sodong)
 {
 	char check[1]{}; check[0] = '\0';
 	if (strcmp(check, sohieu) != 0) {
@@ -81,6 +85,8 @@ void HieuChinhMB(MayBay* maybay,char sohieu[],char loai[],int soday,int sodong)
 	if (sodong > 0) {
 		maybay->so_dong = sodong;
 	}
+	///ghi file///
+	DSMayBay.ghiFile(DLMAYBAY);
 }
 // ======search theo so hieu may bay=======
 MayBay *TimSoHieu (char x[15], DSMayBay DSmaybay) {
@@ -121,9 +127,12 @@ void napFileChuyenBay(const char file[], PTRChuyenBay &fist,DSMayBay ds)/*se sua
 /*ghi file chuyen bay*/
 void ghiFileChuyenBay(const char file[], PTRChuyenBay fist)
 {
-	fstream file1(file, ios::binary | ios::out|ios::trunc);
+	fstream file1(file, ios::binary | ios::out | ios::trunc);
 	PTRChuyenBay p;
 	for (p = fist; p != NULL; p = p->next) {
+		if (p->cb.trang_thai_cb != HUY_CHUYEN) {
+			p->cb.trang_thai_cb = capNhapTT(p->cb.ngay_gio_kh);
+		}
 		file1.write(reinterpret_cast<char*>(&p->cb), sizeof(ChuyenBay));
 		for (int i = 0; i < p->cb.so_ve; i++) {
 			file1.write(reinterpret_cast<char*>(&p->cb.ds_ve[i]), sizeof(Ve));
@@ -135,10 +144,12 @@ bool themChuyenBay(PTRChuyenBay &fist, ChuyenBay x)/*co sua them*/
 {
 	if (fist == NULL) {
 		ThemDauCB(fist, x);
+		ghiFileChuyenBay(DLCHUYENBAY, fist);
 		return 1;
 	}else
 	if (strcmp(fist->cb.ma_cb, x.ma_cb) == 1) {
 		ThemDauCB(fist, x);
+		ghiFileChuyenBay(DLCHUYENBAY, fist);
 		return 1;
 	}
 	if (strcmp(fist->cb.ma_cb, x.ma_cb) == 0) {
@@ -149,10 +160,12 @@ bool themChuyenBay(PTRChuyenBay &fist, ChuyenBay x)/*co sua them*/
 		while (1) {
 			if (p->next == NULL) {
 				ThemSauCB(p, x);
+				ghiFileChuyenBay(DLCHUYENBAY, fist);
 				return 1;
 			}else
 			if ((strcmp(p->next->cb.ma_cb, x.ma_cb) == 1) ) {
 				ThemSauCB(p, x);
+				ghiFileChuyenBay(DLCHUYENBAY, fist);
 				return 1;
 			}else
 			if(strcmp(p->next->cb.ma_cb, x.ma_cb) == 0) {
@@ -685,7 +698,7 @@ void duyetLNR(PTRKhachhang goc)
 
 	}
 	else {
-		cout << goc->info.cmnd << goc->info.ten<< endl;
+		cout <<goc->info.cmnd << goc->info.ten<< endl;
 		duyetLNR(goc->left);
 		duyetLNR(goc->right);
 		
@@ -841,8 +854,8 @@ void SuaTen(char ten[])
 	while (ten[dem] == ' ') {
 		dem++;
 	}
-
-	for (int i = 0; i < strlen(ten); i++) {
+	
+	for (int i = 0; (unsigned)i < strlen(ten); i++) {
 		ten[i] = ten[dem + i];
 	}
 
@@ -907,7 +920,7 @@ void SapVeNguoc(char ve[], int& x, int& y)
 	}
 	x = 0; y = 0;
 	for (i = 0; i < strlen(day); i++) {
-		x += pow(26, strlen(day) - i - 1) * ((int)day[i] - 64);
+		x += (int)pow(26, strlen(day) - i - 1) * ((int)day[i] - 64);
 	}
 	y=atoi(dong);
 }

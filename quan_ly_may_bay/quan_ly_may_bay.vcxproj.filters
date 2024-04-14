@@ -37,7 +37,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="graphics.lib" />
+    <None Include="dlmaybay.dat" />
+    <None Include="dlkhachhang.dat" />
+    <None Include="dlchuyenbay.dat" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dlchuyenbay.dat" />

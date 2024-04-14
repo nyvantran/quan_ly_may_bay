@@ -520,7 +520,6 @@ void xoachu(char* n, int x, int y) {
 	outtextxy(x, y, n);
 	setcolor(tam);
 }
-///==================================================================================///
 void hienDSMb1(int* x, int* y, int* ii, DSMayBay& ds_may_bay)
 {
 	int xg = 460, yg = 100;
@@ -666,7 +665,6 @@ void hienDSMb2(int* x, int* y, int* ii, MayBay*& ht, DSMayBay& ds_may_bay)
 		}
 	}
 }
-///=========== do hoa xoa ds ============================///
 void DHxoaMB(DSMayBay& ds_may_bay, PTRChuyenBay fist, int* x, int* y, int* ii)
 {
 	int xg = 460, yg = 20;
@@ -1053,7 +1051,6 @@ void hienDSMb0(int* x, int* y, int* ii, DSMayBay& ds_may_bay)
 		}
 	}
 }
-///=================================================================================///
 int mouseThemMb(int x, int y)
 {
 	int xg = 50, yg = 10;
@@ -1086,7 +1083,6 @@ int mouseThemMb(int x, int y)
 	}
 	return -1;
 }
-///===================================================================///
 int mouseXoaMb(int x, int y)
 {
 	int xg = 460, yg = 100, yg1 = 20;
@@ -1106,7 +1102,6 @@ int mouseXoaMb(int x, int y)
 	}
 	return -5;
 }
-///=====================hieu chinh mb======///
 int mouseHieuChinhMb(int x, int y, int old)
 {
 	int xg = 460, yg = 275;

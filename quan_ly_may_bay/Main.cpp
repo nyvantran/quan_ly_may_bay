@@ -17,6 +17,7 @@ int main() {
 	KhoiDong();
 	chayDoHoa(ds_may_bay,dau_chuyen_bay,goc_khach_hang);
 	//////////////
+	KetThuc();
 	ds_may_bay.ghiFile(DLMAYBAY);
 	ghiFileChuyenBay(DLCHUYENBAY,dau_chuyen_bay);
 	ghiFileKhangHang(goc_khach_hang, DLKHACHHANG);
@@ -24,7 +25,6 @@ int main() {
 	xoahetChuyenBay(dau_chuyen_bay);
 	xoaHetKhachHang(goc_khach_hang);
 	///////////////////
-	KetThuc();
 }
 
 

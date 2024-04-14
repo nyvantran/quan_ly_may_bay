@@ -5,6 +5,9 @@ using namespace std;
 #include <cstdlib>
 #include <time.h>
 #define MAX_MB 300
+#define DLMAYBAY "dlmaybay.dat"
+#define DLCHUYENBAY "dlchuyenbay.dat"
+#define DLKHACHHANG "dlkhachhang.dat"
 //////////struct may bay
 struct MayBay
 {
@@ -22,7 +25,7 @@ struct DSMayBay {
 };
 //========thao tac voi danh sach may bay=====
 void ThemMayBay(MayBay, DSMayBay&);
-void HieuChinhMB(MayBay* maybay, char sohieu[], char loai[], int soday, int sodong);
+void HieuChinhMB(DSMayBay& DSMayBay ,MayBay* maybay, char sohieu[], char loai[], int soday, int sodong);
 void XoaMayBay(DSMayBay& , char[]);
 MayBay *TimSoHieu(char[], DSMayBay);
 //////
@@ -102,7 +105,7 @@ struct KhachHang
 	char cmnd[13]{};
 	char ho[40]{};
 	char ten[10]{};
-	bool phai;
+	bool phai = 0;
 	void datKhachHang(char cmnd[], char ho[], char ten[], bool phai);
 };
 struct NodeKhachHang

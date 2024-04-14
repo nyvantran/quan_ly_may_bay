@@ -47,6 +47,7 @@ int mouseHienDSCB(int x, int y);
 void xoachu(char* n, int x, int y);
 void KetThuc();
 void KhoiDong();
-
+//==================================================================================
+void xuatSoCBHT(int*,int*,PTRChuyenBay);
 
 

@@ -12,19 +12,24 @@ int main() {
 	PTRKhachhang goc_khach_hang = NULL;
 	ds_may_bay.napFile(DLMAYBAY);
 	napFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay, ds_may_bay);
+	
+	//PTRChuyenBay cbtam = dau_chuyen_bay;
+	
 	napFileKhachHang(goc_khach_hang, DLKHACHHANG);
 	/////////////////////////////////////////////
 	KhoiDong();
 	chayDoHoa(ds_may_bay,dau_chuyen_bay,goc_khach_hang);
 	//////////////
 	ds_may_bay.ghiFile(DLMAYBAY);
-	ghiFileChuyenBay(DLCHUYENBAY,dau_chuyen_bay);
+	ghiFileChuyenBay(DLCHUYENBAY,dau_chuyen_bay);	
 	ghiFileKhangHang(goc_khach_hang, DLKHACHHANG);
 	ds_may_bay.xoa();
 	xoahetChuyenBay(dau_chuyen_bay);
 	xoaHetKhachHang(goc_khach_hang);
 	///////////////////
 	KetThuc();
+	
+
 }
 
 

@@ -303,6 +303,10 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang&
 					putimage(xg + 240, yg + 88 * 0, p2, 1);
 				}
 			}
+			
+			xuatSoCBHT(&x,&y,dau_chuyen_bay);
+			n = -1;
+
 
 			break;
 
@@ -2947,3 +2951,195 @@ void KetThuc()
 	//getch();
 	closegraph();
 }
+//=================================================================
+void xuatSoCBHT(int* x, int* y, PTRChuyenBay chuyenBay)
+{
+	PTRChuyenBay cbtam = chuyenBay;
+	while (chuyenBay != NULL) {
+		chuyenBay->dem = 0;
+		chuyenBay = chuyenBay->next;
+	}
+	chuyenBay = cbtam;
+	demChuyenBayHT(chuyenBay);
+	PTRChuyenBay cbMax=chuyenBay;
+	char tam[100];
+	int i = 0;
+	int page = 0;
+	int xg = 50, yg = 10;
+	int demi = 0;
+	char text[4][40]{};
+	settextstyle(3, HORIZ_DIR, 1);
+	setfillstyle(1, 1);
+	bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+	settextstyle(9, 0, 2);
+	outtextxy(xg + getmaxx() - 1000, yg + 50, (char*)"SO HIEU MAY BAY");
+	outtextxy(getmaxx() - 470, yg + 50, (char*)"SO CHUYEN BAY HOAN TAT");
+	settextstyle(4, 0, 2);
+	outtextxy(xg + getmaxx() - 900, yg + 600, (char*)"SU DUNG 2 NUT TRAI PHAI DE QUA TRANG");
+	
+	settextstyle(9, 0, 2);
+	line(getmaxx() - 500, 60, getmaxx() - 500,yg+70);
+	line(xg +450, yg+80, xg+getmaxx() - 50, yg + 80);
+	char nhap;
+
+	//_itoa_s(chuyenBay->dem,tam[i], 10, 10);
+
+
+	/*while (chuyenBay != NULL && i<10) {
+		outtextxy(getmaxx() - 950, yg + 100, chuyenBay->cb.sh_Mb);
+		_itoa_s(chuyenBay->dem, tam, 10, 10);
+		outtextxy(getmaxx() - 450, yg + 100, tam);
+		yg = yg + 50;
+		chuyenBay = chuyenBay->next;
+		i++;
+	}
+	*/
+	PTRChuyenBay cbt = chuyenBay;
+	 int  Max = 0;
+	while (chuyenBay != NULL) {
+		int bienmax= cbMax->dem;
+		int bienchuyenbay= chuyenBay->dem;
+		if (cbMax->dem < chuyenBay->dem) {
+			cbMax = chuyenBay;
+		}
+		chuyenBay = chuyenBay->next;
+	}
+	Max = cbMax->dem;
+	chuyenBay = cbtam;
+	
+//========================
+	while (1) {
+		//while (chuyenBay != NULL ) {
+		//	bool isDuplicate = false;
+		//	PTRChuyenBay current = chuyenBay->next;
+		//	while (current != NULL) {
+		//		if (current->dem == chuyenBay->dem && strcmp(current->cb.sh_Mb,chuyenBay->cb.sh_Mb)==0) {
+		//			isDuplicate = true;
+		//			break;
+		//		}
+		//		current = current->next;
+		//	}
+
+		//		if (!isDuplicate) {
+		//			if (chuyenBay->dem != 0) {
+		//				outtextxy(getmaxx() - 950, yg + 100, chuyenBay->cb.sh_Mb);
+		//				_itoa_s(chuyenBay->dem, tam, 10, 10);
+		//				outtextxy(getmaxx() - 450, yg + 100, tam);
+		//				yg = yg + 50;
+		//				/*chuyenBay = chuyenBay->next;
+		//				i++;*/
+		//			}
+		//		}
+		//		chuyenBay = chuyenBay->next;
+		//		i++;
+		//	}
+//=================================		
+		while (chuyenBay != NULL &&Max>0&& i<10) {
+			outtextxy(getmaxx() - 950, yg + 100, cbMax->cb.sh_Mb);
+			_itoa_s(cbMax->dem, tam, 10, 10);
+			outtextxy(getmaxx() - 450, yg + 100, tam);
+			/*cout << cbMax->cb.sh_Mb << endl;*/
+			line(getmaxx() - 500, 55, getmaxx() - 500, yg + 140);
+			line(xg + 450, yg +120 , xg + getmaxx() - 50, yg + 120);
+			yg = yg + 50;
+			i++;
+			
+			PTRChuyenBay current = cbt;
+			/*cout << cbMax->cb.sh_Mb << " " << cbMax->dem<< endl;*/
+
+			while (current != NULL&& i<10) {
+				if (strcmp(cbMax->cb.sh_Mb, current->cb.sh_Mb) != 0) {
+					if (cbMax->dem == current->dem) {
+						/*cout << current->cb.sh_Mb << endl;*/
+						outtextxy(getmaxx() - 950, yg + 100, current->cb.sh_Mb);
+						_itoa_s(current->dem, tam, 10, 10);
+						outtextxy(getmaxx() - 450, yg + 100, tam);
+						line(getmaxx() - 500, 60, getmaxx() - 500, yg + 120);
+						line(xg + 450, yg + 120, xg + getmaxx() - 50, yg + 120);
+						yg = yg + 50;
+						i++;
+					}
+				}
+				current = current->next;
+			}
+			Max--;
+
+			chuyenBay = chuyenBay->next;
+			if (Max > 0) {
+				PTRChuyenBay current2 = chuyenBay;
+				while (current2 != NULL) {
+					if (Max == current2->dem) {
+						cbMax = current2;
+						break;
+					}
+					current2 = current2->next;
+				}
+			}
+		
+		}
+
+
+
+
+//===============================================================
+			yg = 10;
+			nhap = getch();
+			if ((int)nhap == 77) {
+				bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+				line(getmaxx() - 500, 55, getmaxx() - 500, yg + 80);
+				line(xg + 450, yg + 80, xg + getmaxx() - 50, yg + 80);
+				outtextxy(xg + getmaxx() - 1000, yg + 50, (char*)"SO HIEU MAY BAY");
+				outtextxy(getmaxx() - 470, yg + 50, (char*)"SO CHUYEN BAY HOAN TAT");
+				settextstyle(4, 0, 2);
+				outtextxy(xg + getmaxx() - 900, yg + 600, (char*)"SU DUNG 2 NUT TRAI PHAI DE QUA TRANG");
+				settextstyle(9, 0, 2);
+				i = 0;
+				page++;
+			}
+			if ((int)nhap == 75 && page > 0) {
+				bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+				line(getmaxx() - 500, 60, getmaxx() - 500, yg + 70);
+				line(xg + 450, yg + 80, xg + getmaxx() - 50, yg + 80);
+				outtextxy(xg + getmaxx() - 1000, yg + 50, (char*)"SO HIEU MAY BAY");
+				outtextxy(getmaxx() - 470, yg + 50, (char*)"SO CHUYEN BAY HOAN TAT");
+				settextstyle(4, 0, 2);
+				outtextxy(xg + getmaxx() - 900, yg + 600, (char*)"SU DUNG 2 NUT TRAI PHAI DE QUA TRANG");
+				settextstyle(9, 0, 2);
+
+				demi = demi - 10;
+				chuyenBay = cbtam;
+				
+				i = 0;
+				page--;
+				while (chuyenBay != NULL) {
+					int bienmax = cbMax->dem;
+					int bienchuyenbay = chuyenBay->dem;
+					if (cbMax->dem < chuyenBay->dem) {
+						cbMax = chuyenBay;
+					}
+					chuyenBay = chuyenBay->next;
+				}
+				Max = cbMax->dem;
+				chuyenBay = cbtam;
+				for (int j = 0; j < demi; j++) {
+					if (chuyenBay->next != NULL) {
+						//cout << chuyenBay->cb.sh_Mb << endl;
+						chuyenBay = chuyenBay->next;
+					}
+					else {
+						cout << "reset" << endl;
+						chuyenBay = cbtam;
+					}
+				}
+			}
+
+
+			if ((int)nhap == 27) {
+				setfillstyle(1, 0);
+				bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+				*x = -1;
+				*y = -1;
+				return;
+			}
+		}
+	}

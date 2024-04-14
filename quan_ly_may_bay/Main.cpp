@@ -11,26 +11,13 @@ int main() {
 	PTRChuyenBay dau_chuyen_bay = NULL;
 	PTRKhachhang goc_khach_hang = NULL;
 	ds_may_bay.napFile(DLMAYBAY);
-	napFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay, ds_may_bay);
-	int max;
-
-	//Bublesort(dau_chuyen_bay, ds_may_bay);
-	//for (int i = 0; i < ds_may_bay.so_MB; i++) {
-	//	cout << ds_may_bay.maybay[i]->sh_Mb << " ";
-	//	timCBtheoSHMB(dau_chuyen_bay, ds_may_bay.maybay[i]->sh_Mb, max);
-	//	cout << max << endl;
-	//}
-	//
-	
-	//PTRChuyenBay cbtam = dau_chuyen_bay;
-
-
-	
+	napFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay, ds_may_bay);	
 	napFileKhachHang(goc_khach_hang, DLKHACHHANG);
 	///////////////////////////////////////////
 	KhoiDong();
 	chayDoHoa(ds_may_bay,dau_chuyen_bay,goc_khach_hang);
 	//////////////
+	KetThuc();
 	ds_may_bay.ghiFile(DLMAYBAY);
 	ghiFileChuyenBay(DLCHUYENBAY,dau_chuyen_bay);	
 	ghiFileKhangHang(goc_khach_hang, DLKHACHHANG);
@@ -39,8 +26,6 @@ int main() {
 	xoaHetKhachHang(goc_khach_hang);
 	///////////////////
 	KetThuc();
-	
-
 }
 
 

@@ -2501,7 +2501,7 @@ void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 						getch();
 						xoachu(const_cast<char*>("ko tim thay khach hanh nay, nhan phim bat ki de tiep tuc"), xg , yg + 110);
 					}
-				}
+				}else
 				if (cmnd[0] != '\0' && ho[0] != '\0' && ten[0] != '\0' && phai[0] != '\0') {
 					kh = timKhachHang(goc_khach_hang, cmnd);
 					if (kh != NULL && (strcmp(kh->info.ho, ho) != 0
@@ -3084,8 +3084,8 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 									for (int j = i; j < ht->cb.so_ve; j++) {
 										ht->cb.ds_ve[j] = ht->cb.ds_ve[j + 1];
 									}
+									ht->cb.so_ve--;
 								}
-								ht->cb.so_ve--;
 								ino = -1;
 								ido = -1;
 								xoachu(text[6], xg, yg + 110);
@@ -3121,8 +3121,8 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 									for (int j = i; j < ht->cb.so_ve; j++) {
 										ht->cb.ds_ve[j] = ht->cb.ds_ve[j + 1];
 									}
+									ht->cb.so_ve--;
 								}
-								ht->cb.so_ve--;
 								ino = -1;
 								ido = -1;
 								xoachu(text[6], xg, yg + 110);

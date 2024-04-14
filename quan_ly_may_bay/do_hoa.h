@@ -32,7 +32,7 @@ int mouseThemCB(int x, int y);
 void DHHuyChuyen(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int*, int*,int*);
 void hienDSCB1(int* x, int* y, int* ii, PTRChuyenBay& dau_chuyen_bay,DSMayBay& ds_may_bay);
 int mouseHuyCB(int x, int y);
-void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay &ht, int* x, int* y, int* ii);
+void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay &ht,DSMayBay ds_may_bay, int* x, int* y, int* ii);
 void hienDSCB2(int* x, int* y, int* ii, PTRChuyenBay& ht, PTRChuyenBay& dau_chuyen_bay, DSMayBay ds_may_bay);
 int mouseHieuChinhCB(int old, int x, int y);
 ///===========================khach hang==============================================///
@@ -49,6 +49,3 @@ int mouseHienDSCB(int x, int y);
 void xoachu(char* n, int x, int y);
 void KetThuc();
 void KhoiDong();
-
-
-

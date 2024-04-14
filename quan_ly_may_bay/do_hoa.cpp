@@ -127,7 +127,8 @@ int checkMouse22(int x, int y)
 
 void mouse(int* x, int* y)
 {
-	int xg = 55, yg = 50;
+	int xg = 55, yg = 50, i = 0;
+	char tb[220]{ "NHAN PHIM BAT KY DE THOAT" };
 	while (1) {
 		if (ismouseclick(WM_LBUTTONDOWN) == 1) {
 			getmouseclick(WM_LBUTTONDOWN, *x, *y);
@@ -135,7 +136,13 @@ void mouse(int* x, int* y)
 		if ((*x >= getmaxx() - 50) && (*y >= 0) && (*x <= getmaxx()) && (*y <= 50)) {
 			*x = -10;
 			*y = -10;
-			break;
+			//closegraph();
+			setfillstyle(1, 8);
+			setbkcolor(8);
+			Sleep(100);
+			bar(getmaxx() / 2 -150 ,getmaxy() / 2 - 50, getmaxx() / 2 + 150, getmaxy() / 2 + 50);
+			outtextxy(getmaxx() / 2 - textwidth(tb) / 2, getmaxy() / 2 - textheight(tb) / 2, tb);
+			return;
 		}
 	}
 }
@@ -147,7 +154,7 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang&
 	void* p2 = nhanhMenu1();
 	void* p3 = nhanhMenu2();
 	putimage(0, 0, p1, 0);
-	int x=0, y=0;
+	int x = 0, y = 0;
 	int n = -1, tam;
 	MayBay tam1{};
 	thread nhanh1(mouse, &x, &y);
@@ -208,6 +215,7 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang&
 				thread nhanh(DHThemCB, ref(dau_chuyen_bay), ref(ds_may_bay), &x, &y, &ii, &ip);
 				hienDSCB0(&x, &y, &ii, &ip, dau_chuyen_bay, ds_may_bay);
 				nhanh.join();
+				ghiFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay);
 				break;
 			}
 			case 1: {
@@ -215,14 +223,16 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang&
 				thread nhanh1(hienDSCB1, &x, &y, &ii, ref(dau_chuyen_bay),ref(ds_may_bay));
 				DHHuyChuyen(dau_chuyen_bay, ds_may_bay, &x, &y,&ii);
 				nhanh1.join();
+				ghiFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay);
 				break;
 			}
 			case 2: {
 				int ii = 0;
 				PTRChuyenBay ht = NULL;
-				thread nhanh2(DHHieuChinhCB, ref(dau_chuyen_bay),ref(ht), &x, &y, &ii);
+				thread nhanh2(DHHieuChinhCB, ref(dau_chuyen_bay), ref(ht), ref(ds_may_bay), &x, &y, &ii);
 				hienDSCB2(&x, &y, &ii, ht, dau_chuyen_bay, ds_may_bay);
 				nhanh2.join();
+				ghiFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay);
 				break;
 			}
 			default:
@@ -241,6 +251,8 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang&
 				}
 			}
 			DHdatVe(dau_chuyen_bay, ds_may_bay, goc_khach_hang, &x, &y);
+			ghiFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay);
+			ghiFileKhangHang(goc_khach_hang, DLKHACHHANG);
 			n = -1;
 			break;
 		}
@@ -256,6 +268,7 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang&
 				}
 			}
 			DHhuyVe(dau_chuyen_bay, ds_may_bay, goc_khach_hang, &x, &y);
+			ghiFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay);
 			n = -1;
 			break;
 		}
@@ -310,9 +323,7 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang&
 					putimage(xg + 240, yg + 88 * 0, p2, 1);
 				}
 			}
-
 			break;
-
 		}
 		default:
 			break;
@@ -521,7 +532,7 @@ void hienDSMb1(int* x, int* y, int* ii, DSMayBay& ds_may_bay)
 	strcpy_s(text[2], 40, " so day: ");
 	strcpy_s(text[3], 40, " so dong: ");
 	setfillstyle(1, 1);
-	char tam[25];
+	char tam[25]{};
 	char nhap;
 	int n = 0, k = 0;
 	setbkcolor(1);
@@ -570,6 +581,12 @@ void hienDSMb1(int* x, int* y, int* ii, DSMayBay& ds_may_bay)
 		else if ((int)nhap == 27) {
 			*x = -1;
 			*y = -1;
+			getimage(xg, yg, getmaxx(), getmaxy(), p);
+			putimage(xg, yg, p, 1);
+			free(p);
+			return;
+		}
+		if (*x == -10 && *y == -10) {
 			getimage(xg, yg, getmaxx(), getmaxy(), p);
 			putimage(xg, yg, p, 1);
 			free(p);
@@ -640,7 +657,7 @@ void hienDSMb2(int* x, int* y, int* ii, MayBay*& ht, DSMayBay& ds_may_bay)
 			outtextxy(xg, getmaxy() - 60, tam);
 			outtextxy(xg, getmaxy() - 30, const_cast<char*>("nhan esc de thoat"));
 		}
-		if (*x == -2 && *y == -2) {
+		if ((*x == -2 && *y == -2) || (*x == -10 && *y == -10)) {
 			void* p = malloc(imagesize(xg, yg, getmaxx(), getmaxy()));
 			getimage(xg, yg, getmaxx(), getmaxy(), p);
 			putimage(xg, yg, p, 1);
@@ -667,48 +684,58 @@ void DHxoaMB(DSMayBay& ds_may_bay, PTRChuyenBay fist, int* x, int* y, int* ii)
 	char tam[100]{};
 	while (1) {
 		n = mouseXoaMb(*x, *y);
-		if (*ii * 10 + n < ds_may_bay.so_MB)
-		if (n >= 0) {
-			bar(xg, yg, xg + 400, yg + 60);
-			outtextxy(xg + 5, yg + 25 - textheight(text[0]) / 2, text[0]);
-			outtextxy(xg + 25, yg + 25 - textheight(text[0]) / 2 + 25, ds_may_bay.maybay[n + *ii * 10]->sh_Mb);
-			outtextxy(xg + 50 + textwidth(text[0]), yg + 25 - textheight(text[0]) / 2, text[1]);
-			rectangle(xg + 45 + textwidth(text[0]), yg + 25 - textheight(text[0]) / 2,
-				xg + 45 + textwidth(text[0]) + 75, yg + 25 - textheight(text[0]) / 2 + 20);
-			outtextxy(xg + 100 + textwidth(text[0]) + textwidth(text[1]), yg + 25 - textheight(text[0]) / 2,
-				text[2]);
-			rectangle(xg + 95 + textwidth(text[0]) + textwidth(text[1]), yg + 25 - textheight(text[0]) / 2,
-				xg + 95 + textwidth(text[0]) + textwidth(text[1]) + 70, yg + 25 - textheight(text[0]) / 2 + 20);
-		///==========================///
-			while (1) {
-				if (mouseXoaMb(*x, *y) == -1 ) {
-					t1 = *ii;
-					if (timCBtheoSHMB(fist, ds_may_bay.maybay[t1 * 10 + n]->sh_Mb,t2) == 0) {
-						*x = 0;
-						*y = 0;
-						strcpy_s(text[3], 41, ds_may_bay.maybay[t1 * 10 + n]->sh_Mb);
-						XoaMayBay(ds_may_bay, text[3]);
+		if (*ii * 10 + n < ds_may_bay.so_MB) {
+			if (n >= 0 && (timCBtheoSHMB(fist, ds_may_bay.maybay[*ii * 10 + n]->sh_Mb, t2) == 0)) {
+				bar(xg, yg, xg + 400, yg + 60);
+				outtextxy(xg + 5, yg + 25 - textheight(text[0]) / 2, text[0]);
+				outtextxy(xg + 25, yg + 25 - textheight(text[0]) / 2 + 25, ds_may_bay.maybay[n + *ii * 10]->sh_Mb);
+				outtextxy(xg + 50 + textwidth(text[0]), yg + 25 - textheight(text[0]) / 2, text[1]);
+				rectangle(xg + 45 + textwidth(text[0]), yg + 25 - textheight(text[0]) / 2,
+					xg + 45 + textwidth(text[0]) + 75, yg + 25 - textheight(text[0]) / 2 + 20);
+				outtextxy(xg + 100 + textwidth(text[0]) + textwidth(text[1]), yg + 25 - textheight(text[0]) / 2, text[2]);
+				rectangle(xg + 95 + textwidth(text[0]) + textwidth(text[1]), yg + 25 - textheight(text[0]) / 2,
+					xg + 95 + textwidth(text[0]) + textwidth(text[1]) + 70, yg + 25 - textheight(text[0]) / 2 + 20);
+				///==========================///
+				while (1) {
+					if (mouseXoaMb(*x, *y) == -1) {
+						t1 = *ii;
+						if (timCBtheoSHMB(fist, ds_may_bay.maybay[t1 * 10 + n]->sh_Mb, t2) == 0) {
+							*x = 0;
+							*y = 0;
+							strcpy_s(text[3], 41, ds_may_bay.maybay[t1 * 10 + n]->sh_Mb);
+							XoaMayBay(ds_may_bay, text[3]);
+						}
+						getimage(xg, yg, xg + 400, yg + 60, p);
+						putimage(xg, yg, p, 1);
+						break;
+
 					}
-					else {
-						outtextxy(xg + 25, yg + 25 - textheight(text[0]) / 2 + 25,const_cast<char*>("co chuyen bay su dung"));
-						Sleep(1000);
+					else if (mouseXoaMb(*x, *y) == -2) {
+						getimage(xg, yg, xg + 400, yg + 60, p);
+						putimage(xg, yg, p, 1);
+						break;
 					}
-					getimage(xg, yg, xg + 400, yg + 60, p);
-					putimage(xg, yg, p, 1);
-					break;
-					
-				}
-				else if (mouseXoaMb(*x, *y) == -2) {
-					getimage(xg, yg, xg + 400, yg + 60, p);
-					putimage(xg, yg, p, 1);
-					break;
-				}
-				if (*x == -1 && *y == -1) {
-					break;
+					if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
+						getimage(xg, yg, xg + 400, yg + 60, p);
+						putimage(xg, yg, p, 1);
+						break;
+					}
+					if (*x == -1 && *y == -1) {
+						break;
+					}
 				}
 			}
-		}
-		if (*x == -1 && *y == -1) {
+			if (n >= 0 && (timCBtheoSHMB(fist, ds_may_bay.maybay[*ii * 10 + n]->sh_Mb, t2) != 0)) {
+				outtextxy(xg + 25, yg  - textheight(text[0]) / 2 + 25, ds_may_bay.maybay[n + *ii * 10]->sh_Mb);
+				outtextxy(xg + 25, yg + 25 - textheight(text[0]) / 2 + 25,const_cast<char*>("da su dung"));
+				Sleep(1500);
+				*x = 0; *y = 0;
+				getimage(xg, yg, xg + 400, yg + 60, p);
+				putimage(xg, yg, p, 1);
+			}
+			
+		}		
+		if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
 			getimage(xg, yg, xg + 400, yg + 60, p);
 			putimage(xg, yg, p, 1);
 			break;
@@ -853,7 +880,7 @@ void DHhieuchinhMB(DSMayBay& ds_may_bay, MayBay*& ht,PTRChuyenBay &fist, int* x,
 				if ((t1 >= ht->so_day && t2 >= ht->so_dong) && timCBtheoSHMB(fist, ht->sh_Mb, t) != 0) {
 					if (shmb[0] != '\0') {
 						if (strcmp(shmb, ht->sh_Mb) == 0 || TimSoHieu(shmb, ds_may_bay) == NULL) {
-							HieuChinhMB(ht, shmb, lmb, t1, t2);
+							HieuChinhMB(ds_may_bay, ht, shmb, lmb, t1, t2);
 							*x = -1; *y = -1;
 							bool d = 1;
 							if (t1 * t2 == ht->so_day * ht->so_dong) {
@@ -875,7 +902,7 @@ void DHhieuchinhMB(DSMayBay& ds_may_bay, MayBay*& ht,PTRChuyenBay &fist, int* x,
 						}
 					}
 					else {
-						HieuChinhMB(ht, shmb, lmb, t1, t2);
+						HieuChinhMB(ds_may_bay, ht, shmb, lmb, t1, t2);
 						*x = -1; *y = -1;
 						bool d = 1;
 						if (t1 * t2 == ht->so_day * ht->so_dong) {
@@ -899,7 +926,7 @@ void DHhieuchinhMB(DSMayBay& ds_may_bay, MayBay*& ht,PTRChuyenBay &fist, int* x,
 				if (timCBtheoSHMB(fist, ht->sh_Mb, t) == 0) {
 					if (shmb[0] != '\0') {
 						if (strcmp(shmb, ht->sh_Mb) == 0 || TimSoHieu(shmb, ds_may_bay) == NULL) {
-							HieuChinhMB(ht, shmb, lmb, t1, t2);
+							HieuChinhMB(ds_may_bay, ht, shmb, lmb, t1, t2);
 							*x = -1; *y = -1;
 							bool d = 1;
 							if (t1 * t2 == ht->so_day * ht->so_dong) {
@@ -921,7 +948,7 @@ void DHhieuchinhMB(DSMayBay& ds_may_bay, MayBay*& ht,PTRChuyenBay &fist, int* x,
 						}
 					}
 					else {
-						HieuChinhMB(ht, shmb, lmb, t1, t2);
+						HieuChinhMB(ds_may_bay, ht, shmb, lmb, t1, t2);
 						*x = -1; *y = -1;
 						bool d = 1;
 						if (t1 * t2 == ht->so_day * ht->so_dong) {
@@ -945,6 +972,12 @@ void DHhieuchinhMB(DSMayBay& ds_may_bay, MayBay*& ht,PTRChuyenBay &fist, int* x,
 			putimage(xg + getmaxx() / 2 - 25 - 310, yg + 45, p1, 1);
 			free(p1);
 			*x = -2; *y = -2;
+			return;
+		}
+		if (*x == -10 && *y == -10) {
+			getimage(xg + getmaxx() / 2 - 25 - 310, yg + 45, getmaxx() / 2 - 25 + 750, yg + 45 + 200, p1);
+			putimage(xg + getmaxx() / 2 - 25 - 310, yg + 45, p1, 1);
+			free(p1);
 			return;
 		}
 		if ((int)nhap == 0) {
@@ -1393,6 +1426,12 @@ void DHThemCB(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* y
 				}
 			}
 		}
+		if (*x == -10 && *y == -10) {
+			getimage(xg, yg, xg + 975, yg + 150, p);
+			putimage(xg, yg, p, 1);
+			free(p);
+			return;
+		}
 	}
 
 }
@@ -1427,10 +1466,10 @@ void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, D
 		}
 	}
 	PTRChuyenBay* tcb = new PTRChuyenBay[cd]{};
-	/*for (int i = 0; i < cd; i++) {
+	for (int i = 0; i < cd; i++) {
 		tcb[i] = q;
 		q = q->next;
-	}*/
+	}
 	while (1) {
 		if (ii1 != *ii) {
 			//i1 = 0; *x = 0; *y = 0;
@@ -1441,7 +1480,7 @@ void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, D
 			}
 			for (int i = 0; i < 8; i++) {
 				if (q != NULL && *ii * 8 + i < cd) {
-					/*q = tcb[*ii * 8 + i];*/
+					q = tcb[*ii * 8 + i];
 					outtextxy(xg + 10, yg + 10 + kc * i, text[0]);
 					//outtextxy(xg + 10 + 225 + 50 + textwidth(text[0]), yg + 10 + kc * i, text[1]);
 					outtextxy(xg + 10, yg + 40 + kc * i, text[2]);
@@ -1460,7 +1499,7 @@ void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, D
 					outtextxy(xg + 140 + 100, yg + 40 + kc * i, tam);///nam
 					outtextxy(xg + 300 + 100, yg + 40 + kc * i, q->cb.sh_Mb);
 					line(xg, yg + 63 + kc * i, xg + 599, yg + 63 + kc * i);
-					q = q->next;
+					//q = q->next;
 				}
 			}
 			ii1 = *ii;
@@ -1484,7 +1523,7 @@ void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, D
 			}
 			ip1 = *ip;
 		}
-		if (*x == -1 && *y == -1) {
+		if ((*x == -1 && *y == -1)||(*x == -10 && *y == -10)) {
 			getimage(xg, yg, xg + getmaxx(), yg + getmaxy(), p);
 			putimage(xg, yg, p, 1);
 			free(p);
@@ -1550,7 +1589,7 @@ void DHHuyChuyen(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int
 		n = mouseHuyCB(*x, *y);
 		if (*ii * 10 + n < cd)
 			if (n >= 0) {
-				int i = 0;				
+				int i = 0;
 				for (p = dau_chuyen_bay; p != NULL && i < *ii * 10 + n; p = p->next) {
 					i++;
 				}
@@ -1583,26 +1622,28 @@ void DHHuyChuyen(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int
 						}
 					}
 				}
-				else if (p->cb.trang_thai_cb == HOAN_TAT) {
-					strcpy_s(text[3], 25, p->cb.ma_cb);
-					strcat_s(text[3], 25, " da hoan tat");
-					outtextxy(xg + 10, yg + 25, text[3]);
-					*x = 0; *y = 0;
-					Sleep(1000);
-					getimage(xg, yg, xg + 550, yg + 50, q);
-					putimage(xg, yg, q, 1);
-				}
-				else if (p->cb.trang_thai_cb == HUY_CHUYEN) {
-					strcpy_s(text[3], 25, p->cb.ma_cb);
-					strcat_s(text[3], 25, " da huy chuyen");
-					outtextxy(xg + 10, yg + 25, text[3]);
-					*x = 0; *y = 0;
-					Sleep(1000);
-					getimage(xg, yg, xg + 550, yg + 50, q);
-					putimage(xg, yg, q, 1);
+				else if (p != NULL) {
+					if (p->cb.trang_thai_cb == HOAN_TAT) {
+						strcpy_s(text[3], 25, p->cb.ma_cb);
+						strcat_s(text[3], 25, " da hoan tat");
+						outtextxy(xg + 10, yg + 25, text[3]);
+						*x = 0; *y = 0;
+						Sleep(1000);
+						getimage(xg, yg, xg + 550, yg + 50, q);
+						putimage(xg, yg, q, 1);
+					}
+					else if (p->cb.trang_thai_cb == HUY_CHUYEN) {
+						strcpy_s(text[3], 25, p->cb.ma_cb);
+						strcat_s(text[3], 25, " da huy chuyen");
+						outtextxy(xg + 10, yg + 25, text[3]);
+						*x = 0; *y = 0;
+						Sleep(1000);
+						getimage(xg, yg, xg + 550, yg + 50, q);
+						putimage(xg, yg, q, 1);
+					}
 				}
 			}
-		if (*x == -1 && *y == -1) {
+		if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
 			getimage(xg, yg, xg + 550, yg + 50, q);
 			putimage(xg, yg, q, 1);
 			free(q);
@@ -1730,6 +1771,13 @@ void hienDSCB1(int* x, int* y, int* ii, PTRChuyenBay& dau_chuyen_bay, DSMayBay& 
 			*x = -1; *y = -1;
 			return;
 		}
+		if (*x == -10 && *y == -10) {
+			getimage(xg, yg, xg + getmaxx(), yg + getmaxy(), p);
+			putimage(xg, yg, p, 1);
+			free(p);
+			delete[] tcb;
+			return;
+		}
 	}
 }
 int mouseHuyCB(int x, int y)
@@ -1751,7 +1799,7 @@ int mouseHuyCB(int x, int y)
 	}
 	return -5;
 }
-void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay &ht, int* x, int* y, int* ii)
+void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, DSMayBay ds_may_bay, int* x, int* y, int* ii)
 {
 	int xg = 500, yg = 55;
 	char text[7][225]{};
@@ -1981,13 +2029,10 @@ void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay &ht, int* x, int* 
 						k = *ii;
 						k--;
 						*ii = k;
-
 					}
 				}
-
 			}
-		else
-			if ((int)nhap == 13 ) {
+		if ((int)nhap == 13 ) {
 					if (ht != NULL) {
 						NgayGio tam1;
 						bool d = 0;
@@ -2030,16 +2075,36 @@ void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay &ht, int* x, int* 
 							outtextxy(xg + 100, yg + 100, const_cast<char*>("thoi gian chuyen bay xung dot voi chuyen bay khac, NHAN PHIM BAT KY DE TIEP TUC"));
 							getch();
 							xoachu(const_cast<char*>("thoi gian chuyen bay xung dot voi chuyen bay khac, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
+							setbkcolor(mt);
 						}
 						else {
-							chinhsuaChuyenBay(ht, tam1, sbd, shmb);
-							ht->capnhap();
-							int mt = getbkcolor();
-							setbkcolor(0);
-							outtextxy(xg + 100, yg + 100, const_cast<char*>("hieu chinh thanh cong, NHAN PHIM BAT KY DE TIEP TUC"));
-							getch();
-							xoachu(const_cast<char*>("hieu chinh thanh cong, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
-							setbkcolor(mt);
+							if (shmb[0] != '\0' && ht->cb.ds_ve[0].cmnd[0] != '\0') {
+								int mt = getbkcolor();
+								setbkcolor(0);
+								outtextxy(xg + 100, yg + 100, const_cast<char*>("chuyen bay da dat ve ko thay doi SHMB, NHAN PHIM BAT KY DE TIEP TUC"));
+								getch();
+								xoachu(const_cast<char*>("chuyen bay da dat ve ko thay doi SHMB, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
+								setbkcolor(mt);
+							}
+							else if (shmb[0] != '\0' && TimSoHieu(shmb, ds_may_bay)==NULL) {
+								int mt = getbkcolor();
+								setbkcolor(0);
+								outtextxy(xg + 100, yg + 100, const_cast<char*>("khong tim thay SHMB, NHAN PHIM BAT KY DE TIEP TUC"));
+								getch();
+								xoachu(const_cast<char*>("khong tim thay SHMB, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
+								setbkcolor(mt);
+							}
+							else {
+								
+								chinhsuaChuyenBay(ht, tam1, sbd, shmb);
+								ht->capnhap();
+								int mt = getbkcolor();
+								setbkcolor(0);
+								outtextxy(xg + 100, yg + 100, const_cast<char*>("hieu chinh thanh cong, NHAN PHIM BAT KY DE TIEP TUC"));
+								getch();
+								xoachu(const_cast<char*>("hieu chinh thanh cong, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
+								setbkcolor(mt);
+							}
 						}
 					}
 					else {
@@ -2052,12 +2117,17 @@ void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay &ht, int* x, int* 
 					}
 				
 			}
-		else if ((int)nhap == 27) {
+		if ((int)nhap == 27) {
 				getimage(xg, yg, xg + 975, yg + 150, p);
 				putimage(xg, yg, p, 1);
 				*x = -1; *y = -1;
 				return;
-			}
+		}
+		if (*x == -10 && *y == -10) {
+			getimage(xg, yg, xg + 975, yg + 150, p);
+			putimage(xg, yg, p, 1);
+			return;
+		}
 	}
 }
 void hienDSCB2(int* x, int* y, int* ii, PTRChuyenBay& ht, PTRChuyenBay& dau_chuyen_bay, DSMayBay ds_may_bay)
@@ -2180,7 +2250,7 @@ void hienDSCB2(int* x, int* y, int* ii, PTRChuyenBay& ht, PTRChuyenBay& dau_chuy
 			}
 			ii1 = *ii;
 		}
-		if (*x == -1 && *y == -1) {
+		if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
 			getimage(xg, yg, xg + getmaxx(), yg + getmaxy(), p);
 			putimage(xg, yg, p, 1);
 			free(p);
@@ -2471,7 +2541,7 @@ void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 							}
 							else {
 								outtextxy(xg + 500, yg + 55, const_cast<char*>("vi tri khong hop le"));
-								Sleep(250);
+								Sleep(1500);
 								xoachu(const_cast<char*>("vi tri khong hop le"), xg + 500, yg + 55);
 							}
 						}
@@ -2511,7 +2581,7 @@ void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 
 				}
 			}
-			if ((int)nhap == 27) {
+			if ((int)nhap == 27 || (*x == -10 && *y == -10)) {
 				bar(xg-165, yg, xg + 850, yg + 101);
 				bar(xg - 170, yg + 120, getmaxx(), getmaxy());
 				setbkcolor(0);
@@ -2524,7 +2594,6 @@ void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 		Sleep(1500);
 		xoachu(const_cast<char*>("CHUYEN BAY DA HOAN TAT HOAC DA HUY CHUYEN"), xg, yg);
 	}
-
 }
 void chonChuyenBay(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, int* x, int* y, int* ii, bool huy, PTRChuyenBay chay[], int& cd)
 {
@@ -2568,7 +2637,7 @@ void chonChuyenBay(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, int* x, int* 
 						putimage(xg, yg, q, 1);
 						break;
 					}
-					else if (*x == -1 && *y == -1) {
+					else if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
 						getimage(xg, yg, xg + 240, yg + 120, q);
 						putimage(xg, yg, q, 1);
 						free(q);
@@ -2577,7 +2646,7 @@ void chonChuyenBay(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, int* x, int* 
 				}
 			}
 		}
-		if (*x == -1 && *y == -1) {
+		if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
 			getimage(xg, yg, xg + 240, yg + 120, q);
 			putimage(xg, yg, q, 1);
 			free(q);
@@ -2631,7 +2700,7 @@ void hienDSCB3(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* 
 		}
 	}
 	i1 = 0;
-	int io = -1, n, tam1;
+	int io = -1, n = -1, tam1;
 	char ngay[3]{}, thang[3]{}, nam[5]{}, sbd[100]{};
 	while (1) {
 		if (io != *ii) {
@@ -2690,7 +2759,7 @@ void hienDSCB3(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* 
 				}
 			}
 		}
-		if (*x == -1 && *y == -1) {
+		if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
 			getimage(xg - 1, yg - 1, xg + getmaxx(), yg + getmaxy(), p);
 			putimage(xg - 1, yg - 1, p, 1);
 			getimage(xg + 5, yg + 5 - 55, xg + 10 + 300 + 50 + 550, yg + 10 + 25 - 55, p1);
@@ -2782,18 +2851,17 @@ void hienDSCB3(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* 
 		}
 		if ((int)nhap == 13) {
 			cd = 0;
-			for (q = dau_chuyen_bay; q != NULL;q = q->next) {
+			for (q = dau_chuyen_bay; q != NULL; q = q->next) {
 				if ((q->cb.trang_thai_cb != HOAN_TAT && q->cb.trang_thai_cb != HUY_CHUYEN) || huy == 1)
-				if ((ngay[0] == '\0' || q->cb.ngay_gio_kh.ngay_kh.ngay == atoi(ngay)) && (thang[0] == '\0' || q->cb.ngay_gio_kh.ngay_kh.thang == atoi(thang))
-					&& (nam[0] == '\0' || q->cb.ngay_gio_kh.ngay_kh.nam == atoi(nam)) && (sbd[0] == '\0' || strcmp(sbd, q->cb.san_bay_den) == 0)) {
-					chay[cd++] = q;
-				}
+					if ((ngay[0] == '\0' || q->cb.ngay_gio_kh.ngay_kh.ngay == atoi(ngay)) && (thang[0] == '\0' || q->cb.ngay_gio_kh.ngay_kh.thang == atoi(thang))
+						&& (nam[0] == '\0' || q->cb.ngay_gio_kh.ngay_kh.nam == atoi(nam)) && (sbd[0] == '\0' || strcmp(sbd, q->cb.san_bay_den) == 0)) {
+						chay[cd++] = q;
+					}
 			}
 			io = -1;
 		}
-		if ((int)nhap == 0)
-			if ( !(*ii * 10 + mouseChonCB(*x, *y) < cd && mouseChonCB(*x, *y) >= 0)) {
-				*x = -2; *y = -2;
+		if ((int)nhap == 0)	if (!(*ii * 10 + mouseChonCB(*x, *y) < cd && mouseChonCB(*x, *y) >= 0)) {
+			*x = -2; *y = -2;
 			nhap = getch();
 			if ((int)nhap == 77) {
 				if (*ii * 10 - cd < 0) {
@@ -2821,7 +2889,7 @@ void hienDSCB3(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* 
 			free(p);
 			*x = -1; *y = -1;
 			return;
-		}
+		}			
 	}
 }
 int mouseChonCB(int x, int y)
@@ -3022,6 +3090,7 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 										ht->cb.ds_ve[j] = ht->cb.ds_ve[j + 1];
 									}
 								}
+								ht->cb.so_ve--;
 								ino = -1;
 								ido = -1;
 								xoachu(text[6], xg, yg + 110);
@@ -3058,6 +3127,7 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 										ht->cb.ds_ve[j] = ht->cb.ds_ve[j + 1];
 									}
 								}
+								ht->cb.so_ve--;
 								ino = -1;
 								ido = -1;
 								xoachu(text[6], xg, yg + 110);
@@ -3080,7 +3150,6 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 						Sleep(1000);
 						xoachu(const_cast<char*>("vi tri ko hop le"), xg + 470, yg + 55);
 					}
-
 				}
 				else {
 					outtextxy(xg, yg + 110, const_cast<char*>("chi huy ve dua vao 1 trg 2 thong tin"));
@@ -3088,7 +3157,7 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 					xoachu(const_cast<char*>("chi huy ve dua vao 1 trg 2 thong tin"), xg, yg + 110);
 				}
 			}
-			if ((int)nhap == 27) {
+			if ((int)nhap == 27 || (*x == -10 && *y == -10)) {
 				bar(xg - 175, yg, xg + 850, yg + 101);
 				bar(xg - 170, yg + 120, getmaxx(), getmaxy());
 				setbkcolor(0);
@@ -3096,7 +3165,7 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 			}
 		}
 	}
-else {
+	else {	
 	outtextxy(xg, yg, const_cast<char*>("CHUYEN BAY DA HOAN TAT HOAC DA HUY CHUYEN"));
 	Sleep(500);
 	xoachu(const_cast<char*>("CHUYEN BAY DA HOAN TAT HOAC DA HUY CHUYEN"), xg, yg);
@@ -3170,7 +3239,6 @@ void DHInVeCb(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& 
 					{
 						outtextxy(xg + 780, yg + 100 + 35 * i, const_cast<char*>("NU"));
 					}
-
 				}
 
 			}
@@ -3190,17 +3258,19 @@ void DHInVeCb(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& 
 
 				}
 			}
-			else if ((int)nhap == 27) {
+			else if ((int)nhap == 27 ) {
 				bar(xg - 200, yg + 60, getmaxx(), getmaxy());
 				bar(xg, yg, xg + 800, yg + 50);
 				*x = -1; *y = -1;
 				return;
+			}	
+			if (*x == -10 && *y == -10) {
+				bar(xg - 200, yg + 60, getmaxx(), getmaxy());
+				bar(xg, yg, xg + 800, yg + 50);
+				return;
 			}
-
-			
 		}
-	}
-	
+	}	
 }
 void hienDSCB4(int* x, int* y, PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay)
 {
@@ -3223,64 +3293,69 @@ void hienDSCB4(int* x, int* y, PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_ba
 	///
 	outtextxy(xg + 10 + 300 + 50, yg + 10, text[1]);
 	rectangle(xg + 10 + 300 + 50 + 95, yg + 5, xg + 10 + 300 + 50 + 550, yg + 10 + 25);
-	int n = 0, i[5]{ 0,0,0,0,0 }, tam = 0, ii = 0, cd = 0, ht = 0, io = 0, kc = 60;
+	int n = 0, i[5]{ 0,0,0,0,0 }, tam = 0, ii = 0, cd = 0, ht = 0, io = -1, kc = 60;
 	char ngay[3]{}, thang[3]{}, nam[5]{}, sbd[101]{}, nhap, tam1[225]{};
 	MayBay* tm = nullptr;
 	PTRChuyenBay p = dau_chuyen_bay;
 	for (p = dau_chuyen_bay; p != NULL; p = p->next)cd++;
 	PTRChuyenBay* q = new PTRChuyenBay[cd];
+	for (p = dau_chuyen_bay; p != NULL; p = p->next) {
+		q[ht++] = p;
+	}
 	setfillstyle(1,BLACK);
 	while (1) {
 		if (io != ii) {
 			io = ii;
 			bar(xg, yg + 60, getmaxx(), getmaxy());
-			for (int j = 0; j < ht; j++) {
-				outtextxy(xg , yg + 80 + kc * j, text[0]);
-				outtextxy(xg + 225 + 130 + textwidth(text[0]), yg +80 + kc * j, text[1]);
-				outtextxy(xg, yg + 110 + kc * j, text[2]);
-				outtextxy(xg + textwidth(text[2]) + 30, yg + 110 + kc * j, text[3]);
-				outtextxy(xg + 325 + 170, yg + 110 + kc * j, text[4]);
-				outtextxy(xg + 540 + 170, yg + 110 + kc * j, text[5]);
-				///===========================================///
-				outtextxy(xg + textwidth(text[0]) + 5, yg + 80 + kc * j, q[j]->cb.ma_cb);
-				outtextxy(xg + 310 + 50 + 120 + textwidth(text[1]), yg + 80 + kc * j, q[j]->cb.san_bay_den);
-				_itoa_s(q[j]->cb.ngay_gio_kh.gio_kh.gio, tam1, 225, 10);
-				outtextxy(xg + 100, yg + 110 + kc * j, tam1);///gio
-				_itoa_s(q[j]->cb.ngay_gio_kh.gio_kh.phut, tam1, 25, 10);
-				outtextxy(xg + 25 + 100, yg + 110 + kc * j, tam1);///phut
-				_itoa_s(q[j]->cb.ngay_gio_kh.ngay_kh.ngay, tam1, 25, 10);
-				outtextxy(xg + 55 + 100, yg + 110 + kc * j, tam1);///ngay
-				_itoa_s(q[j]->cb.ngay_gio_kh.ngay_kh.thang, tam1, 25, 10);
-				outtextxy(xg + 95 + 100, yg + 110 + kc * j, tam1);///thang
-				_itoa_s(q[j]->cb.ngay_gio_kh.ngay_kh.nam, tam1, 25, 10);
-				outtextxy(xg + 135 + 100, yg + 110 + kc * j, tam1);///nam
-				switch (q[j]->cb.trang_thai_cb)
-				{
-				case HUY_CHUYEN: {
-					strcpy_s(tam1, 225, "huy chuyen");
-					break;
-				}
-				case CON_VE: {
-					strcpy_s(tam1, 225, "con ve");
-					break;
-				}
-				case HET_VE: {
-					strcpy_s(tam1, 225, "het ve");
-					break;
-				}
-				case HOAN_TAT: {
-					strcpy_s(tam1, 225, "hoan tat");
-					break;
-				}
-				default:
-					break;
-				}
-				outtextxy(xg + 285 + 100, yg + 110 + kc * j, tam1);
-				outtextxy(xg + 485 + 100, yg + 110 + kc * j, q[j]->cb.sh_Mb);
-				tm = TimSoHieu(q[j]->cb.sh_Mb, ds_may_bay);
-				_itoa_s(tm->so_day * tm->so_dong - q[j]->cb.so_ve, tam1, 10, 10);
-				outtextxy(xg + 720 + 100, yg + 110 + kc * j, tam1);
-				line(xg, yg + 133 + kc * j, getmaxx(), yg + 133 + kc * j);
+			for (int j = 0; j < 10; j++) {
+				if (j + ii * 10 < ht) {
+					outtextxy(xg, yg + 80 + kc * j, text[0]);
+					outtextxy(xg + 225 + 130 + textwidth(text[0]), yg + 80 + kc * j, text[1]);
+					outtextxy(xg, yg + 110 + kc * j, text[2]);
+					outtextxy(xg + textwidth(text[2]) + 30, yg + 110 + kc * j, text[3]);
+					outtextxy(xg + 325 + 170, yg + 110 + kc * j, text[4]);
+					outtextxy(xg + 540 + 170, yg + 110 + kc * j, text[5]);
+					///===========================================///
+					outtextxy(xg + textwidth(text[0]) + 5, yg + 80 + kc * j, q[j + ii * 10]->cb.ma_cb);
+					outtextxy(xg + 310 + 50 + 120 + textwidth(text[1]), yg + 80 + kc * j, q[j + ii * 10]->cb.san_bay_den);
+					_itoa_s(q[j + ii * 10]->cb.ngay_gio_kh.gio_kh.gio, tam1, 225, 10);
+					outtextxy(xg + 100, yg + 110 + kc * j, tam1);///gio
+					_itoa_s(q[j + ii * 10]->cb.ngay_gio_kh.gio_kh.phut, tam1, 25, 10);
+					outtextxy(xg + 25 + 100, yg + 110 + kc * j, tam1);///phut
+					_itoa_s(q[j + ii * 10]->cb.ngay_gio_kh.ngay_kh.ngay, tam1, 25, 10);
+					outtextxy(xg + 55 + 100, yg + 110 + kc * j, tam1);///ngay
+					_itoa_s(q[j + ii * 10]->cb.ngay_gio_kh.ngay_kh.thang, tam1, 25, 10);
+					outtextxy(xg + 95 + 100, yg + 110 + kc * j, tam1);///thang
+					_itoa_s(q[j + ii * 10]->cb.ngay_gio_kh.ngay_kh.nam, tam1, 25, 10);
+					outtextxy(xg + 135 + 100, yg + 110 + kc * j, tam1);///nam
+					switch (q[j + ii * 10]->cb.trang_thai_cb)
+					{
+					case HUY_CHUYEN: {
+						strcpy_s(tam1, 225, "huy chuyen");
+						break;
+					}
+					case CON_VE: {
+						strcpy_s(tam1, 225, "con ve");
+						break;
+					}
+					case HET_VE: {
+						strcpy_s(tam1, 225, "het ve");
+						break;
+					}
+					case HOAN_TAT: {
+						strcpy_s(tam1, 225, "hoan tat");
+						break;
+					}
+					default:
+						break;
+					}
+					outtextxy(xg + 295 + 100, yg + 110 + kc * j, tam1);
+					outtextxy(xg + 485 + 100, yg + 110 + kc * j, q[j + ii * 10]->cb.sh_Mb);
+					tm = TimSoHieu(q[j + ii * 10]->cb.sh_Mb, ds_may_bay);
+					_itoa_s(tm->so_day * tm->so_dong - q[j + ii * 10]->cb.so_ve, tam1, 10, 10);
+					outtextxy(xg + 720 + 100, yg + 110 + kc * j, tam1);
+					line(xg, yg + 133 + kc * j, getmaxx(), yg + 133 + kc * j);
+				}				
 			}
 		}
 		if ((int)(nhap = getch()) != 13 && (int)nhap != 0 && (int)nhap != 27) {
@@ -3377,7 +3452,7 @@ void hienDSCB4(int* x, int* y, PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_ba
 		if ((int)nhap == 0) {
 			nhap = getch();
 			if ((int)nhap == 77) {
-				if (ii * 10 - ht < 0) {
+				if (ii * 10 - ht < -10) {
 					ii++;
 				}
 			}
@@ -3391,6 +3466,12 @@ void hienDSCB4(int* x, int* y, PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_ba
 			bar(xg, yg, getmaxx() - 80, yg + 100);
 			bar(xg, yg + 60, getmaxx(), getmaxy());
 			*x = -1; *y = -1;
+			delete[]q;
+			return;
+		}
+		if (*x == -10 && *y == -10) {
+			bar(xg, yg, getmaxx() - 80, yg + 100);
+			bar(xg, yg + 60, getmaxx(), getmaxy());
 			delete[]q;
 			return;
 		}
@@ -3412,11 +3493,9 @@ int mouseHienDSCB(int x, int y)
 void KhoiDong()
 {
 	initwindow(1500, 770, "quan ly chuyen bay");	
-	
 }
 
 void KetThuc()
 {
-	//getch();
 	closegraph();
 }

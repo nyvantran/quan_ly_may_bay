@@ -615,7 +615,7 @@ void NodeChuyenBay::capNhapVe(DSMayBay ds, char shmb[], bool d)
 		n = TimSoHieu(this->cb.sh_Mb, ds);
 		Ve* tam = new Ve[n->so_day * n->so_dong];
 		for (int i = 0; i < this->cb.so_ve; i++) {
-			tam[0] = this->cb.ds_ve[i];
+			tam[i] = this->cb.ds_ve[i];
 		}
 		delete[] this->cb.ds_ve;
 		this->cb.ds_ve = tam;
@@ -1000,24 +1000,24 @@ void TraDongDay(char ve[], int& day, int& dong) {
 }
 
 // in so chuyen bay hoan tat
-void demChuyenBayHT (PTRChuyenBay dau_chuyen_bay) 
-{
-	PTRChuyenBay tam1 = dau_chuyen_bay;
-	PTRChuyenBay tam = dau_chuyen_bay;
-	while (dau_chuyen_bay != NULL) {
-		while (tam != NULL) { 
-			if (strcmp(dau_chuyen_bay->cb.sh_Mb, tam->cb.sh_Mb) == 0 && tam->cb.trang_thai_cb == 3) {
-				dau_chuyen_bay->dem++;
-			}
-			tam = tam->next;
-		}
-		tam = tam1;
-		dau_chuyen_bay = dau_chuyen_bay->next;
-	}
-	dau_chuyen_bay = tam1;
-
-
-}
+//void demChuyenBayHT (PTRChuyenBay dau_chuyen_bay) 
+//{
+//	PTRChuyenBay tam1 = dau_chuyen_bay;
+//	PTRChuyenBay tam = dau_chuyen_bay;
+//	while (dau_chuyen_bay != NULL) {
+//		while (tam != NULL) { 
+//			if (strcmp(dau_chuyen_bay->cb.sh_Mb, tam->cb.sh_Mb) == 0 && tam->cb.trang_thai_cb == 3) {
+//				dau_chuyen_bay->dem++;
+//			}
+//			tam = tam->next;
+//		}
+//		tam = tam1;
+//		dau_chuyen_bay = dau_chuyen_bay->next;
+//	}
+//	dau_chuyen_bay = tam1;
+//
+//
+//}
 // Bublesort
 void Bublesort(PTRChuyenBay chuyenBay, DSMayBay &DsMayBay)
 {

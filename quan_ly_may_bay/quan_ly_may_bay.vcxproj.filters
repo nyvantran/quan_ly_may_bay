@@ -37,9 +37,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <None Include="dlchuyenbay.dat" />
+    <None Include="dlkhachhang.dat" />
+    <None Include="dlmaybay.dat" />
+=======
     <None Include="dlmaybay.dat" />
     <None Include="dlkhachhang.dat" />
     <None Include="dlchuyenbay.dat" />
+>>>>>>> d35e214d8c9d440aae682e26dd259d32328bf6f3
   </ItemGroup>
   <ItemGroup>
     <None Include="dlchuyenbay.dat" />

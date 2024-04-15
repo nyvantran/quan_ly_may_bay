@@ -77,7 +77,6 @@ struct NodeChuyenBay
 {
 	ChuyenBay cb;
 	NodeChuyenBay* next = NULL;
-	int dem = 0;
 	void capnhap();
 	void capNhapVe(DSMayBay ds, char shmb[], bool);
 };

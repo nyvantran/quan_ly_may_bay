@@ -1338,13 +1338,23 @@ void DHThemCB(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* y
 							break;
 						}
 					}
-					if (capNhapTT(tam2) == HOAN_TAT) {
-						int mt = getbkcolor();
-						setbkcolor(0);
-						outtextxy(xg + 200, yg + 90, const_cast<char*>("thoi gian chuyen bay da troi qua, NHAN PHIM BAT KY DE TIEP TUC"));
-						getch();
-						xoachu(const_cast<char*>("thoi gian chuyen bay da troi qua, NHAN PHIM BAT KY DE TIEP TUC"), xg + 200, yg + 90);
-						setbkcolor(mt);
+					if (capNhapTT(tam2) == HOAN_TAT || tam2.checkNgayGio() == 0) {
+						if (tam2.checkNgayGio() == 0) {
+							int mt = getbkcolor();
+							setbkcolor(0);
+							outtextxy(xg + 200, yg + 90, const_cast<char*>("thoi gian nay khong ton tai, NHAN PHIM BAT KY DE TIEP TUC"));
+							getch();
+							xoachu(const_cast<char*>("thoi gian nay khong ton tai, NHAN PHIM BAT KY DE TIEP TUC"), xg + 200, yg + 90);
+							setbkcolor(mt);
+						}else
+						if (capNhapTT(tam2) == HOAN_TAT) {
+							int mt = getbkcolor();
+							setbkcolor(0);
+							outtextxy(xg + 200, yg + 90, const_cast<char*>("thoi gian chuyen bay da troi qua, NHAN PHIM BAT KY DE TIEP TUC"));
+							getch();
+							xoachu(const_cast<char*>("thoi gian chuyen bay da troi qua, NHAN PHIM BAT KY DE TIEP TUC"), xg + 200, yg + 90);
+							setbkcolor(mt);
+						}
 					}
 					else
 						if (d == 1) {
@@ -1451,33 +1461,20 @@ void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, D
 	strcpy_s(text[6], 100, "trang thai chuyen bay: 0 huy chuyen; 1 con ve; 2 het ve; 3 hoan tat");
 	///==================================================================================///
 	PTRChuyenBay q;
-	int i1 = 0, cd = 0, ii1 = -1, ip1 = -1, i = 0;
+	int i1 = 0, cd = 0, ii1 = -1, ip1 = -1, j = 0;
 	char tam[225], nhap = 0;
-	//MayBay* tm = NULL;
+
 	q = dau_chuyen_bay;
-	for (PTRChuyenBay p1 = dau_chuyen_bay; p1 != NULL; p1 = p1->next) {
-		cd++;
-		if (q != NULL && i < *ii * 8) {
-			q = q->next;
-			i++;
-		}
-	}
-	PTRChuyenBay* tcb = new PTRChuyenBay[cd]{};
-	for (int i = 0; i < cd; i++) {
-		tcb[i] = q;
-		q = q->next;
-	}
 	while (1) {
 		if (ii1 != *ii) {
 			//i1 = 0; *x = 0; *y = 0;
 			bar(xg, yg, xg + 600, getmaxy());
-			i = 0;
-			for (q = dau_chuyen_bay; q != NULL && i < *ii * 8; q = q->next) {
-				i++;
+			j = 0;
+			for (q = dau_chuyen_bay; q != NULL && j < *ii * 8; q = q->next) {
+				j++;
 			}
 			for (int i = 0; i < 8; i++) {
-				if (q != NULL && *ii * 8 + i < cd) {
-					q = tcb[*ii * 8 + i];
+				if (q != NULL) {
 					outtextxy(xg + 10, yg + 10 + kc * i, text[0]);
 					//outtextxy(xg + 10 + 225 + 50 + textwidth(text[0]), yg + 10 + kc * i, text[1]);
 					outtextxy(xg + 10, yg + 40 + kc * i, text[2]);
@@ -1496,7 +1493,7 @@ void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, D
 					outtextxy(xg + 140 + 100, yg + 40 + kc * i, tam);///nam
 					outtextxy(xg + 300 + 100, yg + 40 + kc * i, q->cb.sh_Mb);
 					line(xg, yg + 63 + kc * i, xg + 599, yg + 63 + kc * i);
-					//q = q->next;
+					q = q->next;
 				}
 			}
 			ii1 = *ii;
@@ -1524,7 +1521,6 @@ void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, D
 			getimage(xg, yg, xg + getmaxx(), yg + getmaxy(), p);
 			putimage(xg, yg, p, 1);
 			free(p);
-			delete[]tcb;
 			return;
 		}
 	}
@@ -2012,52 +2008,62 @@ void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, DSMayBay ds_m
 			}
 		}
 		if ((int)nhap == 0) {
-				nhap = getch();
-				if ((int)nhap == 77) {
-					if (*ii * 10 - cd < 0) {
-						k = *ii;
-						k++;
-						*ii = k;
+			nhap = getch();
+			if ((int)nhap == 77) {
+				if (*ii * 10 - cd < 0) {
+					k = *ii;
+					k++;
+					*ii = k;
 
-					}
-				}
-				if ((int)nhap == 75) {
-					if (*ii > 0) {
-						k = *ii;
-						k--;
-						*ii = k;
-					}
 				}
 			}
-		if ((int)nhap == 13 ) {
-					if (ht != NULL) {
-						NgayGio tam1;
-						bool d = 0;
-						int gi = ht->cb.ngay_gio_kh.gio_kh.gio, ph = ht->cb.ngay_gio_kh.gio_kh.phut;
-						int ng = ht->cb.ngay_gio_kh.ngay_kh.ngay, th = ht->cb.ngay_gio_kh.ngay_kh.thang, na = ht->cb.ngay_gio_kh.ngay_kh.nam;
-						if (gio[0] != '\0') {
-							gi = atoi(gio);
-						}
-						if (phut[0] != '\0') {
-							ph = atoi(phut);
-						}
-						if (ngay[0] != '\0') {
-							ng = atoi(ngay);
-						}
-						if (thang[0] != '\0') {
-							th = atoi(thang);
-						}
-						if (nam[0] != '\0') {
-							na = atoi(nam);
-						}
-						if (shmb[0] == '\0') strcpy_s(shmb, 15, ht->cb.sh_Mb);
-						tam1.datNgayGio(gi, ph, ng, th, na);
-						for (PTRChuyenBay p = dau_chuyen_bay; p != NULL; p = p->next) {
-							if (p != ht && strcmp(p->cb.sh_Mb, shmb) == 0 && checkNgayGio(p->cb.ngay_gio_kh, tam1) == 1) {
-								d = 1;
-								break;
-							}
-						}
+			if ((int)nhap == 75) {
+				if (*ii > 0) {
+					k = *ii;
+					k--;
+					*ii = k;
+				}
+			}
+		}
+		if ((int)nhap == 13) {
+			if (ht != NULL) {
+				NgayGio tam1;
+				bool d = 0;
+				int gi = ht->cb.ngay_gio_kh.gio_kh.gio, ph = ht->cb.ngay_gio_kh.gio_kh.phut;
+				int ng = ht->cb.ngay_gio_kh.ngay_kh.ngay, th = ht->cb.ngay_gio_kh.ngay_kh.thang, na = ht->cb.ngay_gio_kh.ngay_kh.nam;
+				if (gio[0] != '\0') {
+					gi = atoi(gio);
+				}
+				if (phut[0] != '\0') {
+					ph = atoi(phut);
+				}
+				if (ngay[0] != '\0') {
+					ng = atoi(ngay);
+				}
+				if (thang[0] != '\0') {
+					th = atoi(thang);
+				}
+				if (nam[0] != '\0') {
+					na = atoi(nam);
+				}
+				if (shmb[0] == '\0') strcpy_s(shmb, 15, ht->cb.sh_Mb);
+				tam1.datNgayGio(gi, ph, ng, th, na);
+				for (PTRChuyenBay p = dau_chuyen_bay; p != NULL; p = p->next) {
+					if (p != ht && strcmp(p->cb.sh_Mb, shmb) == 0 && checkNgayGio(p->cb.ngay_gio_kh, tam1) == 1) {
+						d = 1;
+						break;
+					}
+				}
+				if (capNhapTT(tam1) == HOAN_TAT || tam1.checkNgayGio() == 0) {
+					if (tam1.checkNgayGio() == 0) {
+						int mt = getbkcolor();
+						setbkcolor(0);
+						outtextxy(xg + 200, yg + 90, const_cast<char*>("thoi gian nay khong ton tai, NHAN PHIM BAT KY DE TIEP TUC"));
+						getch();
+						xoachu(const_cast<char*>("thoi gian nay khong ton tai, NHAN PHIM BAT KY DE TIEP TUC"), xg + 200, yg + 90);
+						setbkcolor(mt);
+					}
+					else
 						if (capNhapTT(tam1) == HOAN_TAT) {
 							int mt = getbkcolor();
 							setbkcolor(0);
@@ -2065,55 +2071,57 @@ void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, DSMayBay ds_m
 							getch();
 							xoachu(const_cast<char*>("thoi gian chuyen bay da troi qua, NHAN PHIM BAT KY DE TIEP TUC"), xg + 200, yg + 90);
 							setbkcolor(mt);
-						}else
-						if (d == 1) {
+						}
+				}
+				else
+					if (d == 1) {
+						int mt = getbkcolor();
+						setbkcolor(0);
+						outtextxy(xg + 100, yg + 100, const_cast<char*>("thoi gian chuyen bay xung dot voi chuyen bay khac, NHAN PHIM BAT KY DE TIEP TUC"));
+						getch();
+						xoachu(const_cast<char*>("thoi gian chuyen bay xung dot voi chuyen bay khac, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
+						setbkcolor(mt);
+					}
+					else {
+						if (shmb[0] != '\0' && ht->cb.ds_ve[0].cmnd[0] != '\0') {
 							int mt = getbkcolor();
 							setbkcolor(0);
-							outtextxy(xg + 100, yg + 100, const_cast<char*>("thoi gian chuyen bay xung dot voi chuyen bay khac, NHAN PHIM BAT KY DE TIEP TUC"));
+							outtextxy(xg + 100, yg + 100, const_cast<char*>("chuyen bay da dat ve ko thay doi SHMB, NHAN PHIM BAT KY DE TIEP TUC"));
 							getch();
-							xoachu(const_cast<char*>("thoi gian chuyen bay xung dot voi chuyen bay khac, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
+							xoachu(const_cast<char*>("chuyen bay da dat ve ko thay doi SHMB, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
+							setbkcolor(mt);
+						}
+						else if (shmb[0] != '\0' && TimSoHieu(shmb, ds_may_bay) == NULL) {
+							int mt = getbkcolor();
+							setbkcolor(0);
+							outtextxy(xg + 100, yg + 100, const_cast<char*>("khong tim thay SHMB, NHAN PHIM BAT KY DE TIEP TUC"));
+							getch();
+							xoachu(const_cast<char*>("khong tim thay SHMB, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
 							setbkcolor(mt);
 						}
 						else {
-							if (shmb[0] != '\0' && ht->cb.ds_ve[0].cmnd[0] != '\0') {
-								int mt = getbkcolor();
-								setbkcolor(0);
-								outtextxy(xg + 100, yg + 100, const_cast<char*>("chuyen bay da dat ve ko thay doi SHMB, NHAN PHIM BAT KY DE TIEP TUC"));
-								getch();
-								xoachu(const_cast<char*>("chuyen bay da dat ve ko thay doi SHMB, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
-								setbkcolor(mt);
-							}
-							else if (shmb[0] != '\0' && TimSoHieu(shmb, ds_may_bay)==NULL) {
-								int mt = getbkcolor();
-								setbkcolor(0);
-								outtextxy(xg + 100, yg + 100, const_cast<char*>("khong tim thay SHMB, NHAN PHIM BAT KY DE TIEP TUC"));
-								getch();
-								xoachu(const_cast<char*>("khong tim thay SHMB, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
-								setbkcolor(mt);
-							}
-							else {
-								
-								chinhsuaChuyenBay(ht, tam1, sbd, shmb);
-								ht->capnhap();
-								int mt = getbkcolor();
-								setbkcolor(0);
-								outtextxy(xg + 100, yg + 100, const_cast<char*>("hieu chinh thanh cong, NHAN PHIM BAT KY DE TIEP TUC"));
-								getch();
-								xoachu(const_cast<char*>("hieu chinh thanh cong, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
-								setbkcolor(mt);
-							}
+
+							chinhsuaChuyenBay(ht, tam1, sbd, shmb);
+							ht->capnhap();
+							int mt = getbkcolor();
+							setbkcolor(0);
+							outtextxy(xg + 100, yg + 100, const_cast<char*>("hieu chinh thanh cong, NHAN PHIM BAT KY DE TIEP TUC"));
+							getch();
+							xoachu(const_cast<char*>("hieu chinh thanh cong, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
+							setbkcolor(mt);
 						}
 					}
-					else {
-						int mt = getbkcolor();
-						setbkcolor(0);
-						outtextxy(xg + 100, yg + 100, const_cast<char*>("vui long chon CB, NHAN PHIM BAT KY DE TIEP TUC"));
-						getch();
-						xoachu(const_cast<char*>("vui long chon CB, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
-						setbkcolor(mt);
-					}
-				
 			}
+			else {
+				int mt = getbkcolor();
+				setbkcolor(0);
+				outtextxy(xg + 100, yg + 100, const_cast<char*>("vui long chon CB, NHAN PHIM BAT KY DE TIEP TUC"));
+				getch();
+				xoachu(const_cast<char*>("vui long chon CB, NHAN PHIM BAT KY DE TIEP TUC"), xg + 100, yg + 100);
+				setbkcolor(mt);
+			}
+
+		}
 		if ((int)nhap == 27) {
 				getimage(xg, yg, xg + 975, yg + 150, p);
 				putimage(xg, yg, p, 1);

@@ -406,7 +406,61 @@ void NgayGio::datNgayGio(int gio, int phut, int ngay, int thang, int nam)
 	if (nam > 0) {
 		this->ngay_kh.nam = nam;
 	}
-	SuaNgay(this->ngay_kh);
+}
+bool NgayGio::checkNgayGio() const
+{
+
+		switch (this->ngay_kh.thang)
+		{
+		case 1: {
+			
+		}
+		case 3: {
+
+		}
+		case 5: {
+
+		}
+		case 7: {
+
+		}
+		case 8: {
+
+		}
+		case 10: {
+
+		}
+		case 12: {
+			if (this->ngay_kh.ngay <= 31) { return 1; }
+			else { return 0; }
+			break;
+		}
+		case 2: {
+			if (this->ngay_kh.nam % 4 != 0) {
+				if (this->ngay_kh.ngay <= 28) { return 1; }
+				else { return 0; }
+			}
+			else {
+				if (this->ngay_kh.ngay <= 29) { return 1; }
+				else { return 0; }
+			}
+			break;
+		}
+		case 4: {
+
+		}
+		case 6: {
+
+		}
+		case 9: {
+
+		}
+		case 11: {
+			if (this->ngay_kh.ngay <= 30) { return 1; }
+			else { return 0; }
+			break;
+		}
+		}
 }
 //tao cccd ngau nhien
 void CCCDNN(char cccd[])
@@ -953,7 +1007,7 @@ int SSNgayThang(NgayGio t1, NgayGio t2)
 bool checkNgayGio(NgayGio t1, NgayGio t2)
 {
 	NgayGio t;
-	//if (SSNgayThang(t1, t2) == 0)return 1;
+	if (SSNgayThang(t1, t2) == 0)return 1;
 	if (SSNgayThang(t1, t2) == 1) {
 		t = t2;
 		t.gio_kh.gio += 6;

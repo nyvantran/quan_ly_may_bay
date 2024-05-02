@@ -58,6 +58,7 @@ struct NgayGio
 	Ngay ngay_kh;
 	Gio gio_kh;
 	void datNgayGio(int gio, int phut, int ngay, int thang, int nam);
+	bool checkNgayGio() const;
 };
 struct ChuyenBay
 {
@@ -134,7 +135,6 @@ void SapVe(char[], int, int );
 void SuaNgay(Ngay&);
 // chuan hoa ten
 void SuaTen(char[]);
-
 // nguoc ve
 void SapVeNguoc(char[], int&, int&);
 // so sanh ngay thang

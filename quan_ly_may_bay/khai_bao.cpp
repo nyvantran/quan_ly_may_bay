@@ -659,10 +659,10 @@ void NodeChuyenBay::capnhap()
 	
 }
 
-void NodeChuyenBay::capNhapVe(DSMayBay ds, char shmb[], bool d)
+void NodeChuyenBay::capNhapVe(DSMayBay ds, char shmb[], char shmbcu[], bool d)
 {
 	MayBay* n;
-	if (shmb[0] == '\0') {
+	if (strcmp(this->cb.sh_Mb, shmbcu) == 0 && shmb[0] != '\0') {
 		strcpy_s(this->cb.sh_Mb, shmb);
 	}
 	if (d == 1) {

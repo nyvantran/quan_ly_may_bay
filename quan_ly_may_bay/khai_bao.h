@@ -79,7 +79,7 @@ struct NodeChuyenBay
 	ChuyenBay cb;
 	NodeChuyenBay* next = NULL;
 	void capnhap();
-	void capNhapVe(DSMayBay ds, char shmb[], bool);
+	void capNhapVe(DSMayBay ds, char shmb[], char shmbcu[], bool);
 };
 typedef NodeChuyenBay* PTRChuyenBay;
 ///chuyen bay function 

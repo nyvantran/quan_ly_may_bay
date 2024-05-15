@@ -615,7 +615,7 @@ void NodeChuyenBay::capNhapVe(DSMayBay ds, char shmb[], bool d)
 		n = TimSoHieu(this->cb.sh_Mb, ds);
 		Ve* tam = new Ve[n->so_day * n->so_dong];
 		for (int i = 0; i < this->cb.so_ve; i++) {
-			tam[0] = this->cb.ds_ve[i];
+			tam[i] = this->cb.ds_ve[i];
 		}
 		delete[] this->cb.ds_ve;
 		this->cb.ds_ve = tam;

@@ -141,7 +141,10 @@ void SapVeNguoc(char[], int&, int&);
 int SSNgayThang(NgayGio t1, NgayGio t2);
 //check ngay gio
 bool checkNgayGio(NgayGio t1, NgayGio t2);
+
 //  in chuyen bay hoan tat
 void demChuyenBayHT(PTRChuyenBay);
 // Bublesort
 void Bublesort(PTRChuyenBay, DSMayBay&);
+
+

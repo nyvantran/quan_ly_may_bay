@@ -11,11 +11,11 @@
     <ClInclude Include="graphics.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="dlkhachhang.dat" />
-    <None Include="dlmaybay.dat" />
-    <None Include="dlchuyenbay.dat" />
+    <Library Include="graphics.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="graphics.lib" />
+    <None Include="dlchuyenbay.dat" />
+    <None Include="dlkhachhang.dat" />
+    <None Include="dlmaybay.dat" />
   </ItemGroup>
 </Project>

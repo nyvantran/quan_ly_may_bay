@@ -11,10 +11,9 @@ using namespace std;
 //////////struct may bay
 struct MayBay
 {
-	char sh_Mb[15];
-	char loai_may_bay[40];
+	char sh_Mb[15]{};
+	char loai_may_bay[40]{};
 	int so_day, so_dong;
-	//int demcb = 0;
 };
 struct DSMayBay {
 	int so_MB = 0;
@@ -60,6 +59,7 @@ struct NgayGio
 	void datNgayGio(int gio, int phut, int ngay, int thang, int nam);
 	bool checkNgayGio() const;
 };
+double truNgayGio(NgayGio x, NgayGio y);
 struct ChuyenBay
 {
 	char ma_cb[15]{};
@@ -78,13 +78,13 @@ struct NodeChuyenBay
 {
 	ChuyenBay cb;
 	NodeChuyenBay* next = NULL;
-	void capnhap();
+	void capnhap(DSMayBay ds);
 	void capNhapVe(DSMayBay ds, char shmb[], char shmbcu[], bool);
 };
 typedef NodeChuyenBay* PTRChuyenBay;
 ///chuyen bay function 
 void napFileChuyenBay(const char file[], PTRChuyenBay& fist, DSMayBay ds);
-void ghiFileChuyenBay(const char file[], PTRChuyenBay fist);
+void ghiFileChuyenBay(const char file[], PTRChuyenBay fist, DSMayBay ds);
 bool themChuyenBay(PTRChuyenBay&, ChuyenBay);
 void xoahetChuyenBay(PTRChuyenBay&);
 bool xoaChuyenBay(PTRChuyenBay&, PTRChuyenBay);

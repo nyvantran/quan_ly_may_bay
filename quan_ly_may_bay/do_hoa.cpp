@@ -313,7 +313,10 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang&
 					putimage(xg + 240, yg + 88 * 0, p2, 1);
 				}
 			}
-
+			thread nhanh6(locVeMB,&x,&y,dau_chuyen_bay,ds_may_bay);
+			xuatSoVeTrong(&x, &y, dau_chuyen_bay, ds_may_bay);
+			nhanh6.join();
+			n = -1;
 			break;
 		}
 		case 7: {
@@ -390,6 +393,7 @@ void DHThemMB(DSMayBay& ds_may_bay, int* x, int* y, int* ii)
 					shmb[i0 + 1] = shmb[i0];
 					shmb[i0] = nhap; i0++;
 					outtextxy(xg+textwidth(text[0]) + getmaxx() / 2 - 300, yg + 45 + 30 - textheight(text[0]) / 2 + 10, shmb);
+					
 				}
 				if ((int)nhap == 8) {
 					xoachu(shmb, xg+textwidth(text[0]) + getmaxx() / 2 - 300, yg + 45 + 30 - textheight(text[0]) / 2 + 10);
@@ -4005,15 +4009,12 @@ void xuatSoCBHT(int* x, int* y, PTRChuyenBay chuyenBay,DSMayBay DsMayBay)
 	outtextxy(getmaxx() - 470, yg + 50, (char*)"SO CHUYEN BAY HOAN TAT");
 	settextstyle(4, 0, 2);
 	outtextxy(xg + getmaxx() - 900, yg + 600, (char*)"SU DUNG 2 NUT TRAI PHAI DE QUA TRANG");
-	
 	settextstyle(9, 0, 2);
 	line(getmaxx() - 500, 55, getmaxx() - 500,yg+70);
 	line(xg +450, yg+80, xg+getmaxx() - 50, yg + 80);
 	char nhap;
 	Bublesort(chuyenBay, DsMayBay);
 	//_itoa_s(chuyenBay->dem,tam[i], 10, 10);
-
-
 	/*while (chuyenBay != NULL && i<10) {
 		outtextxy(getmaxx() - 950, yg + 100, chuyenBay->cb.sh_Mb);
 		_itoa_s(chuyenBay->dem, tam, 10, 10);
@@ -4085,3 +4086,573 @@ void xuatSoCBHT(int* x, int* y, PTRChuyenBay chuyenBay,DSMayBay DsMayBay)
 			}
 		}
 	}
+	
+
+void xuatSoVeTrong(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay) 
+{
+	char char0[] = { '0' };
+	char tam[100];
+	int xm=0, ym=0;
+	int check = 0;
+	int chay = 0;
+	int page = 0;
+	int demqt = 0;
+	char nhap=0;
+	PTRChuyenBay cbtam = chuyenBay;
+	int i=0;
+	while (chuyenBay != NULL) {
+		i++;
+		chuyenBay = chuyenBay->next;
+	}
+	chuyenBay = cbtam;
+	bool n = false;
+	int xg = 50, yg = 10;
+	//bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+	setbkcolor(BLUE);
+	settextstyle(3, HORIZ_DIR, 1);
+	setfillstyle(1, 1);
+	bar(getmaxx()-1255,yg+45,getmaxx()-1000, yg + 240);
+	line(getmaxx() - 1255, yg + 45, getmaxx() - 1000, yg + 45);
+	line(getmaxx() - 1255, yg + 240, getmaxx() - 1000, yg + 240);
+	line(getmaxx() - 1255, yg + 45, getmaxx() - 1255, yg + 240);
+//====================================
+	setbkcolor(0);
+	outtextxy(getmaxx() - 990, yg , (char*)"CHUYEN BAY MA: ");
+	rectangle(getmaxx() - 850, yg, getmaxx() - 700,yg+20);
+//=======================================
+	setbkcolor(BLUE);
+	outtextxy(getmaxx() - 1250, yg+50, (char*)"GIO:");
+	rectangle(getmaxx() - 1210, yg+50, getmaxx() - 1135, yg + 70);
+	line(getmaxx() - 1172, yg+50, getmaxx() - 1172, yg + 70);
+
+//=======================================
+	outtextxy(getmaxx() - 1250, yg + 100, (char*)"NGAY:");
+	rectangle(getmaxx() - 1190, yg + 100, getmaxx() - 1030, yg + 120);
+	line(getmaxx() - 1150, yg + 100, getmaxx() - 1150, yg + 120);
+	line(getmaxx() - 1110, yg + 100, getmaxx() - 1110, yg + 120);
+//=======================================
+	outtextxy(getmaxx() - 1250, yg + 140, (char*)"TRANG THAI:");
+	rectangle(getmaxx() - 1140, yg + 140, getmaxx() - 1010, yg + 160);
+	line(getmaxx() - 1030, yg + 140, getmaxx() - 1030, yg + 160);
+	line(getmaxx() - 1020, yg + 145, getmaxx() - 1020, yg + 155);
+	line(getmaxx() - 1025, yg + 150, getmaxx() - 1015, yg + 150);
+//======================================
+	setbkcolor(BLUE);
+	settextstyle(3, HORIZ_DIR, 1);
+	setfillstyle(1, 1);
+	bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+	line(getmaxx() - 750, 55, getmaxx() - 750, yg + 750);
+	line(getmaxx() - 1000, 55, getmaxx() - 1000, yg + 750);
+	line(xg + 450, yg + 45, xg + getmaxx() - 800, yg + 45);
+	settextstyle(9,0,1);
+	*x= -1;
+	*y = -1;
+	/*thread nhanh(mousexv, ref(x), ref(y));
+	nhanh.join();
+	n = mousexv(x, y);
+	if (n) {
+		cout << *x << endl << *y << endl;
+	}*/
+	while (1) {
+		/*n = mousexv(x, y);
+		if (n) {
+			cout << *x << endl << *y << endl;
+		}*/
+		//================================
+		while (chuyenBay != NULL && demqt < 8) {
+			line(xg + 450, yg + 125, xg + getmaxx() - 800, yg + 125);
+			outtextxy(getmaxx() - 900, yg + 50, chuyenBay->cb.sh_Mb);
+			_itoa_s(chuyenBay->cb.ngay_gio_kh.ngay_kh.ngay, tam, 10, 10);
+			if (chuyenBay->cb.ngay_gio_kh.ngay_kh.ngay < 10) {
+				outtextxy(getmaxx() - 885, yg + 100, (char*)"0");
+				outtextxy(getmaxx() - 870, yg + 100, tam);
+			}
+			else {
+				outtextxy(getmaxx() - 885, yg + 100, tam);
+			}
+			//outtextxy(getmaxx() - 885, yg + 100, tam);
+//===================================================
+			outtextxy(getmaxx() - 855, yg + 100, (char*)"/");
+			_itoa_s(chuyenBay->cb.ngay_gio_kh.ngay_kh.thang, tam, 10, 10);
+			if (chuyenBay->cb.ngay_gio_kh.ngay_kh.thang < 10) {
+				outtextxy(getmaxx() - 847, yg + 100, (char*)"0");
+				outtextxy(getmaxx() - 832, yg + 100, tam);
+			}
+			else {
+				outtextxy(getmaxx() - 847, yg + 100, tam);
+			}
+			//outtextxy(getmaxx() - 847, yg + 100, tam);
+//===================================================
+			outtextxy(getmaxx() - 820, yg + 100, (char*)"/");
+			_itoa_s(chuyenBay->cb.ngay_gio_kh.ngay_kh.nam, tam, 10, 10);
+			outtextxy(getmaxx() - 810, yg + 100, tam);
+			//=======================================
+			_itoa_s(chuyenBay->cb.ngay_gio_kh.gio_kh.gio, tam, 10, 10);
+			if (chuyenBay->cb.ngay_gio_kh.gio_kh.gio < 10) {
+				outtextxy(getmaxx() - 990, yg + 100, (char*)"0");
+				outtextxy(getmaxx() - 975, yg + 100, tam);
+			}
+			else {
+				outtextxy(getmaxx() - 985, yg + 100, tam);
+			}
+			//================================			
+			outtextxy(getmaxx() - 960, yg + 100, (char*)":");
+			_itoa_s(chuyenBay->cb.ngay_gio_kh.gio_kh.phut, tam, 10, 10);
+			if (chuyenBay->cb.ngay_gio_kh.gio_kh.phut < 10) {
+				outtextxy(getmaxx() - 950, yg + 100, (char*)"0");
+				outtextxy(getmaxx() - 935, yg + 100, tam);
+			}
+			else {
+				outtextxy(getmaxx() - 950, yg + 100, tam);
+			}
+
+
+			if (chuyenBay->cb.trang_thai_cb == 0) {
+				setcolor(BROWN);
+				outtextxy(getmaxx() - 990, yg + 80, (char*)" HUY CHUYEN");
+				setcolor(WHITE);
+			}
+			if (chuyenBay->cb.trang_thai_cb == 1) {
+				setcolor(GREEN);
+				outtextxy(getmaxx() - 990, yg + 80, (char*)" CON VE");
+				setcolor(WHITE);
+			}
+			if (chuyenBay->cb.trang_thai_cb == 2) {
+				setcolor(WHITE);
+				outtextxy(getmaxx() - 990, yg + 80, (char*)" HET VE");
+				setcolor(WHITE);
+			}
+			if (chuyenBay->cb.trang_thai_cb == 3) {
+				setcolor(RED);
+				outtextxy(getmaxx() - 990, yg + 80, (char*)" HOAN TAT");
+				setcolor(WHITE);
+			}
+			//cout << chuyenBay->cb.sh_Mb << endl;
+			demqt++;
+			yg = yg + 80;
+			chuyenBay = chuyenBay->next;
+			Sleep(75);
+
+		}
+		//chuyenBay = cbtam;
+//=====
+
+
+//================================
+		//bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+		if (*x > xg + getmaxx() / 2 - 300 && *x < getmaxx() / 2 - 25 + 800) {
+			if (*y > yg + 45 && *y < yg + 750) {
+				
+				nhap = getch();
+				cout << nhap << endl;
+			}
+		}
+		/*else {
+			nhap = '=';
+		}*/
+		 yg = 10;
+		 if ((int)nhap == 80&& chuyenBay!=NULL) {
+			 bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+			 if (check < i-1) {
+
+			 check = check + 8;
+		 }
+			//cout << check;
+			demqt = 0;
+			page++;
+			line(getmaxx() - 750, 55, getmaxx() - 750, yg + 750);
+			line(getmaxx() - 1000, 55, getmaxx() - 1000, yg + 750);
+			line(xg + 450, yg + 45, xg + getmaxx() - 800, yg + 45);
+			nhap = 0;
+		}
+		if ((int)nhap == 72 && page>0) {
+			bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+			line(getmaxx() - 750, 55, getmaxx() - 750, yg + 750);
+			line(getmaxx() - 1000, 55, getmaxx() - 1000, yg + 750);
+			line(xg + 450, yg + 45, xg + getmaxx() - 800, yg + 45);
+			chuyenBay = cbtam;
+			check = check - 8;
+			//cout << check;
+			for (int j = 0; j < check; j++) {
+				chuyenBay = chuyenBay->next;
+			}
+			nhap = 0;
+			demqt = 0;
+			page--;
+			
+		}
+
+//================================
+		if ((int)nhap == 27) {
+			setfillstyle(1, 0);
+			bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 - 25 + 800, yg + 750);
+			*x = -1;
+			*y = -1;
+			return;
+		}
+	}
+}
+
+//================
+bool mousexv(int *x, int *y) {
+	int xg = 50, yg = 10;
+		if (*x > getmaxx() - 850 && *x< getmaxx() - 700 ) {
+			if (*y > yg && *y < yg + 20) {
+			cout << *x << endl << *y << endl;
+			return true;
+			}
+		}
+		else {
+			*x = -1;
+			*y = -1;
+			return false;
+		}
+}
+//==========
+void locVeMB(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay) {
+	char gio[3]{}, phut[3]{}, ngay[3]{}, thang[3]{}, nam[3]{};
+	int bgio = 0, bphut = 0, bngay = 0, bthang = 0, bnam = 0;
+	int n=0;
+	int n1 = 0;
+	int xg = 50, yg = 10;
+	char nhap=0;
+	int lgio = 0, lphut = 0, lngay = 0, lthang = 0, lnam = 0, ltt = -1;
+	//rectangle(getmaxx() - 1210, yg + 50, getmaxx() - 1135, yg + 70);
+	while (1) {
+		//bar(getmaxx() - 1255, yg + 45, getmaxx() - 1000, yg + 205);
+		if (*x > getmaxx() - 1255 && *x < getmaxx() - 1000) {
+			if (*y > yg + 45 && *y < yg + 240) {
+				nhap = getch();
+				/*cout <<"y="<< * y << endl;
+				cout << "x=" << *x << endl;*/
+				cout << (int)nhap << endl;
+			}
+		}
+		/*else {
+			nhap = '=';
+		}*/
+		
+		if (*x > getmaxx() - 1210 && *x < getmaxx() - 1135) {
+			if (*y > yg + 50 && *y < yg + 70) {
+				n = 1;
+				//cout << *x << " "  << *y << endl;
+			
+			}
+		}
+		 if(*x > getmaxx() - 1190 && *x < getmaxx() - 1030) {
+			if (*y > yg + 100 && *y < yg + 120) {
+				n = 2;
+				//cout << *x << " " << *y << endl;
+			}
+			//rectangle(getmaxx() - 1190, yg + 100, getmaxx() - 1030, yg + 120);
+		}
+		 if (*x > getmaxx() - 1140 && *x < getmaxx() - 1010) {
+			if (*y > yg + 140 && *y < yg + 160) {
+				n = 3;
+				//cout << *x << " " << *y << endl;
+			}
+			//rectangle(getmaxx() - 1140, yg + 140, getmaxx() - 1030, yg + 160);
+		}
+	/*	cout << n;
+		cout << " " << nhap << endl;*/
+		 switch(n) {
+		 case 1:
+			 //line(getmaxx() - 1172, yg + 50, getmaxx() - 1172, yg + 70);
+			 if (*x > getmaxx() - 1210 && *x < getmaxx() - 1172) {
+				 n1 = 1;
+				// cout << *x << endl;
+			 }
+			 else if (*x > getmaxx() - 1172 && *x < getmaxx() - 1135) {
+				 n1 = 2;
+				// cout << *x << endl;
+			 }
+			 else { 
+				// cout << *x << endl;
+				 n1 = 0; }
+			// cout << nhap << endl;
+			 switch (n1) {
+			 case 1:
+				 if (nhap >= '0' && nhap <= '9') {
+					 if (bgio < 2) {
+						lgio = (lgio * 10) + (int)nhap - 48;
+						if (lgio < 24) {
+							//cout << nhap<< endl;
+							gio[bgio + 1] = gio[bgio];
+							gio[bgio] = nhap;
+							bgio++;
+							// settextstyle(, 0,);
+							//cout << tam[0] <<  endl;
+							setbkcolor(BLUE);
+							settextstyle(6, HORIZ_DIR, 1);
+							setfillstyle(1, 1);
+							outtextxy(getmaxx() - 1205, yg + 51, (char*)gio);
+							
+							cout << lgio << endl;
+						}
+						else {
+							lgio = lgio / 10;
+						}
+						// cout << (int)nhap - 48;
+					 }
+				 }
+				 if ((int)nhap == 8) {
+					 if (bgio >0) {
+						 xoachu(gio, getmaxx() - 1205, yg + 51);
+						 gio[bgio - 1] = gio[bgio--];
+						 outtextxy(getmaxx() - 1205, yg + 51, (char*)gio);
+						 lgio = lgio / 10;
+						 cout << lgio << " ";
+					 }
+				 }
+				break;
+			 case 2: 
+				 if (nhap >= '0' && nhap <= '9') {
+					 if (bphut < 2) {
+						 //cout << nhap<< endl;
+						lphut = (lphut * 10) + (int)nhap - 48;
+						if (lphut < 60) {
+							phut[bphut + 1] = phut[bphut];
+							phut[bphut] = nhap;
+							bphut++;
+							// settextstyle(, 0,);
+							//cout << tam[0] <<  endl;
+							setbkcolor(BLUE);
+							settextstyle(6, HORIZ_DIR, 1);
+							setfillstyle(1, 1);
+							outtextxy(getmaxx() - 1165, yg + 51, (char*)phut);
+				
+							cout << lphut << endl;
+						
+						 
+						}
+						else {
+							lphut = lphut / 10;
+						}
+					 }
+				 }
+				 if ((int)nhap == 8) {
+					 if (bphut > 0) {
+						 xoachu(phut, getmaxx() - 1165, yg + 51);
+						 phut[bphut - 1] = phut[bphut--];
+						 outtextxy(getmaxx() - 1165, yg + 51, (char*)phut);
+						 lphut = lphut / 10;
+					 }
+				 }
+				 break;
+			}
+			// cout << n1 << endl;
+			 break;
+		
+		 case 2:
+			 //line(getmaxx() - 1150, yg + 100, getmaxx() - 1150, yg + 120);
+			 //line(getmaxx() - 1110, yg + 100, getmaxx() - 1110, yg + 120);
+			 if (*x > getmaxx() - 1190 && *x < getmaxx() - 1150) {
+				 n1 = 1;
+			 }
+			 else if (*x > getmaxx() - 1150 && *x < getmaxx() - 1110) {
+				 n1 = 2;
+			 }
+			 else if(*x> getmaxx() - 1110&&*x< getmaxx() - 1030) {
+				 n1 = 3;
+			 }
+			 else { n1 = 0; }
+			 switch (n1) {
+			 case 1:
+				 if (nhap >= '0' && nhap <= '9') {
+					 if (bngay < 2) {
+						 lngay = (lngay * 10) + (int)nhap - 48;
+						 if (lngay < 32) {
+							 //cout << nhap<< endl;
+							 ngay[bngay + 1] = ngay[bngay];
+							 ngay[bngay] = nhap;
+							 bngay++;
+							 // settextstyle(, 0,);
+							 //cout << tam[0] <<  endl;
+							 setbkcolor(BLUE);
+							 settextstyle(6, HORIZ_DIR, 1);
+							 setfillstyle(1, 1);
+							 outtextxy(getmaxx() - 1185, yg + 101, (char*)ngay);
+							
+							 cout << lngay << endl;
+						 }
+						 else {
+							 lngay = lngay / 10;
+						 }
+						// cout << (int)nhap - 48;
+					 }
+				 }
+				 if ((int)nhap == 8&& bngay>0) {
+					 xoachu(ngay, getmaxx() - 1185, yg + 101);
+					 ngay[bngay - 1] = ngay[bngay--];
+					 outtextxy(getmaxx() - 1185, yg + 101, (char*)ngay);
+					 lngay = lngay / 10;
+				 }
+				 break;
+			 case 2:
+				 if (nhap >= '0' && nhap <= '9') {
+					 if (bthang < 2) {
+						 //cout << nhap<< endl;
+						lthang = (lthang * 10) + (int)nhap - 48;
+						if (lthang < 13) {
+							thang[bthang + 1] = thang[bthang];
+							thang[bthang] = nhap;
+							bthang++;
+							// settextstyle(, 0,);
+							//cout << tam[0] <<  endl;
+							setbkcolor(BLUE);
+							settextstyle(6, HORIZ_DIR, 1);
+							setfillstyle(1, 1);
+							outtextxy(getmaxx() - 1145, yg + 101, (char*)thang);
+							
+							cout << lthang << endl;
+						}
+						else {
+							lthang = lthang / 10;
+						}
+						 //cout << (int)nhap - 48;
+					 }
+				 }
+				 if ((int)nhap == 8&&bthang>0) {
+					 xoachu(thang, getmaxx() - 1145, yg + 101);
+					 thang[bthang - 1] = thang[bthang--];
+					 outtextxy(getmaxx() - 1145, yg + 101, (char*)thang);
+					 lthang = lthang / 10;
+				 }
+				 break;
+			 case 3:
+				 if (nhap >= '0' && nhap <= '9') {
+					 if (bnam < 4) {
+						 //cout << nhap<< endl;
+						 nam[bnam + 1] = nam[bnam];
+						 nam[bnam] = nhap;
+						 bnam++;
+						 // settextstyle(, 0,);
+						 //cout << tam[0] <<  endl;
+						 setbkcolor(BLUE);
+						 settextstyle(6, HORIZ_DIR, 1);
+						 setfillstyle(1, 1);
+						 outtextxy(getmaxx() - 1105, yg + 101, (char*)nam);
+						 lnam = (lnam * 10) + (int)nhap - 48;
+						 cout << lnam << endl;
+						
+						 //cout << (int)nhap - 48;
+					 }
+				 }
+				 if ((int)nhap == 8&&bnam>0) {
+					 xoachu(nam, getmaxx() - 1105, yg + 101);
+					 nam[bnam - 1] = nam[bnam--];
+					 outtextxy(getmaxx() - 1105, yg + 101, (char*)nam);
+					 lnam = lnam / 10;
+					 cout << "ltt=" << ltt;
+				 }
+				 break;
+			 }
+			 //cout << n1;
+			 break;
+		 case 3:
+			 //rectangle(getmaxx() - 1140, yg + 140, getmaxx() - 1010, yg + 160);
+			 //line(getmaxx() - 1030, yg + 140, getmaxx() - 1030, yg + 160);
+			 if (*x > getmaxx() - 1255 && *x < getmaxx() - 1000) {
+				 if (*y > yg + 45 && *y < yg + 240) {
+
+					 if (*x > getmaxx() - 1030 && *x < getmaxx() - 1005) {
+						 if (*y > yg + 140 && *y < yg + 240) {
+							 /**x = -1;
+							 *y = -1;*/
+							 rectangle(getmaxx() - 1140, yg + 140, getmaxx() - 1010, yg + 160);
+							 outtextxy(getmaxx() - 1135, yg + 143, (char*)"CON VE");
+							 outtextxy(getmaxx() - 1138, yg + 163, (char*)"HOAN TAT");
+							 rectangle(getmaxx() - 1140, yg + 160, getmaxx() - 1010, yg + 180);
+							 outtextxy(getmaxx() - 1138, yg + 183, (char*)"HET VE");
+							 rectangle(getmaxx() - 1140, yg + 180, getmaxx() - 1010, yg + 200);
+							 outtextxy(getmaxx() - 1138, yg + 203, (char*)"HUY ");
+							 rectangle(getmaxx() - 1140, yg + 200, getmaxx() - 1010, yg + 240);
+							 outtextxy(getmaxx() - 1138, yg + 220, (char*)"CHUYEN ");
+							 //=======================================================================================
+
+
+						 }
+					 }
+					 if (*x< getmaxx()-1140 || *x>  getmaxx() - 1010 || *y<yg + 140 || *y>yg + 240) {
+
+						 bar(getmaxx() - 1140, yg + 140, getmaxx() - 1005, yg + 240);
+						 rectangle(getmaxx() - 1140, yg + 140, getmaxx() - 1010, yg + 160);
+						 line(getmaxx() - 1030, yg + 140, getmaxx() - 1030, yg + 160);
+						 line(getmaxx() - 1020, yg + 145, getmaxx() - 1020, yg + 155);
+						 line(getmaxx() - 1025, yg + 150, getmaxx() - 1015, yg + 150);
+						 cout << "hello";
+						 ltt = -1;
+						 cout << ltt;
+					 }
+					 if (*x> getmaxx() - 1140&&*x< getmaxx() - 1030) {
+						 if (*y> yg + 140&&*y< yg + 160) {
+							 ltt = 1;
+							 cout << ltt;
+							 bar(getmaxx() - 1140, yg + 140, getmaxx() - 1005, yg + 240);
+							outtextxy(getmaxx() - 1135, yg + 143, (char*)"CON VE");
+							 rectangle(getmaxx() - 1140, yg + 140, getmaxx() - 1010, yg + 160);
+							 line(getmaxx() - 1030, yg + 140, getmaxx() - 1030, yg + 160);
+							 line(getmaxx() - 1020, yg + 145, getmaxx() - 1020, yg + 155);
+							 line(getmaxx() - 1025, yg + 150, getmaxx() - 1015, yg + 150);
+							
+						 }
+					 }
+					 if (*x > getmaxx() - 1140 && *x < getmaxx() - 1010) {
+						 if (*y > yg + 160 && *y < yg + 180) {
+							 ltt = 3;
+							 cout << ltt;
+							 bar(getmaxx() - 1140, yg + 140, getmaxx() - 1005, yg + 240);
+							 outtextxy(getmaxx() - 1135, yg + 143, (char*)"HOAN");
+							 outtextxy(getmaxx() - 1135, yg + 160, (char*)"TAT");
+							 rectangle(getmaxx() - 1140, yg + 140, getmaxx() - 1010, yg + 180);
+							 line(getmaxx() - 1030, yg + 140, getmaxx() - 1030, yg + 160);
+							 line(getmaxx() - 1020, yg + 145, getmaxx() - 1020, yg + 155);
+							 line(getmaxx() - 1025, yg + 150, getmaxx() - 1015, yg + 150);
+							 line(getmaxx() - 1030, yg + 160, getmaxx() - 1010, yg + 160);
+							 
+						 }
+					 }
+					 if (*x > getmaxx() - 1140 && *x < getmaxx() - 1010) {
+						 if (*y > yg + 180 && *y < yg + 200) {
+							 ltt = 2;
+
+							 cout << ltt;
+							 bar(getmaxx() - 1140, yg + 140, getmaxx() - 1005, yg + 240);
+							 outtextxy(getmaxx() - 1135, yg + 143, (char*)"HET VE");
+							 rectangle(getmaxx() - 1140, yg + 140, getmaxx() - 1010, yg + 160);
+							 line(getmaxx() - 1030, yg + 140, getmaxx() - 1030, yg + 160);
+							 line(getmaxx() - 1020, yg + 145, getmaxx() - 1020, yg + 155);
+							 line(getmaxx() - 1025, yg + 150, getmaxx() - 1015, yg + 150);
+							 
+						 }
+					 }
+					 if (*x > getmaxx() - 1140 && *x < getmaxx() - 1010) {
+						 if (*y > yg + 200 && *y < yg + 240) {
+							 ltt = 0;
+							 cout << ltt;
+							 bar(getmaxx() - 1140, yg + 140, getmaxx() - 1005, yg + 240);
+							 outtextxy(getmaxx() - 1135, yg + 143, (char*)"HUY");
+							 outtextxy(getmaxx() - 1135, yg + 160, (char*)"CHUYEN");
+							 rectangle(getmaxx() - 1140, yg + 140, getmaxx() - 1010, yg + 180);
+							 line(getmaxx() - 1030, yg + 140, getmaxx() - 1030, yg + 160);
+							 line(getmaxx() - 1020, yg + 145, getmaxx() - 1020, yg + 155);
+							 line(getmaxx() - 1025, yg + 150, getmaxx() - 1015, yg + 150);
+							 line(getmaxx() - 1030, yg + 160, getmaxx() - 1010, yg + 160);
+							 
+						 }
+					 }
+					 nhap = 0;
+				 }
+			 }
+			// cout << 3;
+			 break;
+
+
+		 }
+		 if ((int)nhap == 13) {
+
+		}
+		
+	}
+
+}

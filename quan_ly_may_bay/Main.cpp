@@ -13,6 +13,14 @@ int main() {
 	ds_may_bay.napFile(DLMAYBAY);
 	napFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay, ds_may_bay);	
 	napFileKhachHang(goc_khach_hang, DLKHACHHANG);
+	
+	//duyetLNR(goc_khach_hang);
+	/*while (dau_chuyen_bay != NULL) {
+		cout << dau_chuyen_bay->cb.sh_Mb << endl;
+		cout << dau_chuyen_bay->cb.trang_thai_cb << endl;
+		cout << endl;
+		dau_chuyen_bay = dau_chuyen_bay->next;
+	}*/
 	///////////////////////////////////////////
 	KhoiDong();
 	chayDoHoa(ds_may_bay,dau_chuyen_bay,goc_khach_hang);

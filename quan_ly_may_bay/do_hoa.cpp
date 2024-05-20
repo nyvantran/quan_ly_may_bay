@@ -4628,7 +4628,7 @@ bool mousexv(int *x, int *y) {
 }
 //==========
 void locVeMB(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay) {
-	char gio[3]{}, phut[3]{}, ngay[3]{}, thang[3]{}, nam[3]{};
+	char gio[3]{}, phut[3]{}, ngay[3]{}, thang[3]{}, nam[5]{};
 	int bgio = 0, bphut = 0, bngay = 0, bthang = 0, bnam = 0;
 	int n=0;
 	int n1 = 0;
@@ -6128,6 +6128,86 @@ void locVeMB(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay) {
 					 yg = 10;
 				 }
 			 }
+			 else if (tempng.ngay_kh.ngay != -1 && tempng.ngay_kh.thang != -1 && tempng.ngay_kh.nam == -1) {
+				 cout << 1;
+				 while (tempcb != NULL && demqt < 8) {
+					 if (lthang == tempcb->cb.ngay_gio_kh.ngay_kh.thang&&lngay== tempcb->cb.ngay_gio_kh.ngay_kh.ngay) {
+						 //cout << tempcb->cb.sh_Mb << endl;
+						 line(xg + 450, yg + 125, xg + getmaxx() - 800, yg + 125);
+						 outtextxy(getmaxx() - 900, yg + 50, tempcb->cb.ma_cb);
+						 _itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.ngay, tam, 10, 10);
+						 if (tempcb->cb.ngay_gio_kh.ngay_kh.ngay < 10) {
+							 outtextxy(getmaxx() - 885, yg + 100, (char*)"0");
+							 outtextxy(getmaxx() - 870, yg + 100, tam);
+						 }
+						 else {
+							 outtextxy(getmaxx() - 885, yg + 100, tam);
+						 }
+						 //=================
+						 outtextxy(getmaxx() - 855, yg + 100, (char*)"/");
+						 _itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.thang, tam, 10, 10);
+						 if (tempcb->cb.ngay_gio_kh.ngay_kh.thang < 10) {
+							 outtextxy(getmaxx() - 847, yg + 100, (char*)"0");
+							 outtextxy(getmaxx() - 832, yg + 100, tam);
+						 }
+						 else {
+							 outtextxy(getmaxx() - 847, yg + 100, tam);
+						 }
+						 //======================================
+						 outtextxy(getmaxx() - 820, yg + 100, (char*)"/");
+						 _itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.nam, tam, 10, 10);
+						 outtextxy(getmaxx() - 810, yg + 100, tam);
+						 //=======================================
+						 _itoa_s(tempcb->cb.ngay_gio_kh.gio_kh.gio, tam, 10, 10);
+						 if (tempcb->cb.ngay_gio_kh.gio_kh.gio < 10) {
+							 outtextxy(getmaxx() - 990, yg + 100, (char*)"0");
+							 outtextxy(getmaxx() - 975, yg + 100, tam);
+						 }
+						 else {
+							 outtextxy(getmaxx() - 985, yg + 100, tam);
+						 }
+						 //================================			
+						 outtextxy(getmaxx() - 960, yg + 100, (char*)":");
+						 _itoa_s(tempcb->cb.ngay_gio_kh.gio_kh.phut, tam, 10, 10);
+						 if (tempcb->cb.ngay_gio_kh.gio_kh.phut < 10) {
+							 outtextxy(getmaxx() - 950, yg + 100, (char*)"0");
+							 outtextxy(getmaxx() - 935, yg + 100, tam);
+						 }
+						 else {
+							 outtextxy(getmaxx() - 950, yg + 100, tam);
+						 }
+						 //=====================================
+						 if (tempcb->cb.trang_thai_cb == 0) {
+							 setcolor(BROWN);
+							 outtextxy(getmaxx() - 990, yg + 80, (char*)" HUY CHUYEN");
+							 setcolor(WHITE);
+						 }
+						 if (tempcb->cb.trang_thai_cb == 1) {
+							 setcolor(GREEN);
+							 outtextxy(getmaxx() - 990, yg + 80, (char*)" CON VE");
+							 setcolor(WHITE);
+						 }
+						 if (tempcb->cb.trang_thai_cb == 2) {
+							 setcolor(WHITE);
+							 outtextxy(getmaxx() - 990, yg + 80, (char*)" HET VE");
+							 setcolor(WHITE);
+						 }
+						 if (tempcb->cb.trang_thai_cb == 3) {
+							 setcolor(RED);
+							 outtextxy(getmaxx() - 990, yg + 80, (char*)" HOAN TAT");
+							 setcolor(WHITE);
+						 }
+						 demqt++;
+						 yg = yg + 80;
+						 Sleep(75);
+					 }
+
+					 tempcb = tempcb->next;
+				 }
+				 yg = 10;
+				 nhap = 0;
+				 //tempcb = chuyenBay;
+			 }
 //=======================================================				 
 			 nhap = 0;
 			 
@@ -6642,6 +6722,166 @@ void locVeMB(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay) {
 						nhap = 0;
 						//tempcb = chuyenBay;
 					}
+					else if (tempng.ngay_kh.ngay == -1 && tempng.ngay_kh.thang == -1 && tempng.ngay_kh.nam != -1) {
+						cout << 1;
+						while (tempcb != NULL && demqt < 8) {
+							if (lngay == tempcb->cb.ngay_gio_kh.ngay_kh.ngay&&lthang== tempcb->cb.ngay_gio_kh.ngay_kh.thang) {
+								cout << tempcb->cb.sh_Mb << endl;
+								line(xg + 450, yg + 125, xg + getmaxx() - 800, yg + 125);
+								outtextxy(getmaxx() - 900, yg + 50, tempcb->cb.ma_cb);
+								_itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.ngay, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.ngay_kh.ngay < 10) {
+									outtextxy(getmaxx() - 885, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 870, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 885, yg + 100, tam);
+								}
+								//=================
+								outtextxy(getmaxx() - 855, yg + 100, (char*)"/");
+								_itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.thang, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.ngay_kh.thang < 10) {
+									outtextxy(getmaxx() - 847, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 832, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 847, yg + 100, tam);
+								}
+								//======================================
+								outtextxy(getmaxx() - 820, yg + 100, (char*)"/");
+								_itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.nam, tam, 10, 10);
+								outtextxy(getmaxx() - 810, yg + 100, tam);
+								//=======================================
+								_itoa_s(tempcb->cb.ngay_gio_kh.gio_kh.gio, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.gio_kh.gio < 10) {
+									outtextxy(getmaxx() - 990, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 975, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 985, yg + 100, tam);
+								}
+								//================================			
+								outtextxy(getmaxx() - 960, yg + 100, (char*)":");
+								_itoa_s(tempcb->cb.ngay_gio_kh.gio_kh.phut, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.gio_kh.phut < 10) {
+									outtextxy(getmaxx() - 950, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 935, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 950, yg + 100, tam);
+								}
+								//=====================================
+								if (tempcb->cb.trang_thai_cb == 0) {
+									setcolor(BROWN);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" HUY CHUYEN");
+									setcolor(WHITE);
+								}
+								if (tempcb->cb.trang_thai_cb == 1) {
+									setcolor(GREEN);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" CON VE");
+									setcolor(WHITE);
+								}
+								if (tempcb->cb.trang_thai_cb == 2) {
+									setcolor(WHITE);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" HET VE");
+									setcolor(WHITE);
+								}
+								if (tempcb->cb.trang_thai_cb == 3) {
+									setcolor(RED);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" HOAN TAT");
+									setcolor(WHITE);
+								}
+								demqt++;
+								yg = yg + 80;
+								Sleep(75);
+							}
+
+							tempcb = tempcb->next;
+						}
+						yg = 10;
+						nhap = 0;
+						//tempcb = chuyenBay;
+					}
+					else if (tempng.ngay_kh.ngay != -1 && tempng.ngay_kh.thang != -1 && tempng.ngay_kh.nam == -1) {
+						cout << 1;
+						while (tempcb != NULL && demqt < 8) {
+							if (lthang == tempcb->cb.ngay_gio_kh.ngay_kh.thang && lngay == tempcb->cb.ngay_gio_kh.ngay_kh.ngay) {
+								cout << tempcb->cb.sh_Mb << endl;
+								line(xg + 450, yg + 125, xg + getmaxx() - 800, yg + 125);
+								outtextxy(getmaxx() - 900, yg + 50, tempcb->cb.ma_cb);
+								_itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.ngay, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.ngay_kh.ngay < 10) {
+									outtextxy(getmaxx() - 885, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 870, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 885, yg + 100, tam);
+								}
+								//=================
+								outtextxy(getmaxx() - 855, yg + 100, (char*)"/");
+								_itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.thang, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.ngay_kh.thang < 10) {
+									outtextxy(getmaxx() - 847, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 832, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 847, yg + 100, tam);
+								}
+								//======================================
+								outtextxy(getmaxx() - 820, yg + 100, (char*)"/");
+								_itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.nam, tam, 10, 10);
+								outtextxy(getmaxx() - 810, yg + 100, tam);
+								//=======================================
+								_itoa_s(tempcb->cb.ngay_gio_kh.gio_kh.gio, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.gio_kh.gio < 10) {
+									outtextxy(getmaxx() - 990, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 975, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 985, yg + 100, tam);
+								}
+								//================================			
+								outtextxy(getmaxx() - 960, yg + 100, (char*)":");
+								_itoa_s(tempcb->cb.ngay_gio_kh.gio_kh.phut, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.gio_kh.phut < 10) {
+									outtextxy(getmaxx() - 950, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 935, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 950, yg + 100, tam);
+								}
+								//=====================================
+								if (tempcb->cb.trang_thai_cb == 0) {
+									setcolor(BROWN);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" HUY CHUYEN");
+									setcolor(WHITE);
+								}
+								if (tempcb->cb.trang_thai_cb == 1) {
+									setcolor(GREEN);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" CON VE");
+									setcolor(WHITE);
+								}
+								if (tempcb->cb.trang_thai_cb == 2) {
+									setcolor(WHITE);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" HET VE");
+									setcolor(WHITE);
+								}
+								if (tempcb->cb.trang_thai_cb == 3) {
+									setcolor(RED);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" HOAN TAT");
+									setcolor(WHITE);
+								}
+								demqt++;
+								yg = yg + 80;
+								Sleep(75);
+							}
+
+							tempcb = tempcb->next;
+						}
+						yg = 10;
+						nhap = 0;
+						//tempcb = chuyenBay;
+						}
 
 				}
 			}
@@ -7223,6 +7463,86 @@ void locVeMB(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay) {
 						nhap = 0;
 						//tempcb = chuyenBay;
 					}
+					else if (tempng.ngay_kh.ngay != -1 && tempng.ngay_kh.thang != -1 && tempng.ngay_kh.nam == -1) {
+						cout << 1;
+						while (tempcb != NULL && demqt < 8) {
+							if (lthang == tempcb->cb.ngay_gio_kh.ngay_kh.thang && lngay == tempcb->cb.ngay_gio_kh.ngay_kh.ngay) {
+								cout << tempcb->cb.sh_Mb << endl;
+								line(xg + 450, yg + 125, xg + getmaxx() - 800, yg + 125);
+								outtextxy(getmaxx() - 900, yg + 50, tempcb->cb.ma_cb);
+								_itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.ngay, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.ngay_kh.ngay < 10) {
+									outtextxy(getmaxx() - 885, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 870, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 885, yg + 100, tam);
+								}
+								//=================
+								outtextxy(getmaxx() - 855, yg + 100, (char*)"/");
+								_itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.thang, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.ngay_kh.thang < 10) {
+									outtextxy(getmaxx() - 847, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 832, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 847, yg + 100, tam);
+								}
+								//======================================
+								outtextxy(getmaxx() - 820, yg + 100, (char*)"/");
+								_itoa_s(tempcb->cb.ngay_gio_kh.ngay_kh.nam, tam, 10, 10);
+								outtextxy(getmaxx() - 810, yg + 100, tam);
+								//=======================================
+								_itoa_s(tempcb->cb.ngay_gio_kh.gio_kh.gio, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.gio_kh.gio < 10) {
+									outtextxy(getmaxx() - 990, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 975, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 985, yg + 100, tam);
+								}
+								//================================			
+								outtextxy(getmaxx() - 960, yg + 100, (char*)":");
+								_itoa_s(tempcb->cb.ngay_gio_kh.gio_kh.phut, tam, 10, 10);
+								if (tempcb->cb.ngay_gio_kh.gio_kh.phut < 10) {
+									outtextxy(getmaxx() - 950, yg + 100, (char*)"0");
+									outtextxy(getmaxx() - 935, yg + 100, tam);
+								}
+								else {
+									outtextxy(getmaxx() - 950, yg + 100, tam);
+								}
+								//=====================================
+								if (tempcb->cb.trang_thai_cb == 0) {
+									setcolor(BROWN);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" HUY CHUYEN");
+									setcolor(WHITE);
+								}
+								if (tempcb->cb.trang_thai_cb == 1) {
+									setcolor(GREEN);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" CON VE");
+									setcolor(WHITE);
+								}
+								if (tempcb->cb.trang_thai_cb == 2) {
+									setcolor(WHITE);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" HET VE");
+									setcolor(WHITE);
+								}
+								if (tempcb->cb.trang_thai_cb == 3) {
+									setcolor(RED);
+									outtextxy(getmaxx() - 990, yg + 80, (char*)" HOAN TAT");
+									setcolor(WHITE);
+								}
+								demqt++;
+								yg = yg + 80;
+								Sleep(75);
+							}
+
+							tempcb = tempcb->next;
+						}
+						yg = 10;
+						nhap = 0;
+						//tempcb = chuyenBay;
+						}
 
 				}
 			}

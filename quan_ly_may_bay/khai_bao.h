@@ -72,6 +72,9 @@ struct ChuyenBay
 	void datChuyenBay(char macb[], NgayGio ngay, char sanbay[], char somb[], TrangThai trangthai, DSMayBay ds);
 	Ve* timVe(char cmnd[]) const;
 	bool huyVe(char cmnd[]);
+	////
+	void DatVe(char cmnd[], char vtd[]);
+	Ve* timVe1(char vtd[]);
 	//ChuyenBay();
 };
 struct NodeChuyenBay

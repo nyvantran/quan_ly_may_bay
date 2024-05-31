@@ -18,6 +18,20 @@ int main() {
 	chayDoHoa(ds_may_bay,dau_chuyen_bay,goc_khach_hang);
 	//////////////
 	KetThuc();
+	/*Ve tam;
+	for (PTRChuyenBay p = dau_chuyen_bay; p != NULL; p = p->next) {
+		if (p->cb.so_ve != 0) {
+			for (int i = 0; i < p->cb.so_ve; i++) {
+				for (int j = i; j < p->cb.so_ve; j++) {
+					if (strcmp(p->cb.ds_ve[i].vitri, p->cb.ds_ve[j].vitri) == 1) {
+						tam = p->cb.ds_ve[i];
+						p->cb.ds_ve[i] = p->cb.ds_ve[j];
+						p->cb.ds_ve[j] = tam;
+					}
+				}
+			}
+		}
+	}*/
 	ds_may_bay.ghiFile(DLMAYBAY);
 	ghiFileChuyenBay(DLCHUYENBAY,dau_chuyen_bay,ds_may_bay);	
 	ghiFileKhangHang(goc_khach_hang, DLKHACHHANG);
@@ -25,11 +39,6 @@ int main() {
 	xoahetChuyenBay(dau_chuyen_bay);
 	xoaHetKhachHang(goc_khach_hang);
 	///////////////////
-	KetThuc();
-	/*NgayGio t1, t2;
-	t1.datNgayGio(8, 0, 23, 4, 2023);
-	t2.datNgayGio(8, 0, 23, 4, 2023);
-	cout << truNgayGio(t1, t2);*/
 }
 
 

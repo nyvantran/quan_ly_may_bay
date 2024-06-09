@@ -299,7 +299,9 @@ void chayDoHoa(DSMayBay& ds_may_bay, PTRChuyenBay& dau_chuyen_bay, PTRKhachhang&
 					putimage(xg + 240, yg + 88 * 0, p2, 1);
 				}
 			}
+			thread nhanh1(DHlocngaythang, &x, &y);
 			hienDSCB4(&x, &y, dau_chuyen_bay, ds_may_bay);
+			nhanh1.join();
 			n = -1;
 			break;
 		}
@@ -3522,153 +3524,379 @@ void NhapThongTinKH(int* x, int* y, int option)
 {
 	int mau = 0;
 	*x = 0; *y = 0;
+	bool lan[5]{ 0,0,0,0,0 };
 	while (1) {
 		if (option == 1) {	
 			mau = mouseDatVe(*x, *y);
 			switch (mau)
 			{
 			case 0: {
-				if (getpixel(545, 20) == 15) {
-					setcolor(4);
-					rectangle(545, 20, 1005, 50);
-					setcolor(15);
-					if (getpixel(545, 20) == 4) {
-						rectangle(545, 20, 1005, 50);
-					}
-					if (getpixel(1060, 20) == 4) {
-						rectangle(1060, 20, 1100, 50);
-					}
-					if (getpixel(550, 60) == 4) {
-						rectangle(550, 60, 710, 90);
-					}
-					if (getpixel(800, 60) == 4) {
-						rectangle(800, 60, 960, 90);
-					}
-					if (getpixel(1270, 60) == 4) {
-						rectangle(1270, 60, 1340, 90);
+				if (lan[mau] == 0) {
+					lan[mau] = 1;
+					rectangle(545 - 1, 20 - 1, 1005 + 1, 50 + 1);
+					for (int i = 0; i < 5; i++) {
+						if (i != mau && lan[i] == 1) {
+							lan[i] = 0;
+							switch (i)
+							{
+							case 0: {
+								setcolor(0);
+								rectangle(545 - 1, 20 - 1, 1005 + 1, 50 + 1);
+								setcolor(15);
+								break;
+							}
+							case 1: {
+								setcolor(0);
+								rectangle(1060 - 1, 20 - 1, 1100 + 1, 50 + 1);
+								setcolor(15);
+								break;
+							}
+							case 2: {
+								setcolor(0);
+								rectangle(550 - 1, 60 - 1, 710 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 3: {
+								setcolor(0);
+								rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 4: {
+								setcolor(0);
+								rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							default:
+								break;
+							}
+						}
 					}
 				}
 				break;
 			}
 			case 1: {
-				if (getpixel(1060, 20) == 15) {
-					setcolor(4);
-					rectangle(1060, 20, 1100, 50);
-					setcolor(15);
-					if (getpixel(545, 20) == 4) {
-						rectangle(545, 20, 1005, 50);
-					}
-					/*if (getpixel(1060, 20) == 4) {
-						rectangle(1060, 20, 1100, 50);
-					}*/
-					if (getpixel(550, 60) == 4) {
-						rectangle(550, 60, 710, 90);
-					}
-					if (getpixel(800, 60) == 4) {
-						rectangle(800, 60, 960, 90);
-					}
-					if (getpixel(1270, 60) == 4) {
-						rectangle(1270, 60, 1340, 90);
+				if (lan[mau] == 0) {					
+					lan[mau] = 1;
+					rectangle(1060 - 1, 20 - 1, 1100 + 1, 50 + 1);
+					for (int i = 0; i < 5; i++) {
+						if (i != mau && lan[i] == 1) {
+							lan[i] = 0;
+							switch (i)
+							{
+							case 0: {
+								setcolor(0);
+								rectangle(545 - 1, 20 - 1, 1005 + 1, 50 + 1);
+								setcolor(15);
+								break;
+							}
+							case 1: {
+								setcolor(0);
+								rectangle(1060 - 1, 20 - 1, 1100 + 1, 50 + 1);
+								setcolor(15);						
+								break;
+							}
+							case 2: {
+								setcolor(0);
+								rectangle(550 - 1, 60 - 1, 710 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 3: {
+								setcolor(0);
+								rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 4: {
+								setcolor(0);
+								rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							default:
+								break;
+							}
+						}
 					}
 				}
 				break;
 			}
 			case 2: {
-				if (getpixel(550, 60) == 15) {
-					setcolor(4);
-					rectangle(550, 60, 710, 90);
-					setcolor(15);
-					if (getpixel(545, 20) == 4) {
-						rectangle(545, 20, 1005, 50);
-					}
-					if (getpixel(1060, 20) == 4) {
-						rectangle(1060, 20, 1100, 50);
-					}
-					/*if (getpixel(550, 60) == 4) {
-						rectangle(550, 60, 710, 90);
-					}*/
-					if (getpixel(800, 60) == 4) {
-						rectangle(800, 60, 960, 90);
-					}
-					if (getpixel(1270, 60) == 4) {
-						rectangle(1270, 60, 1340, 90);
+				if (lan[mau] == 0) {
+					lan[mau] = 1;
+					rectangle(550 - 1, 60 - 1, 710 + 1, 90 + 1);
+					for (int i = 0; i < 5; i++) {
+						if (i != mau && lan[i] == 1) {
+							lan[i] = 0;
+							switch (i)
+							{
+							case 0: {
+								setcolor(0);
+								rectangle(545 - 1, 20 - 1, 1005 + 1, 50 + 1);
+								setcolor(15);
+								break;
+							}
+							case 1: {
+								setcolor(0);
+								rectangle(1060 - 1, 20 - 1, 1100 + 1, 50 + 1);
+								setcolor(15);
+								break;
+							}
+							case 2: {
+								setcolor(0);
+								rectangle(550 - 1, 60 - 1, 710 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 3: {
+								setcolor(0);
+								rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 4: {
+								setcolor(0);
+								rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							default:
+								break;
+							}
+						}
 					}
 				}
 				break;
 			}
 			case 3: {
-				if (getpixel(800, 60) == 15) {
-					setcolor(4);
-					rectangle(800, 60, 960, 90);
-					setcolor(15);
-					if (getpixel(545, 20) == 4) {
-						rectangle(545, 20, 1005, 50);
-					}
-					if (getpixel(1060, 20) == 4) {
-						rectangle(1060, 20, 1100, 50);
-					}
-					if (getpixel(550, 60) == 4) {
-						rectangle(550, 60, 710, 90);
-					}
-					/*if (getpixel(800, 60) == 4) {
-						rectangle(800, 60, 960, 90);
-					}*/
-					if (getpixel(1270, 60) == 4) {
-						rectangle(1270, 60, 1340, 90);
+				if (lan[mau] == 0) {
+					lan[mau] = 1;
+					rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+					for (int i = 0; i < 5; i++) {
+						if (i != mau && lan[i] == 1) {
+							lan[i] = 0;
+							switch (i)
+							{
+							case 0: {
+								setcolor(0);
+								rectangle(545 - 1, 20 - 1, 1005 + 1, 50 + 1);
+								setcolor(15);
+								break;
+							}
+							case 1: {
+								setcolor(0);
+								rectangle(1060 - 1, 20 - 1, 1100 + 1, 50 + 1);
+								setcolor(15);
+								break;
+							}
+							case 2: {
+								setcolor(0);
+								rectangle(550 - 1, 60 - 1, 710 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 3: {
+								setcolor(0);
+								rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 4: {
+								setcolor(0);
+								rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							default:
+								break;
+							}
+						}
 					}
 				}
 				break;
 			}
 			case 4: {
-				if (getpixel(1270, 60) == 15) {
-					setcolor(4);
-					rectangle(1270, 60, 1340, 90);
-					setcolor(15);
-					if (getpixel(545, 20) == 4) {
-						rectangle(545, 20, 1005, 50);
+				if (lan[mau] == 0) {
+					lan[mau] = 1;
+					rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+					for (int i = 0; i < 5; i++) {
+						if (i != mau && lan[i] == 1) {
+							lan[i] = 0;
+							switch (i)
+							{
+							case 0: {
+								setcolor(0);
+								rectangle(545 - 1, 20 - 1, 1005 + 1, 50 + 1);
+								setcolor(15);
+								break;
+							}
+							case 1: {
+								setcolor(0);
+								rectangle(1060 - 1, 20 - 1, 1100 + 1, 50 + 1);
+								setcolor(15);
+								break;
+							}
+							case 2: {
+								setcolor(0);
+								rectangle(550 - 1, 60 - 1, 710 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 3: {
+								setcolor(0);
+								rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 4: {
+								setcolor(0);
+								rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							default:
+								break;
+							}
+						}
 					}
-					if (getpixel(1060, 20) == 4) {
-						rectangle(1060, 20, 1100, 50);
-					}
-					if (getpixel(550, 60) == 4) {
-						rectangle(550, 60, 710, 90);
-					}
-					if (getpixel(800, 60) == 4) {
-						rectangle(800, 60, 960, 90);
-					}
-					/*if (getpixel(1270, 60) == 4) {
-						rectangle(1270, 60, 1340, 90);
-					}*/
 				}
 				break;
 			}
 			default: {
-				if (getpixel(545, 20) == 4 || getpixel(1060, 20) == 4 || getpixel(550, 60) == 4 
-					|| getpixel(800, 60) == 4 || getpixel(1270, 60) == 4) {
-					setcolor(15);
-					if (getpixel(545, 20) == 4) {
-						rectangle(545, 20, 1005, 50);
+				for (int i = 0; i < 5; i++) {
+					if (lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(545 - 1, 20 - 1, 1005 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(1060 - 1, 20 - 1, 1100 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(550 - 1, 60 - 1, 710 + 1, 90 + 1);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
 					}
-					if (getpixel(1060, 20) == 4) {
-						rectangle(1060, 20, 1100, 50);
-					}
-					if (getpixel(550, 60) == 4) {
-						rectangle(550, 60, 710, 90);
-					}
-					if (getpixel(800, 60) == 4) {
-						rectangle(800, 60, 960, 90);
-					}
-					if (getpixel(1270, 60) == 4) {
-						rectangle(1270, 60, 1340, 90);
+				}
+			}
+			}
+			
+		}		
+		else {
+			mau = mouseDatVe(*x, *y);
+			switch (mau)
+			{				
+			case 3: {
+				if (lan[mau] == 0) {
+					lan[mau] = 1;
+					rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+					for (int i = 3; i < 5; i++) {
+						if (i != mau && lan[i] == 1) {
+							lan[i] = 0;
+							switch (i)
+							{							
+							case 3: {
+								setcolor(0);
+								rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 4: {
+								setcolor(0);
+								rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							default:
+								break;
+							}
+						}
 					}
 				}
 				break;
 			}
-			
+			case 4: {
+				if (lan[mau] == 0) {
+					lan[mau] = 1;
+					rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+					for (int i = 3; i < 5; i++) {
+						if (i != mau && lan[i] == 1) {
+							lan[i] = 0;
+							switch (i)
+							{							
+							case 3: {
+								setcolor(0);
+								rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							case 4: {
+								setcolor(0);
+								rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+								setcolor(15);
+								break;
+							}
+							default:
+								break;
+							}
+						}
+					}
+				}
+				break;
 			}
-		}
-		else {
-
+			default: {
+				for (int i = 3; i < 5; i++) {
+					if (lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{						
+						case 3: {
+							setcolor(0);
+							rectangle(800 - 1, 60 - 1, 960 + 1, 90 + 1);
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(1270 - 1, 60 - 1, 1340 + 1, 90 + 1);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
+				}
+			}
+			}
 		}
 		if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
 			return;
@@ -3739,7 +3967,7 @@ void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 			setfillstyle(1, 0);
 			PTRKhachhang kh = NULL;
 			thread nhanh1(dongho, xg + 740, yg, x, y);
-			//thread nhanh2(NhapThongTinKH, x, y, 1);
+			thread nhanh2(NhapThongTinKH, x, y, 1);
 			Sleep(100);
 			while (1) {
 				if (in != ino || id != ido) {
@@ -4084,7 +4312,7 @@ void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 				}
 			}
 			nhanh1.join();
-			//nhanh2.join();
+			nhanh2.join();
 			if (ht->cb.so_ve == 0) {
 				delete[] ht->cb.ds_ve;
 			}
@@ -4107,6 +4335,7 @@ void chonChuyenBay(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, int* x, int* 
 	strcpy_s(text[3], 100, " huy bo");
 	PTRChuyenBay p; 
 	int n, mau;
+	bool lan[4]{ 0,0,0,0 };
 	void* q = malloc(imagesize(xg, yg, xg + 240, yg + 120));
 	while (1) {
 		n = mouseChonCB(*x, *y);
@@ -4153,100 +4382,203 @@ void chonChuyenBay(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, int* x, int* 
 		switch (mau)
 		{
 		case 0: {
-			if (getpixel(655, 20) == 15) {
-				setcolor(4);
-				rectangle(655, 20, 685, 50);
-				setcolor(15);
-				/*if (getpixel(655, 20) == 4) {
-					rectangle(655, 20, 685, 50);
-				}*/
-				if (getpixel(700, 20) == 4) {
-					rectangle(700, 20, 730, 50);
-				}
-				if (getpixel(740, 20) == 4) {
-					rectangle(740, 20, 790, 50);
-				}
-				if (getpixel(955, 20) == 4) {
-					rectangle(955, 20, 1410, 50);
-				}
+			if (lan[mau] == 0) {
+				lan[mau] = 1;				
+				rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+				for (int i = 0; i < 4; i++) {
+					if (i != mau && lan[mau] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
+				}				
 			}
 			break;
 		}
 		case 1: {
-			if (getpixel(700, 20) == 15) {
-				setcolor(4);
-				rectangle(700, 20, 730, 50);
-				setcolor(15);
-				if (getpixel(655, 20) == 4) {
-					rectangle(655, 20, 685, 50);
-				}
-				/*if (getpixel(700, 20) == 4) {
-					rectangle(700, 20, 730, 50);
-				}*/
-				if (getpixel(740, 20) == 4) {
-					rectangle(740, 20, 790, 50);
-				}
-				if (getpixel(955, 20) == 4) {
-					rectangle(955, 20, 1410, 50);
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+				for (int i = 0; i < 4; i++) {
+					if (i != mau && lan[mau] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
 			}
 			break;
 		}
 		case 2: {
-			if (getpixel(740, 20) == 15) {
-				setcolor(4);
-				rectangle(740, 20, 790, 50);
-				setcolor(15);
-				if (getpixel(655, 20) == 4) {
-					rectangle(655, 20, 685, 50);
-				}
-				if (getpixel(700, 20) == 4) {
-					rectangle(700, 20, 730, 50);
-				}
-				/*if (getpixel(740, 20) == 4) {
-					rectangle(740, 20, 790, 50);
-				}*/
-				if (getpixel(955, 20) == 4) {
-					rectangle(955, 20, 1410, 50);
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+				for (int i = 0; i < 4; i++) {
+					if (i != mau && lan[mau] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
 			}
 			break;
 		}
 		case 3: {
-			if (getpixel(955, 20) == 15) {
-				setcolor(4);
-				rectangle(955, 20, 1410, 50);
-				setcolor(15);
-				if (getpixel(655, 20) == 4) {
-					rectangle(655, 20, 685, 50);
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+				for (int i = 0; i < 4; i++) {
+					if (i != mau && lan[mau] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(700, 20) == 4) {
-					rectangle(700, 20, 730, 50);
-				}
-				if (getpixel(740, 20) == 4) {
-					rectangle(740, 20, 790, 50);
-				}
-				/*if (getpixel(955, 20) == 4) {
-					rectangle(955, 20, 1410, 50);
-				}*/
 			}
 			break;
-		}
+		}		
 		default: {
-			if (getpixel(655, 20) == 4 || getpixel(700, 20) == 4 || getpixel(740, 20) == 4 || getpixel(955, 20) == 4) {
-				setcolor(15);
-				if (getpixel(655, 20) == 4) {
-					rectangle(655, 20, 685, 50);
-				}
-				if (getpixel(700, 20) == 4) {
-					rectangle(700, 20, 730, 50);
-				}
-				if (getpixel(740, 20) == 4) {
-					rectangle(740, 20, 790, 50);
-				}
-				if (getpixel(955, 20) == 4) {
-					rectangle(955, 20, 1410, 50);
-				}
+			for (int i = 0; i < 4; i++) {
+				if (lan[i] == 1) {
+					lan[i] = 0;
+					switch (i)
+					{
+					case 0: {
+						setcolor(0);
+						rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+						setcolor(15);
+						break;
+					}
+					case 1: {
+						setcolor(0);
+						rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+						setcolor(15);
+						break;
+					}
+					case 2: {
+						setcolor(0);
+						rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+						setcolor(15);
+						break;
+					}
+					case 3: {
+						setcolor(0);
+						rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+						setcolor(15);
+						break;
+					}
+					default:
+						break;
+					}
+				}							
 			}
 			break;
 		}
@@ -4671,6 +5003,7 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 			rectangle(xg + 770, yg + 50, xg + 770 + 70, yg + 50 + 30);
 			///=====///
 			thread nhanh1(dongho, xg + 740, yg, x, y);
+			thread nhanh2(NhapThongTinKH, x, y, 2);
 			Sleep(100);
 			MayBay* mb = TimSoHieu(ht->cb.sh_Mb, ds_may_bay);
 			while (1) {
@@ -4871,6 +5204,7 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 				}
 			}
 			nhanh1.join();
+			nhanh2.join();
 			if (ht->cb.so_ve == 0) {
 				delete[]ht->cb.ds_ve;
 			}
@@ -4986,6 +5320,224 @@ void DHInVeCb(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& 
 			}
 		}
 	}	
+}
+void DHlocngaythang(int* x, int* y)
+{
+	bool lan[4]{ 0,0,0,0 };
+	int mau;
+	while (1) {
+		//
+		mau = mouseHienDSCB(*x, *y);
+		switch (mau)
+		{
+		case 0: {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+				for (int i = 0; i < 4; i++) {
+					if (i != mau && lan[mau] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
+				}
+			}
+			break;
+		}
+		case 1: {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+				for (int i = 0; i < 4; i++) {
+					if (i != mau && lan[mau] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
+				}
+			}
+			break;
+		}
+		case 2: {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+				for (int i = 0; i < 4; i++) {
+					if (i != mau && lan[mau] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
+				}
+			}
+			break;
+		}
+		case 3: {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+				for (int i = 0; i < 4; i++) {
+					if (i != mau && lan[mau] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
+				}
+			}
+			break;
+		}
+		default: {
+			for (int i = 0; i < 4; i++) {
+				if (lan[i] == 1) {
+					lan[i] = 0;
+					switch (i)
+					{
+					case 0: {
+						setcolor(0);
+						rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+						setcolor(15);
+						break;
+					}
+					case 1: {
+						setcolor(0);
+						rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+						setcolor(15);
+						break;
+					}
+					case 2: {
+						setcolor(0);
+						rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+						setcolor(15);
+						break;
+					}
+					case 3: {
+						setcolor(0);
+						rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+						setcolor(15);
+						break;
+					}
+					default:
+						break;
+					}
+				}
+			}
+			break;
+		}
+		}
+		//
+		if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
+			return;
+		}
+	}
+	
 }
 void hienDSCB4(int* x, int* y, PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay)
 {

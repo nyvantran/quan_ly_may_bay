@@ -1,5 +1,6 @@
 #include<iostream>
 #include<thread>
+#include <stdint.h>
 #include"khai_bao.h"
 #include"do_hoa.h"
 #define DLMAYBAY "dlmaybay.dat"

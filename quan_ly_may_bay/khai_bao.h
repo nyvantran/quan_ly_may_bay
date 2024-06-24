@@ -146,5 +146,7 @@ bool checkNgayGio(NgayGio t1, NgayGio t2);
 void demChuyenBayHT(PTRChuyenBay);
 // Bublesort
 void Bublesort(PTRChuyenBay, DSMayBay&);
+// dem chuyen bay can in theo bo loc
+int demCBBL(PTRChuyenBay, int, int, int, int, int);
 
 

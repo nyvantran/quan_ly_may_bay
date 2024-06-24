@@ -1117,5 +1117,99 @@ void Bublesort(PTRChuyenBay chuyenBay, DSMayBay &DsMayBay)
 	
 	
 }
-
+//=============================
+int demCBBL(PTRChuyenBay chuyenbay, int gio, int phut, int ngay, int thang, int nam) {
+	int n = 0;
+	PTRChuyenBay q = chuyenbay;
+	//
+	if (gio != 0&&phut==0) {
+		while (q!=NULL) {
+			if (q->cb.ngay_gio_kh.gio_kh.gio == gio) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (gio == 0 && phut != 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.gio_kh.phut == phut) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (gio != 0 && phut != 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.gio_kh.phut == phut&& q->cb.ngay_gio_kh.gio_kh.gio == gio) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay != 0 && thang == 0 && nam == 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.ngay==ngay) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay == 0 && thang != 0 && nam == 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.thang == thang) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay == 0 && thang == 0 && nam != 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.nam == nam) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay != 0 && thang != 0 && nam == 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.thang == thang&& q->cb.ngay_gio_kh.ngay_kh.ngay==ngay) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay != 0 && thang == 0 && nam != 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.nam == nam && q->cb.ngay_gio_kh.ngay_kh.ngay == ngay) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay == 0 && thang != 0 && nam != 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.thang == thang && q->cb.ngay_gio_kh.ngay_kh.nam == nam) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+}
 

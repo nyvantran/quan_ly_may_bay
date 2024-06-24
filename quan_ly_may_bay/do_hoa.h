@@ -58,4 +58,13 @@ void KhoiDong();
 void KetThuc();
 void dongho(int xi, int yi, int* x, int* y);
 //==================================================================================
+
 void xuatSoCBHT(int*,int*,PTRChuyenBay,DSMayBay);
+//=================================
+void xuatSoVeTrong(int*, int*, PTRChuyenBay, DSMayBay);
+bool mousexv(int* , int* );
+void checkmouse(bool x);
+void locVeMB(int* , int* , PTRChuyenBay , DSMayBay );
+//=======
+void xuatSoCBHT(int*,int*,PTRChuyenBay,DSMayBay);
+

@@ -14,8 +14,8 @@
     <Library Include="graphics.lib" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="dlchuyenbay.dat" />
     <None Include="dlkhachhang.dat" />
     <None Include="dlmaybay.dat" />
+    <None Include="dlchuyenbay.dat" />
   </ItemGroup>
 </Project>

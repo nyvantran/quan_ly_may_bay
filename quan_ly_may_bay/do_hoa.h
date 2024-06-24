@@ -28,17 +28,20 @@ int mouseHieuChinhMb(int x, int y, int old);
 int mouseLocHieuChinhMB(int x, int y);
 int mouseLocXoaMB(int x, int y);
 ///===========================them chuyen bay=======================================///
-void DHThemCB(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int*, int*, int* ii, int* ip);
-void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, DSMayBay ds_may_bay);
+void DHThemCB(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int*, int*, int* ii, int* ip, char* shmb1);
+void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, DSMayBay ds_may_bay, char* shmb1);
 int mouseThemCB(int x, int y);
-void DHHuyChuyen(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int*, int*,int*);
-void hienDSCB1(int* x, int* y, int* ii, PTRChuyenBay& dau_chuyen_bay,DSMayBay& ds_may_bay);
+int mouseChonMB(int x, int y, int old);
+void DHHuyChuyen(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int*, int*, int*, char* loc, int& cd);
+void hienDSCB1(int* x, int* y, int* ii, PTRChuyenBay& dau_chuyen_bay,DSMayBay& ds_may_bay, char* loc, int& cd);
 int mouseHuyCB(int x, int y);
+int mouselocHuyCB(int x, int y);
 void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, DSMayBay ds_may_bay, int* x, int* y, int* ii, char* loc);
 void hienDSCB2(int* x, int* y, int* ii, PTRChuyenBay& ht, PTRChuyenBay& dau_chuyen_bay, DSMayBay ds_may_bay, char* loc);
 int mouseHieuChinhCB(int old, int x, int y);
 int mouseLocHieuChinhCB(int x, int y);
 ///===========================khach hang==============================================///
+void NhapThongTinKH(int* x, int* y, int option);
 void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& goc_khach_hang, int* x, int* y);
 void chonChuyenBay(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, int* x, int* y, int* ii, int option, PTRChuyenBay chay[],int &cd);
 void hienDSCB3(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* y, int* ii, int option, PTRChuyenBay chay[],int &cd);
@@ -46,6 +49,7 @@ int mouseChonCB(int x, int y);
 int mouseDatVe(int x, int y);
 void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& goc_khach_hang, int* x, int* y);
 void DHInVeCb(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& goc_khach_hang, int* x, int* y);
+void DHlocngaythang(int* x, int* y);
 void hienDSCB4(int* x, int* y, PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay);
 int mouseHienDSCB(int x, int y);
 ///===================================================================================///

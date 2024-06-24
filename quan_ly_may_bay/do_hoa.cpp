@@ -638,6 +638,7 @@ void hienDSMb2(int* x, int* y, int* ii, MayBay*& ht, DSMayBay& ds_may_bay, char*
 	char tam[25];
 	int n = -1, cd, mau;
 	int old = -1;
+	bool lan[5]{ 0,0,0,0,0 };
 	MayBay* hto = NULL;
 	MayBay* hienthi[MAX_MB]{};
 	for (int i = 0; i < ds_may_bay.so_MB; i++) {
@@ -705,127 +706,256 @@ void hienDSMb2(int* x, int* y, int* ii, MayBay*& ht, DSMayBay& ds_may_bay, char*
 		switch (mau)
 		{
 		case 0: {
-			if (getpixel(609 - 1, 75 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(609 - 1, 75 - 1, 919, 115);
-				setcolor(0);
-				if (getpixel(609 - 1, 125 - 1) == 15) {
-					rectangle(609 - 1, 125 - 1, 1219, 165);
+				for (int i = 0; i < 4; i++) {
+					if (lan[i] == 1 && i != mau) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(609 - 1, 75 - 1, 919, 115);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(609 - 1, 125 - 1, 1219, 165);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(609 - 1, 175 - 1, 669, 215);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(823 - 1, 175 - 1, 893, 215);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(609 - 1, 175 - 1) == 15) {
-					rectangle(609 - 1, 175 - 1, 669, 215);
-				}
-				if (getpixel(823 - 1, 175 - 1) == 15) {
-					rectangle(823 - 1, 175 - 1, 893, 215);
-				}
-				if (getpixel(635 - 1, 10 - 1) == 15) {
-					rectangle(635 - 1, 10 - 1, 950, 50);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 1: {
-			if (getpixel(609 - 1, 125 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(609 - 1, 125 - 1, 1219, 165);
-				setcolor(0);
-				if (getpixel(609 - 1, 75 - 1) == 15) {
-					rectangle(609 - 1, 75 - 1, 919, 115);
+				for (int i = 0; i < 4; i++) {
+					if (lan[i] == 1 && i != mau) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(609 - 1, 75 - 1, 919, 115);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(609 - 1, 125 - 1, 1219, 165);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(609 - 1, 175 - 1, 669, 215);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(823 - 1, 175 - 1, 893, 215);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(609 - 1, 175 - 1) == 15) {
-					rectangle(609 - 1, 175 - 1, 669, 215);
-				}
-				if (getpixel(823 - 1, 175 - 1) == 15) {
-					rectangle(823 - 1, 175 - 1, 893, 215);
-				}
-				if (getpixel(635 - 1, 10 - 1) == 15) {
-					rectangle(635 - 1, 10 - 1, 950, 50);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 2: {
-			if (getpixel(609 - 1, 175 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(609 - 1, 175 - 1, 669, 215);
-				setcolor(0);
-				if (getpixel(609 - 1, 75 - 1) == 15) {
-					rectangle(609 - 1, 75 - 1, 919, 115);
+				for (int i = 0; i < 4; i++) {
+					if (lan[i] == 1 && i != mau) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(609 - 1, 75 - 1, 919, 115);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(609 - 1, 125 - 1, 1219, 165);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(609 - 1, 175 - 1, 669, 215);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(823 - 1, 175 - 1, 893, 215);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(609 - 1, 125 - 1) == 15) {
-					rectangle(609 - 1, 125 - 1, 1219, 165);
-				}
-				if (getpixel(823 - 1, 175 - 1) == 15) {
-					rectangle(823 - 1, 175 - 1, 893, 215);
-				}
-				if (getpixel(635 - 1, 10 - 1) == 15) {
-					rectangle(635 - 1, 10 - 1, 950, 50);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 3: {
-			if (getpixel(823 - 1, 175 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(823 - 1, 175 - 1, 893, 215);
-				setcolor(0);
-				if (getpixel(609 - 1, 75 - 1) == 15) {
-					rectangle(609 - 1, 75 - 1, 919, 115);
+				for (int i = 0; i < 4; i++) {
+					if (lan[i] == 1 && i != mau) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(609 - 1, 75 - 1, 919, 115);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(609 - 1, 125 - 1, 1219, 165);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(609 - 1, 175 - 1, 669, 215);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(823 - 1, 175 - 1, 893, 215);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(609 - 1, 125 - 1) == 15) {
-					rectangle(609 - 1, 125 - 1, 1219, 165);
-				}
-				if (getpixel(609 - 1, 175 - 1) == 15) {
-					rectangle(609 - 1, 175 - 1, 669, 215);
-				}
-				if (getpixel(635 - 1, 10 - 1) == 15) {
-					rectangle(635 - 1, 10 - 1, 950, 50);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		default: {
-			if (getpixel(609 - 1, 75 - 1) == 15 || getpixel(609 - 1, 125 - 1) == 15 
-				|| getpixel(609 - 1, 175 - 1) == 15 || getpixel(823 - 1, 175 - 1) == 15) {
-				setcolor(0);
-				if (getpixel(609 - 1, 75 - 1) == 15) {
-					rectangle(609 - 1, 75 - 1, 919, 115);
+			for (int i = 0; i < 4; i++) {
+				if (lan[i] == 1) {
+					lan[i] = 0;
+					switch (i)
+					{
+					case 0: {
+						setcolor(0);
+						rectangle(609 - 1, 75 - 1, 919, 115);
+						setcolor(15);
+						break;
+					}
+					case 1: {
+						setcolor(0);
+						rectangle(609 - 1, 125 - 1, 1219, 165);
+						setcolor(15);
+						break;
+					}
+					case 2: {
+						setcolor(0);
+						rectangle(609 - 1, 175 - 1, 669, 215);
+						setcolor(15);
+						break;
+					}
+					case 3: {
+						setcolor(0);
+						rectangle(823 - 1, 175 - 1, 893, 215);
+						setcolor(15);
+						break;
+					}
+					default:
+						break;
+					}
 				}
-				if (getpixel(609 - 1, 125 - 1) == 15) {
-					rectangle(609 - 1, 125 - 1, 1219, 165);
-				}
-				if (getpixel(609 - 1, 175 - 1) == 15) {
-					rectangle(609 - 1, 175 - 1, 669, 215);
-				}
-				if (getpixel(823 - 1, 175 - 1) == 15) {
-					rectangle(823 - 1, 175 - 1, 893, 215);
-				}				
-				setcolor(15);
-			}			
+			}
 			break;
 		}
-		}		
+		}
 		if (mouseLocHieuChinhMB(*x, *y) == 1){
-			if (getpixel(635 - 1, 10 - 1) == 0) {
+			if (lan[4] == 0) {
+				lan[4] = 1;
 				rectangle(635 - 1, 10 - 1, 950, 50);
-				setcolor(0);
-				if (getpixel(609 - 1, 75 - 1) == 15) {
-					rectangle(609 - 1, 75 - 1, 919, 115);
+				for (int i = 0; i < 4; i++) {
+					if (lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(609 - 1, 75 - 1, 919, 115);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(609 - 1, 125 - 1, 1219, 165);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(609 - 1, 175 - 1, 669, 215);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(823 - 1, 175 - 1, 893, 215);
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(635 - 1, 10 - 1, 950, 50);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(609 - 1, 125 - 1) == 15) {
-					rectangle(609 - 1, 125 - 1, 1219, 165);
-				}
-				if (getpixel(609 - 1, 175 - 1) == 15) {
-					rectangle(609 - 1, 175 - 1, 669, 215);
-				}
-				if (getpixel(823 - 1, 175 - 1) == 15) {
-					rectangle(823 - 1, 175 - 1, 893, 215);
-				}
-				setcolor(15);
 			}
 		}
 		else {
-			if (getpixel(635 - 1, 10 - 1) == 15) {
+			if (lan[4] == 1) {
+				lan[4] = 0;
 				setcolor(0);
 				rectangle(635 - 1, 10 - 1, 950, 50);
 				setcolor(15);
@@ -1184,10 +1314,10 @@ void DHhieuchinhMB(DSMayBay& ds_may_bay, MayBay*& ht, PTRChuyenBay& fist, int* x
 					}
 				}
 				else if ((t1 < ht->so_day || t2 < ht->so_dong) && timCBtheoSHMB(fist, ht->sh_Mb, t) != 0) {
-					outtextxy(xg + textwidth(text[0]) + getmaxx() / 2 + 100, yg + 20 + 130 - textheight(text[1]) / 2 + 50,
-						const_cast<char*>("so ve ko duoc giam nhan, phim bat ki de tiep tuc"));
+					outtextxy(xg + textwidth(text[0]) + getmaxx() / 2 + 50, yg + 20 + 130 - textheight(text[1]) / 2 + 50,
+						const_cast<char*>("may bay da duoc dung so ve ko duoc giam nhan, phim bat ki de tiep tuc"));
 					getch();
-					bar(1019, 200, 1019 + textwidth(const_cast<char*>("so ve ko duoc giam nhan, phim bat ki de tiep tuc")), 200 + textheight(const_cast<char*>("so ve ko duoc giam")));
+					bar(1019 - 50, 200, 1019 - 50 + textwidth(const_cast<char*>("may bay da duoc dung so ve ko duoc giam nhan, phim bat ki de tiep tuc")), 200 + textheight(const_cast<char*>("may bay da duoc dung so ve ko duoc giam nhan, phim bat ki de tiep tuc")));
 				}
 				if (timCBtheoSHMB(fist, ht->sh_Mb, t) == 0 && t1 * t2 >= 20) {
 					if (shmb[0] != '\0') {
@@ -1293,6 +1423,7 @@ void hienDSMb0(int* x, int* y, int* ii, DSMayBay& ds_may_bay)
 	int n = -1, mau;
 	int old = -1;
 	MayBay* hto = NULL;
+	bool lan[4]{ 0,0,0,0 };
 	while (1) {
 		if (n != *ii) {
 			/**x = 0; *y = 0; */
@@ -1325,88 +1456,204 @@ void hienDSMb0(int* x, int* y, int* ii, DSMayBay& ds_may_bay)
 		switch (mau)
 		{
 		case 0: {
-			if (getpixel(609 - 1, 75 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(609 - 1, 75 - 1, 919, 115);
-				setcolor(0);
-				if (getpixel(609 - 1, 125 - 1) == 15) {					
-					rectangle(609 - 1, 125 - 1, 1219, 165);
+				for (int i = 0; i < 4; i++) {
+					if (lan[i] == 1 && i != mau) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(609 - 1, 75 - 1, 919, 115);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(609 - 1, 125 - 1, 1219, 165);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(609 - 1, 175 - 1, 669, 215);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(823 - 1, 175 - 1, 893, 215);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(609 - 1, 175 - 1) == 15) {					
-					rectangle(609 - 1, 175 - 1, 669, 215);
-				}
-				if (getpixel(823 - 1, 175 - 1) == 15) {					
-					rectangle(823 - 1, 175 - 1, 893, 215);
-				}
-				setcolor(15);
-			}			
+			}
 			break;
 		}
 		case 1: {
-			if (getpixel(609 - 1, 125 - 1) == 0) {				
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(609 - 1, 125 - 1, 1219, 165);
-				setcolor(0);
-				if (getpixel(609 - 1, 75 - 1) == 15) {
-					rectangle(609 - 1, 75 - 1, 919, 115);
+				for (int i = 0; i < 4; i++) {
+					if (lan[i] == 1 && i != mau) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(609 - 1, 75 - 1, 919, 115);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(609 - 1, 125 - 1, 1219, 165);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(609 - 1, 175 - 1, 669, 215);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(823 - 1, 175 - 1, 893, 215);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(609 - 1, 175 - 1) == 15) {
-					rectangle(609 - 1, 175 - 1, 669, 215);
-				}
-				if (getpixel(823 - 1, 175 - 1) == 15) {
-					rectangle(823 - 1, 175 - 1, 893, 215);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 2: {
-			if (getpixel(609 - 1, 175 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(609 - 1, 175 - 1, 669, 215);
-				setcolor(0);
-				if (getpixel(609 - 1, 75 - 1) == 15) {
-					rectangle(609 - 1, 75 - 1, 919, 115);
+				for (int i = 0; i < 4; i++) {
+					if (lan[i] == 1 && i != mau) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(609 - 1, 75 - 1, 919, 115);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(609 - 1, 125 - 1, 1219, 165);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(609 - 1, 175 - 1, 669, 215);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(823 - 1, 175 - 1, 893, 215);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(609 - 1, 125 - 1) == 15) {
-					rectangle(609 - 1, 125 - 1, 1219, 165);
-				}
-				if (getpixel(823 - 1, 175 - 1) == 15) {
-					rectangle(823 - 1, 175 - 1, 893, 215);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 3: {
-			if (getpixel(823 - 1, 175 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(823 - 1, 175 - 1, 893, 215);
-				setcolor(0);
-				if (getpixel(609 - 1, 75 - 1) == 15) {
-					rectangle(609 - 1, 75 - 1, 919, 115);
+				for (int i = 0; i < 4; i++) {
+					if (lan[i] == 1 && i != mau) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 0: {
+							setcolor(0);
+							rectangle(609 - 1, 75 - 1, 919, 115);
+							setcolor(15);
+							break;
+						}
+						case 1: {
+							setcolor(0);
+							rectangle(609 - 1, 125 - 1, 1219, 165);
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(609 - 1, 175 - 1, 669, 215);
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(823 - 1, 175 - 1, 893, 215);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(609 - 1, 125 - 1) == 15) {
-					rectangle(609 - 1, 125 - 1, 1219, 165);
-				}
-				if (getpixel(609 - 1, 175 - 1) == 15) {
-					rectangle(609 - 1, 175 - 1, 669, 215);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		default: {
-			setcolor(0);
-			if (getpixel(609 - 1, 75 - 1) == 15) {
-				rectangle(609 - 1, 75 - 1, 919, 115);
+			for (int i = 0; i < 4; i++) {
+				if (lan[i] == 1) {
+					lan[i] = 0;
+					switch (i)
+					{
+					case 0: {
+						setcolor(0);
+						rectangle(609 - 1, 75 - 1, 919, 115);
+						setcolor(15);
+						break;
+					}
+					case 1: {
+						setcolor(0);
+						rectangle(609 - 1, 125 - 1, 1219, 165);
+						setcolor(15);
+						break;
+					}
+					case 2: {
+						setcolor(0);
+						rectangle(609 - 1, 175 - 1, 669, 215);
+						setcolor(15);
+						break;
+					}
+					case 3: {
+						setcolor(0);
+						rectangle(823 - 1, 175 - 1, 893, 215);
+						setcolor(15);
+						break;
+					}
+					default:
+						break;
+					}
+				}
 			}
-			if (getpixel(609 - 1, 125 - 1) == 15) {
-				rectangle(609 - 1, 125 - 1, 1219, 165);
-			}
-			if (getpixel(609 - 1, 175 - 1) == 15) {
-				rectangle(609 - 1, 175 - 1, 669, 215);
-			}
-			if (getpixel(823 - 1, 175 - 1) == 15) {
-				rectangle(823 - 1, 175 - 1, 893, 215);
-			}			
-			setcolor(15);
 			break;
 		}			
 		}
@@ -1731,6 +1978,11 @@ void DHThemCB(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* y
 				break;
 			}
 		}
+		if (strcmp(shmb1, shmb2) != 0) {
+			strcpy_s(shmb2, 100, shmb1);
+			strcpy_s(shmb, 15, shmb1);
+			i[9] = strlen(shmb);
+		}
 		if ((int)nhap == 13) {
 			if ((shmb[0] == '\0') || (mcb[0] == '\0') || (ngay[0] == '\0') || (thang[0] == '\0')
 				|| (nam[0] == '\0') || (gio[0] == '\0') || (phut[0] == '\0') || (sbd[0] == '\0'))
@@ -1880,6 +2132,7 @@ void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, D
 	PTRChuyenBay q;
 	int i1 = 0, cd = 0, ii1 = -1, ip1 = -1, j = 0, n = -1, mau;
 	char tam[225], nhap = 0;
+	bool lan[11]{ 0,0,0,0,0,0,0,0,0,0,0 };
 	q = dau_chuyen_bay;
 	while (1) {
 		if (ii1 != *ii) {
@@ -1947,300 +2200,597 @@ void hienDSCB0(int* x, int* y, int* ii, int* ip, PTRChuyenBay& dau_chuyen_bay, D
 			outtextxy(1095, 115, shmb1);
 		}
 		mau = mouseThemCB(*x, *y);
+
 		switch (mau)
 		{
-		case 1: {
-			if (getpixel(619 - 1, 60 - 1) == 0) {
-				rectangle(619 - 1, 60 - 1, 854, 90);
-				setcolor(0);
-				//if (getpixel(619 - 1, 60 - 1) == 15) {
-				//	rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
-				//}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+			case 1: {
+				if (lan[mau] == 0) {
+					lan[mau] = 1;
+					rectangle(619 - 1, 60 - 1, 854, 90);
+					for (int i = 0; i < 10; i++) {
+						if (i != mau && lan[i] == 1) {
+							lan[i] = 0;
+							switch (i)
+							{
+							case 1: {
+								setcolor(0);
+								rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+								setcolor(15);
+								break;
+							}
+							case 2: {
+								setcolor(0);
+								rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+								setcolor(15);
+								break;
+							}
+							case 3: {
+								setcolor(0);
+								rectangle(610 - 1, 110 - 1, 640, 140);//gio
+								setcolor(15);
+								break;
+							}
+							case 4: {
+								setcolor(0);
+								rectangle(650 - 1, 110 - 1, 680, 140);//phut
+								setcolor(15);
+								break;
+							}
+							case 5: {
+								setcolor(0);
+								rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+								setcolor(15);
+								break;
+							}
+							case 6: {
+								setcolor(0);
+								rectangle(740 - 1, 110, 770, 140);//thang
+								setcolor(15);
+								break;
+							}
+							case 7: {
+								setcolor(0);
+								rectangle(780 - 1, 110 - 1, 830, 140);//nam
+								setcolor(15);
+								break;
+							}
+							case 9: {
+								setcolor(0);
+								rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+								setcolor(15);
+								break;
+							}
+							default:
+								break;
+							}
+						}
+					}
 				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				setcolor(15);
+				break;
 			}
-			break;
-		}
 		case 2: {
-			if (getpixel(994 - 1, 60 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(994 - 1, 60 - 1, 1449, 90);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 11; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				//if (getpixel(994 - 1, 60 - 1) == 15) {
-				//	rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				//}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 3: {
-			if (getpixel(610 - 1, 110 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				//if (getpixel(610 - 1, 110 - 1) == 15) {
-				//	rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				//}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 4: {
-			if (getpixel(650 - 1, 110 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(650 - 1, 110 - 1, 680, 140);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				//if (getpixel(650 - 1, 110 - 1) == 15) {
-				//	rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				//}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 5: {
-			if (getpixel(695 - 1, 110 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(695 - 1, 110 - 1, 725, 140);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				//if (getpixel(695 - 1, 110 - 1) == 15) {
-				//	rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				//}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 6: {
-			if (getpixel(740 - 1, 110 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(740 - 1, 110, 770, 140);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				//if (getpixel(740 - 1, 110) == 15) {
-				//	rectangle(740 - 1, 110, 770, 140);//thang
-				//}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 7: {
-			if (getpixel(780 - 1, 110 - 1) == 0) {
-				rectangle(780 - 1, 110 - 1, 830, 140);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(780 - 1, 110 - 1, 830, 140);//nam
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				//if (getpixel(780 - 1, 110 - 1) == 15) {
-				//	rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				//}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 9: {
-			if (getpixel(1095 - 1, 110 - 1) == 0) {
-				rectangle(1095 - 1, 110 - 1, 1320, 140);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				//if (getpixel(1095 - 1, 110 - 1) == 15) {
-				//	rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				//}
-				setcolor(15);
 			}
 			break;
 		}
 		default: {
-			if (getpixel(619 - 1, 60 - 1) == 0 || getpixel(994 - 1, 60 - 1) == 0|| getpixel(610 - 1, 110 - 1) == 0
-				|| getpixel(650 - 1, 110 - 1) == 0|| getpixel(695 - 1, 110 - 1) == 0|| getpixel(740 - 1, 110) == 0
-				|| getpixel(780 - 1, 110 - 1) == 0|| getpixel(1095 - 1, 110 - 1) == 0) {
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+			for (int i = 0; i < 10; i++) {
+				if (lan[i] == 1) {
+					lan[i] = 0;
+					switch (i)
+					{
+					case 1: {
+						setcolor(0);
+						rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+						setcolor(15);
+						break;
+					}
+					case 2: {
+						setcolor(0);
+						rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+						setcolor(15);
+						break;
+					}
+					case 3: {
+						setcolor(0);
+						rectangle(610 - 1, 110 - 1, 640, 140);//gio
+						setcolor(15);
+						break;
+					}
+					case 4: {
+						setcolor(0);
+						rectangle(650 - 1, 110 - 1, 680, 140);//phut
+						setcolor(15);
+						break;
+					}
+					case 5: {
+						setcolor(0);
+						rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+						setcolor(15);
+						break;
+					}
+					case 6: {
+						setcolor(0);
+						rectangle(740 - 1, 110, 770, 140);//thang
+						setcolor(15);
+						break;
+					}
+					case 7: {
+						setcolor(0);
+						rectangle(780 - 1, 110 - 1, 830, 140);//nam
+						setcolor(15);
+						break;
+					}
+					case 9: {
+						setcolor(0);
+						rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+						setcolor(15);
+						break;
+					}
+					default:
+						break;
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				setcolor(15);
-			}			
+			}
 			break;
 		}
-
-			
 		}
+
 		if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
 			if (getpixel(619 - 1, 60 - 1) == 0 || getpixel(994 - 1, 60 - 1) == 0 || getpixel(610 - 1, 110 - 1) == 0
 				|| getpixel(650 - 1, 110 - 1) == 0 || getpixel(695 - 1, 110 - 1) == 0 || getpixel(740 - 1, 110) == 0
@@ -2411,7 +2961,7 @@ void DHHuyChuyen(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int
 					tm = TimSoHieu(tcb[*ii * 10 + i]->cb.sh_Mb, ds_may_bay);
 					_itoa_s(tm->so_day * tm->so_dong - tcb[*ii * 10 + i]->cb.so_ve, tam, 100, 10);
 					outtextxy(xg + 720 + 100, yg + 100 + kc * i, tam);
-					if (tcb[i]->cb.trang_thai_cb != HUY_CHUYEN && tcb[i]->cb.trang_thai_cb != HOAN_TAT) {
+					if (tcb[*ii * 10 + i]->cb.trang_thai_cb != HUY_CHUYEN && tcb[*ii * 10 + i]->cb.trang_thai_cb != HOAN_TAT) {
 						outtextxy(xg + 770 + 100, yg + 100 + kc * i, const_cast<char*>("HUY CHUYEN"));
 						rectangle(xg + 765 + 100, yg + 100 + kc * i, xg + 880 + 100, yg + 120 + kc * i);
 					}
@@ -2507,13 +3057,13 @@ void hienDSCB1(int* x, int* y, int* ii, PTRChuyenBay& dau_chuyen_bay, DSMayBay& 
 	char tam[225], nhap = 0;	
 	while (1) {		
 		nhap = getch();
-		if (mouseChonCB(*x, *y) == -1) {
+		/*if (mouseChonCB(*x, *y) == -1) {
 			getimage(xg, yg, xg + getmaxx(), yg + getmaxy(), p);
 			putimage(xg, yg, p, 1);
 			free(p);
 			*x = -1; *y = -1;
 			return;
-		}
+		}*/
 		if ((int)(nhap != 13) && (int)nhap != 27 && (int)nhap != 0) {
 			if (iloc < 14) if ((('a' <= nhap) && (nhap <= 'z')) || (('A' <= nhap) && (nhap <= 'Z'))
 				|| (('0' <= nhap) && (nhap <= '9'))) {
@@ -2529,11 +3079,12 @@ void hienDSCB1(int* x, int* y, int* ii, PTRChuyenBay& dau_chuyen_bay, DSMayBay& 
 					}
 					outtextxy(xg + 485 + 145, yg - 50, loc);
 			}			
-		}else		
+		}
+		else
 		if ((int)nhap == 0) {
+			nhap = getch();
 			if (!(*ii * 10 + mouseChonCB(*x, *y) < cd && mouseChonCB(*x, *y) >= 0)) {
-				*x = -2; *y = -2;
-				nhap = getch();
+				*x = -2; *y = -2;				
 				if ((int)nhap == 77) {
 					if (*ii * 10 - cd < 0) {
 						k = *ii;
@@ -2815,25 +3366,27 @@ void DHHieuChinhCB(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, DSMayBay ds_m
 				}
 				break;
 			}
-			default:
+			default: {
+				if (mouseLocHieuChinhCB(*x, *y) == 1) {
+					if (i[1] < 14) if ((('a' <= nhap) && (nhap <= 'z')) || (('A' <= nhap) && (nhap <= 'Z'))
+						|| (('0' <= nhap) && (nhap <= '9'))) {
+						nhap = toupper(nhap);
+						loc[i[1] + 1] = loc[i[1]];
+						loc[i[1]++] = nhap;
+						outtextxy(xg + 5 + textwidth(text[6]), yg - 40, loc);
+					}
+					if ((int)nhap == 8) {
+						xoachu(loc, xg + 5 + textwidth(text[6]), yg - 40);
+						if (i[1] > 0) {
+							loc[i[1] - 1] = loc[i[1]--];
+						}
+						outtextxy(xg + 5 + textwidth(text[6]), yg - 40, loc);
+					}
+				}
 				break;
 			}
-			if (mouseLocHieuChinhCB(*x, *y) == 1) {
-				if (i[1] < 14) if ((('a' <= nhap) && (nhap <= 'z')) || (('A' <= nhap) && (nhap <= 'Z'))
-					|| (('0' <= nhap) && (nhap <= '9'))) {
-					nhap = toupper(nhap);
-					loc[i[1] + 1] = loc[i[1]];
-					loc[i[1]++] = nhap;					
-					outtextxy(xg + 5 + textwidth(text[6]), yg - 40, loc);
-				}
-				if ((int)nhap == 8) {
-					xoachu(loc, xg + 5 + textwidth(text[6]), yg - 40);
-					if (i[1] > 0) {
-						loc[i[1] - 1] = loc[i[1]--];
-					}
-					outtextxy(xg + 5 + textwidth(text[6]), yg - 40, loc);
-				}
 			}
+			
 		}
 		if ((int)nhap == 0) {
 			nhap = getch();
@@ -2991,6 +3544,7 @@ void hienDSCB2(int* x, int* y, int* ii, PTRChuyenBay& ht, PTRChuyenBay& dau_chuy
 		tcb[i] = q;
 		q = q->next;
 	}
+	bool lan[11]{ 0,0,0,0,0,0,0,0,0,0,0 };
 	while (1) {
 		if (old != mouseHieuChinhCB(old, *x, *y) && *ii * 8 + mouseHieuChinhCB(old, *x, *y) < cd && mouseHieuChinhCB(old, *x, *y) >= 0)
 		{
@@ -3091,358 +3645,719 @@ void hienDSCB2(int* x, int* y, int* ii, PTRChuyenBay& ht, PTRChuyenBay& dau_chuy
 		switch (mau)
 		{
 		//case 1: {
-		//	if (getpixel(619 - 1, 60 - 1) == 0) {
+		//	if (lan[mau] == 0) {
+		//		lan[mau] = 1;
 		//		rectangle(619 - 1, 60 - 1, 854, 90);
-		//		setcolor(0);
-		//		//if (getpixel(619 - 1, 60 - 1) == 15) {
-		//		//	rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
-		//		//}
-		//		if (getpixel(994 - 1, 60 - 1) == 15) {
-		//			rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+		//		for (int i = 0; i < 10; i++) {
+		//			if (i != mau && lan[i] == 1) {
+		//				lan[i] = 0;
+		//				switch (i)
+		//				{
+		//				case 1: {
+		//					setcolor(0);
+		//					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+		//					setcolor(15);
+		//					break;
+		//				}
+		//				case 2: {
+		//					setcolor(0);
+		//					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+		//					setcolor(15);
+		//					break;
+		//				}
+		//				case 3: {
+		//					setcolor(0);
+		//					rectangle(610 - 1, 110 - 1, 640, 140);//gio
+		//					setcolor(15);
+		//					break;
+		//				}
+		//				case 4: {
+		//					setcolor(0);
+		//					rectangle(650 - 1, 110 - 1, 680, 140);//phut
+		//					setcolor(15);
+		//					break;
+		//				}
+		//				case 5: {
+		//					setcolor(0);
+		//					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+		//					setcolor(15);
+		//					break;
+		//				}
+		//				case 6: {
+		//					setcolor(0);
+		//					rectangle(740 - 1, 110, 770, 140);//thang
+		//					setcolor(15);
+		//					break;
+		//				}
+		//				case 7: {
+		//					setcolor(0);
+		//					rectangle(780 - 1, 110 - 1, 830, 140);//nam
+		//					setcolor(15);
+		//					break;
+		//				}
+		//				case 9: {
+		//					setcolor(0);
+		//					rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+		//					setcolor(15);
+		//					break;
+		//				}
+		//				default:
+		//					break;
+		//				}
+		//			}
 		//		}
-		//		if (getpixel(610 - 1, 110 - 1) == 15) {
-		//			rectangle(610 - 1, 110 - 1, 640, 140);//gio
-		//		}
-		//		if (getpixel(650 - 1, 110 - 1) == 15) {
-		//			rectangle(650 - 1, 110 - 1, 680, 140);//phut
-		//		}
-		//		if (getpixel(695 - 1, 110 - 1) == 15) {
-		//			rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-		//		}
-		//		if (getpixel(740 - 1, 110) == 15) {
-		//			rectangle(740 - 1, 110, 770, 140);//thang
-		//		}
-		//		if (getpixel(780 - 1, 110 - 1) == 15) {
-		//			rectangle(780 - 1, 110 - 1, 830, 140);//nam
-		//		}
-		//		if (getpixel(1095 - 1, 110 - 1) == 15) {
-		//			rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-		//		}
-		//		setcolor(15);
 		//	}
 		//	break;
 		//}
 		case 2: {
-			if (getpixel(994 - 1, 60 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(994 - 1, 60 - 1, 1449, 90);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 11; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						case 10: {
+							setcolor(0);
+							rectangle(685 - 1, 10 - 1, 920, 40);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				//if (getpixel(994 - 1, 60 - 1) == 15) {
-				//	rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				//}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				if (getpixel(685 - 1, 10 - 1) == 15) {
-					rectangle(685 - 1, 10 - 1, 920, 40);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 3: {
-			if (getpixel(610 - 1, 110 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						case 10: {
+							setcolor(0);
+							rectangle(685 - 1, 10 - 1, 920, 40);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				//if (getpixel(610 - 1, 110 - 1) == 15) {
-				//	rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				//}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				if (getpixel(685 - 1, 10 - 1) == 15) {
-					rectangle(685 - 1, 10 - 1, 920, 40);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 4: {
-			if (getpixel(650 - 1, 110 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(650 - 1, 110 - 1, 680, 140);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						case 10: {
+							setcolor(0);
+							rectangle(685 - 1, 10 - 1, 920, 40);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				//if (getpixel(650 - 1, 110 - 1) == 15) {
-				//	rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				//}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				if (getpixel(685 - 1, 10 - 1) == 15) {
-					rectangle(685 - 1, 10 - 1, 920, 40);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 5: {
-			if (getpixel(695 - 1, 110 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(695 - 1, 110 - 1, 725, 140);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						case 10: {
+							setcolor(0);
+							rectangle(685 - 1, 10 - 1, 920, 40);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				//if (getpixel(695 - 1, 110 - 1) == 15) {
-				//	rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				//}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				if (getpixel(685 - 1, 10 - 1) == 15) {
-					rectangle(685 - 1, 10 - 1, 920, 40);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 6: {
-			if (getpixel(740 - 1, 110 - 1) == 0) {
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
 				rectangle(740 - 1, 110, 770, 140);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						case 10: {
+							setcolor(0);
+							rectangle(685 - 1, 10 - 1, 920, 40);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				//if (getpixel(740 - 1, 110) == 15) {
-				//	rectangle(740 - 1, 110, 770, 140);//thang
-				//}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				if (getpixel(685 - 1, 10 - 1) == 15) {
-					rectangle(685 - 1, 10 - 1, 920, 40);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 7: {
-			if (getpixel(780 - 1, 110 - 1) == 0) {
-				rectangle(780 - 1, 110 - 1, 830, 140);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(780 - 1, 110 - 1, 830, 140);//nam
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						case 10: {
+							setcolor(0);
+							rectangle(685 - 1, 10 - 1, 920, 40);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				//if (getpixel(780 - 1, 110 - 1) == 15) {
-				//	rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				//}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				if (getpixel(685 - 1, 10 - 1) == 15) {
-					rectangle(685 - 1, 10 - 1, 920, 40);
-				}
-				setcolor(15);
 			}
 			break;
 		}
 		case 9: {
-			if (getpixel(1095 - 1, 110 - 1) == 0) {
-				rectangle(1095 - 1, 110 - 1, 1320, 140);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+			if (lan[mau] == 0) {
+				lan[mau] = 1;
+				rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+				for (int i = 0; i < 10; i++) {
+					if (i != mau && lan[i] == 1) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						case 10: {
+							setcolor(0);
+							rectangle(685 - 1, 10 - 1, 920, 40);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				//if (getpixel(1095 - 1, 110 - 1) == 15) {
-				//	rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				//}
-				if (getpixel(685 - 1, 10 - 1) == 15) {
-					rectangle(685 - 1, 10 - 1, 920, 40);
-				}
-				setcolor(15);
 			}
 			break;
-		}
+		}	
 		default: {
-			if (getpixel(619 - 1, 60 - 1) == 15 || getpixel(994 - 1, 60 - 1) == 15 || getpixel(610 - 1, 110 - 1) == 15
-				|| getpixel(650 - 1, 110 - 1) == 15 || getpixel(695 - 1, 110 - 1) == 15 || getpixel(740 - 1, 110) == 15
-				|| getpixel(780 - 1, 110 - 1) == 15 || getpixel(1095 - 1, 110 - 1) == 15) {
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+			for (int i = 0; i < 10; i++) {
+				if (lan[i] == 1) {
+					lan[i] = 0;
+					switch (i)
+					{
+					case 1: {
+						setcolor(0);
+						rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+						setcolor(15);
+						break;
+					}
+					case 2: {
+						setcolor(0);
+						rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+						setcolor(15);
+						break;
+					}
+					case 3: {
+						setcolor(0);
+						rectangle(610 - 1, 110 - 1, 640, 140);//gio
+						setcolor(15);
+						break;
+					}
+					case 4: {
+						setcolor(0);
+						rectangle(650 - 1, 110 - 1, 680, 140);//phut
+						setcolor(15);
+						break;
+					}
+					case 5: {
+						setcolor(0);
+						rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+						setcolor(15);
+						break;
+					}
+					case 6: {
+						setcolor(0);
+						rectangle(740 - 1, 110, 770, 140);//thang
+						setcolor(15);
+						break;
+					}
+					case 7: {
+						setcolor(0);
+						rectangle(780 - 1, 110 - 1, 830, 140);//nam
+						setcolor(15);
+						break;
+					}
+					case 9: {
+						setcolor(0);
+						rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+						setcolor(15);
+						break;
+					}					
+					default:
+						break;
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}				
-				setcolor(15);
 			}
 			break;
 		}
 		}
 		if (mouseLocHieuChinhCB(*x, *y) == 1) {
-			if (getpixel(685 - 1, 10 - 1) == 0) {
+			if (lan[10] == 0) {
+				lan[10] = 1;
 				rectangle(685 - 1, 10 - 1, 920, 40);
-				setcolor(0);
-				if (getpixel(619 - 1, 60 - 1) == 15) {
-					rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+				for (int i = 0; i < 11; i++) {
+					if (lan[i] == 1 && i != 10) {
+						lan[i] = 0;
+						switch (i)
+						{
+						case 1: {
+							setcolor(0);
+							rectangle(619 - 1, 60 - 1, 854, 90); //ma cb
+							setcolor(15);
+							break;
+						}
+						case 2: {
+							setcolor(0);
+							rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
+							setcolor(15);
+							break;
+						}
+						case 3: {
+							setcolor(0);
+							rectangle(610 - 1, 110 - 1, 640, 140);//gio
+							setcolor(15);
+							break;
+						}
+						case 4: {
+							setcolor(0);
+							rectangle(650 - 1, 110 - 1, 680, 140);//phut
+							setcolor(15);
+							break;
+						}
+						case 5: {
+							setcolor(0);
+							rectangle(695 - 1, 110 - 1, 725, 140);//ngay
+							setcolor(15);
+							break;
+						}
+						case 6: {
+							setcolor(0);
+							rectangle(740 - 1, 110, 770, 140);//thang
+							setcolor(15);
+							break;
+						}
+						case 7: {
+							setcolor(0);
+							rectangle(780 - 1, 110 - 1, 830, 140);//nam
+							setcolor(15);
+							break;
+						}
+						case 9: {
+							setcolor(0);
+							rectangle(1095 - 1, 110 - 1, 1320, 140);//sh mb
+							setcolor(15);
+							break;
+						}
+						case 10: {
+							setcolor(0);
+							rectangle(685 - 1, 10 - 1, 920, 40);
+							setcolor(15);
+							break;
+						}
+						default:
+							break;
+						}
+					}
 				}
-				if (getpixel(994 - 1, 60 - 1) == 15) {
-					rectangle(994 - 1, 60 - 1, 1449, 90);//san bay den
-				}
-				if (getpixel(610 - 1, 110 - 1) == 15) {
-					rectangle(610 - 1, 110 - 1, 640, 140);//gio
-				}
-				if (getpixel(650 - 1, 110 - 1) == 15) {
-					rectangle(650 - 1, 110 - 1, 680, 140);//phut
-				}
-				if (getpixel(695 - 1, 110 - 1) == 15) {
-					rectangle(695 - 1, 110 - 1, 725, 140);//ngay
-				}
-				if (getpixel(740 - 1, 110) == 15) {
-					rectangle(740 - 1, 110, 770, 140);//thang
-				}
-				if (getpixel(780 - 1, 110 - 1) == 15) {
-					rectangle(780 - 1, 110 - 1, 830, 140);//nam
-				}
-				if (getpixel(1095 - 1, 110 - 1) == 15) {
-					rectangle(1095 - 1, 110 - 1, 1320, 140);//shmb
-				}
-				/*if (getpixel(685 - 1, 10 - 1) == 15) {
-					rectangle(685 - 1, 10 - 1, 920, 40);
-				}*/
-				setcolor(15);
-			}			
-
+			}		
 		}
 		else {
-			if (getpixel(685 - 1, 10 - 1) == 15) {
+			if (lan[10] == 1) {
+				lan[10] = 0;
 				setcolor(0);
 				rectangle(685 - 1, 10 - 1, 920, 40);
 				setcolor(15);
 			}
+			if (mouseLocHieuChinhCB(*x, *y) == 2) {
+				cd = 0;
+				for (PTRChuyenBay chay = dau_chuyen_bay; chay != NULL; chay = chay->next) {
+					if (strncmp(chay->cb.ma_cb, loc, strlen(loc)) == 0) {
+						tcb[cd++] = chay;
+					}
+				}
+				ii1 = -1;
+			}
+				
 		}
+		
+		
 		if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
 			if (getpixel(619 - 1, 60 - 1) == 15 || getpixel(994 - 1, 60 - 1) == 15 || getpixel(610 - 1, 110 - 1) == 15
 				|| getpixel(650 - 1, 110 - 1) == 15 || getpixel(695 - 1, 110 - 1) == 15 || getpixel(740 - 1, 110) == 15
@@ -3482,16 +4397,7 @@ void hienDSCB2(int* x, int* y, int* ii, PTRChuyenBay& ht, PTRChuyenBay& dau_chuy
 			free(p1);
 			delete[]tcb;
 			return;
-		}
-		if (mouseLocHieuChinhCB(*x, *y) == 2) {
-			cd = 0;
-			for (PTRChuyenBay chay = dau_chuyen_bay; chay != NULL; chay = chay->next) {
-				if (strncmp(chay->cb.ma_cb, loc, strlen(loc)) == 0) {
-					tcb[cd++] = chay;
-				}
-			}
-			ii1 = -1;			
-		}		
+		}				
 	}
 
 }
@@ -4117,7 +5023,7 @@ void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 					}
 				}
 				if ((int)nhap == 13) {
-					if (cmnd[0] != '\0' && ho[0] == '\0' && ten[0] == '\0' && phai[0] == '\0') {
+					if (cmnd[0] != '\0' && n[3] == 12 && ho[0] == '\0' && ten[0] == '\0' && phai[0] == '\0') {
 						kh = timKhachHang(goc_khach_hang, cmnd);
 						if (kh != NULL) {
 							strcpy_s(ho, 40, kh->info.ho); n[0] = strlen(ho);
@@ -4133,7 +5039,7 @@ void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 									Ve* a = NULL;
 									Ve* b = NULL;
 									a = ht->cb.timVe(cmnd);
-									b = ht->cb.timVe1(vtd);									
+									b = ht->cb.timVe1(vtd);
 									if (ht->cb.timVe(cmnd) == NULL && ht->cb.timVe1(vtd) == NULL) {
 										ht->cb.DatVe(cmnd, vtd);
 										ido = -1;
@@ -4188,7 +5094,7 @@ void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 						}
 					}
 					else
-						if (cmnd[0] != '\0' && ho[0] != '\0' && ten[0] != '\0' && phai[0] != '\0') {
+						if (cmnd[0] != '\0' && n[3] == 12 && ho[0] != '\0' && ten[0] != '\0' && phai[0] != '\0') {
 							kh = timKhachHang(goc_khach_hang, cmnd);
 							if (kh != NULL && (strcmp(kh->info.ho, ho) != 0
 								|| strcmp(kh->info.ten, ten) != 0 || atoi(phai) != (int)kh->info.phai)) {
@@ -4297,10 +5203,16 @@ void DHdatVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 								}
 							}
 						}
+				////					
 					if (cmnd[0] == '\0') {
 						outtextxy(xg, yg + 120, const_cast<char*>("CMND khong dc de trong, nhan phim bat ky de tiep tuc"));
 						getch();
 						xoachu(const_cast<char*>("CMND khong dc de trong, nhan phim bat ky de tiep tuc"), xg, yg + 120);
+					}else
+					if (n[3] < 12) {
+						outtextxy(xg, yg + 120, const_cast<char*>("so CMND co 12 so, nhan phim bat ky de tiep tuc"));
+						getch();
+						xoachu(const_cast<char*>("so CMND co 12 so, nhan phim bat ky de tiep tuc"), xg, yg + 120);
 					}
 				}
 				if ((int)nhap == 27 || (*x == -10 && *y == -10)) {
@@ -4585,6 +5497,40 @@ void chonChuyenBay(PTRChuyenBay& dau_chuyen_bay, PTRChuyenBay& ht, int* x, int* 
 		}
 		//
 		if ((*x == -1 && *y == -1) || (*x == -10 && *y == -10)) {
+			for (int i = 0; i < 4; i++) {
+				if (lan[i] == 1) {
+					lan[i] = 0;
+					switch (i)
+					{
+					case 0: {
+						setcolor(0);
+						rectangle(655 - 1, 20 - 1, 685 + 1, 50 + 1);
+						setcolor(15);
+						break;
+					}
+					case 1: {
+						setcolor(0);
+						rectangle(700 - 1, 20 - 1, 730 + 1, 50 + 1);
+						setcolor(15);
+						break;
+					}
+					case 2: {
+						setcolor(0);
+						rectangle(740 - 1, 20 - 1, 790 - 1, 50 - 1);
+						setcolor(15);
+						break;
+					}
+					case 3: {
+						setcolor(0);
+						rectangle(955 - 1, 20 - 1, 1410 + 1, 50 + 1);
+						setcolor(15);
+						break;
+					}
+					default:
+						break;
+					}
+				}
+			}
 			getimage(xg, yg, xg + 240, yg + 120, q);
 			putimage(xg, yg, q, 1);
 			free(q);
@@ -5093,7 +6039,7 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 					}
 				}
 				if ((int)nhap == 13) {
-					if (cmnd[0] != '\0' && vtd[0] == '\0') {
+					if (cmnd[0] != '\0' && n[3] == 12 && vtd[0] == '\0') {
 						kh = timKhachHang(goc_khach_hang, cmnd);
 						if (capNhapTT(ht->cb.ngay_gio_kh) == HOAN_TAT) {
 							outtextxy(xg, yg + 120, const_cast<char*>("da qua thoi gian huy ve, NHAN PHIM BAT KY DE TIEP TUC"));
@@ -5119,6 +6065,9 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 										ht->cb.ds_ve[j] = ht->cb.ds_ve[j + 1];
 									}
 									ht->cb.so_ve--;
+								}
+								else {
+									if (nhap == 0) getch();
 								}
 								ino = -1;
 								ido = -1;
@@ -5156,6 +6105,9 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 										}
 										ht->cb.so_ve--;
 									}
+									else {
+										if (nhap == 0) getch();
+									}
 									ino = -1;
 									ido = -1;
 									xoachu(text[6], xg, yg + 120);
@@ -5192,6 +6144,11 @@ void DHhuyVe(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, PTRKhachhang& g
 							outtextxy(xg, yg + 120, const_cast<char*>("huy ve bang thong tin CMND hoac vi tri ve, NHAN PHIM BAT KY DE TIEP TUC"));
 							getch();
 							xoachu(const_cast<char*>("huy ve bang thong tin CMND hoac vi tri ve, NHAN PHIM BAT KY DE TIEP TUC"), xg, yg + 120);
+						}
+						if (cmnd[0] != '\0' && n[3] < 12) {
+							outtextxy(xg, yg + 120, const_cast<char*>("CMND co 12 so, NHAN PHIM BAT KY DE TIEP TUC"));
+							getch();
+							xoachu(const_cast<char*>("CMND co 12 so, NHAN PHIM BAT KY DE TIEP TUC"), xg, yg + 120);
 						}
 					}
 				}

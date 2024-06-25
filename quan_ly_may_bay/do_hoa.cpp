@@ -7465,6 +7465,7 @@ while (chuyenBay != NULL && demqt < 8) {
 				}
 			}
 			if ((int)nhap == 115 && checktd + 13 <= dsmaybay.maybay[bmb]->so_dong) {
+				cout << 115;
 				yve = 110;
 				xve = 720;
 				bar(getmaxx() - 745, yg + 100, getmaxx(), 750); bar(getmaxx() - 745, yg + 100, getmaxx(), 750);

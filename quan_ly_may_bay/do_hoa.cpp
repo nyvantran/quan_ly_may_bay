@@ -2885,6 +2885,7 @@ int mouseChonMB(int x, int y, int old)
 		}
 	}
 	return old;
+	//return -1;
 }
 void DHHuyChuyen(PTRChuyenBay& dau_chuyen_bay, DSMayBay& ds_may_bay, int* x, int* y,int *ii, char* loc, int& cd)
 {

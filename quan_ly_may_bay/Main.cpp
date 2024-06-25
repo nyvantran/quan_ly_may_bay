@@ -13,15 +13,7 @@ int main() {
 	PTRKhachhang goc_khach_hang = NULL;
 	ds_may_bay.napFile(DLMAYBAY);
 	napFileChuyenBay(DLCHUYENBAY, dau_chuyen_bay, ds_may_bay);	
-	napFileKhachHang(goc_khach_hang, DLKHACHHANG);
-	
-	//duyetLNR(goc_khach_hang);
-	/*while (dau_chuyen_bay != NULL) {
-		cout << dau_chuyen_bay->cb.sh_Mb << endl;
-		cout << dau_chuyen_bay->cb.trang_thai_cb << endl;
-		cout << endl;
-		dau_chuyen_bay = dau_chuyen_bay->next;
-	}*/
+	napFileKhachHang(goc_khach_hang, DLKHACHHANG);	
 	///////////////////////////////////////////
 	KhoiDong();
 	chayDoHoa(ds_may_bay,dau_chuyen_bay,goc_khach_hang);
@@ -35,10 +27,6 @@ int main() {
 	xoaHetKhachHang(goc_khach_hang);
 	///////////////////
 	KetThuc();
-	/*NgayGio t1, t2;
-	t1.datNgayGio(8, 0, 23, 4, 2023);
-	t2.datNgayGio(8, 0, 23, 4, 2023);
-	cout << truNgayGio(t1, t2);*/
 }
 
 

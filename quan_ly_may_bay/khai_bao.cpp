@@ -129,7 +129,7 @@ void napFileChuyenBay(const char file[], PTRChuyenBay &fist,DSMayBay ds)
 					doc.trang_thai_cb = HET_VE;
 				}
 			}			
-			doc.ds_ve = new Ve[n];
+			if (doc.so_ve > 0) { doc.ds_ve = new Ve[n]; }
 			for (int i = 0; i < doc.so_ve; i++) {
 				file1.read(reinterpret_cast<char*>(&doc.ds_ve[i]), sizeof(Ve));
 			}
@@ -192,7 +192,7 @@ bool themChuyenBay(PTRChuyenBay &fist, ChuyenBay x)/*co sua them*/
 void xoahetChuyenBay(PTRChuyenBay& fist)
 {
 	while (fist != NULL) {
-		delete fist->cb.ds_ve;
+		if (fist->cb.so_ve > 0)delete[] fist->cb.ds_ve;
 		xoadauNodeChuyenBay(fist);
 	}
 }
@@ -401,6 +401,38 @@ bool ChuyenBay::huyVe(char cmnd[])
 	this->so_ve--;
 	return true;
 }
+void ChuyenBay::DatVe(char cmnd[], char vtd[])
+{
+	int diem;
+	for (diem = 0; diem < this->so_ve; diem++) {
+		if (strcmp(vtd, this->ds_ve[diem].vitri) == -1) {
+			break;
+		}			
+
+	}
+	for (int i = this->so_ve - 1; i >= diem; i--) {
+		this->ds_ve[i + 1] = this->ds_ve[i];
+	}
+	this->ds_ve[diem].DatVe(cmnd, vtd);
+	this->so_ve++;
+}
+Ve* ChuyenBay::timVe1(char vtd[])
+{
+	int giua = this->so_ve / 2, dau = 0, duoi = this->so_ve - 1;	
+	while (dau <= duoi) {
+		if (strcmp(this->ds_ve[giua].vitri, vtd) == 0) {
+			return this->ds_ve + giua;
+		}
+		if (strcmp(vtd, this->ds_ve[giua].vitri) == -1) {
+			duoi = giua - 1;
+		}
+		if (strcmp(vtd, this->ds_ve[giua].vitri) == 1) {
+			dau = giua + 1;
+		}
+		giua = (duoi - dau + 1) / 2 + dau;
+	}
+	return NULL;
+}
 /*setup ngay gio*/
 void NgayGio::datNgayGio(int gio, int phut, int ngay, int thang, int nam)
 {
@@ -498,7 +530,7 @@ void SapVe(char ve[],int ghe_day,int ghe_dong)
 		n = ghe_day / 26;
 		m = ghe_day % 26;
 		n += 64;
-		m += 64;
+		m += 65;
 		day[0] = (char)n;
 		day[1] = (char)m;
 	}

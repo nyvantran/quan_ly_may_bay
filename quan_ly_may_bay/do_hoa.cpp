@@ -7378,7 +7378,7 @@ while (chuyenBay != NULL && demqt < 8) {
 				}
 			}
 		}
-		for (PTRChuyenBay q = cbtam; q->next != NULL;q=q->next ) {
+		for (PTRChuyenBay q = cbtam; q != NULL;q=q->next ) {
 			if (strcmp(inma, q->cb.ma_cb)==0) {
 				 checkma = 1;
 				 //cout << checkma << endl;

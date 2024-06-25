@@ -4014,16 +4014,6 @@ void xuatSoCBHT(int* x, int* y, PTRChuyenBay chuyenBay,DSMayBay DsMayBay)
 	line(xg +450, yg+80, xg+getmaxx() - 50, yg + 80);
 	char nhap;
 	Bublesort(chuyenBay, DsMayBay);
-	//_itoa_s(chuyenBay->dem,tam[i], 10, 10);
-	/*while (chuyenBay != NULL && i<10) {
-		outtextxy(getmaxx() - 950, yg + 100, chuyenBay->cb.sh_Mb);
-		_itoa_s(chuyenBay->dem, tam, 10, 10);
-		outtextxy(getmaxx() - 450, yg + 100, tam);
-		yg = yg + 50;
-		chuyenBay = chuyenBay->next;
-		i++;
-	}
-	*/
 	
 	
 //========================
@@ -4112,6 +4102,7 @@ void xuatSoVeTrong(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay)
 	int ldemqt = 0;
 	PTRChuyenBay lcb = chuyenBay;
 	DSMayBay dsmaybay = DsMayBay;
+	int dung = 0;
 
 	//============================set bo loc
 	char gio[3]{}, phut[3]{}, ngay[3]{}, thang[3]{}, nam[5]{};
@@ -4126,18 +4117,6 @@ void xuatSoVeTrong(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay)
 	int lcbi = 0;
 	int lcbdi = 0;
 	//==========================
-	/*for (int j = 1; j <= dsmaybay.maybay[0]->so_day; j++) {
-		for (int k = 1; k <= 2; k++) {
-			SapVe(ve, k, j);
-			cout << ve << " ";
-			outtextxy(getmaxx() - 1250, yg + 50, ve);
-		}
-		cout << endl;
-	}*/
-	
-	
-	
-	
 	PTRChuyenBay cbtam = chuyenBay;
 	int i=0;
 	while (chuyenBay != NULL) {
@@ -4147,9 +4126,7 @@ void xuatSoVeTrong(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay)
 	}
 	chuyenBay = cbtam;
 	
-	/*for (int m = 0; m < chuyenBay->cb.so_ve; m++) {
-		cout << chuyenBay->cb.ds_ve[m].vitri << endl;
-	}*/
+	
 	bool n = false;
 	 xg = 50, yg = 10;
 
@@ -4175,11 +4152,7 @@ void xuatSoVeTrong(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay)
 	line(getmaxx() - 1150, yg + 100, getmaxx() - 1150, yg + 120);
 	line(getmaxx() - 1110, yg + 100, getmaxx() - 1110, yg + 120);
 //=======================================
-	/*outtextxy(getmaxx() - 1250, yg + 140, (char*)"TRANG THAI:");
-	rectangle(getmaxx() - 1140, yg + 140, getmaxx() - 1010, yg + 160);
-	line(getmaxx() - 1030, yg + 140, getmaxx() - 1030, yg + 160);
-	line(getmaxx() - 1020, yg + 145, getmaxx() - 1020, yg + 155);
-	line(getmaxx() - 1025, yg + 150, getmaxx() - 1015, yg + 150);*/
+	
 //======================================
 	setbkcolor(BLUE);
 	settextstyle(3, HORIZ_DIR, 1);
@@ -4196,8 +4169,7 @@ void xuatSoVeTrong(int* x, int* y, PTRChuyenBay chuyenBay, DSMayBay DsMayBay)
 	outtextxy(getmaxx() - 700, yg + 50, (char*)"CHUYEN BAY MA: ");
 	rectangle(getmaxx() - 470, yg+50, getmaxx() - 150, yg + 70);
 //====================================
-	/*outtextxy(getmaxx() - 210, yg + 50, (char*)"CLEAR ");
-	rectangle(getmaxx() - 230, yg + 50, getmaxx() - 100, yg + 70);*/
+	
 while (chuyenBay != NULL && demqt < 8) {
 				line(xg + 450, yg + 125, xg + getmaxx() - 800, yg + 125);
 				outtextxy(getmaxx() - 900, yg + 50, chuyenBay->cb.ma_cb);
@@ -4277,42 +4249,8 @@ while (chuyenBay != NULL && demqt < 8) {
 		
 
 //================================
-	/*if (*x > getmaxx() - 470 && *x < getmaxx() - 300) {
-		if (*y > yg + 50 && *y < yg + 70) {
-			cout << 1;
-		}
-	}*/
-//=================================================
-		/*for (int j = 1; j <= dsmaybay.maybay[0]->so_day; j++) {
-		for (int k = 1; k <= dsmaybay.maybay[0]->so_dong; k++) {
-			SapVe(ve, k, j);
-			cout << ve << " ";
-			outtextxy(getmaxx() - xve,yve, ve);
-			xve -= 60;
-		}
-		yve =yve+50;
-		for (int k = 1; k <= dsmaybay.maybay[0]->so_dong; k++) {
-			xve += 60;
-		}
-		cout << endl;
-		
-	}*/
-	//xg = 50;
-	//yg = 10;
-	
-//================================
-	/*thread nhanh(mousexv, ref(x), ref(y));
-	nhanh.join();
-	n = mousexv(x, y);
-	if (n) {
-		cout << *x << endl << *y << endl;
-	}*/
-			//chuyenBay = cbtam;
-	while (1) {
-		
-		
-		
 
+	while (1) {
 //===================================
 		if (mouseNhapSH(x, y)) {
 			if (((int)nhap  >= '0' && nhap <= '9') || (nhap >= 'a' && nhap <= 'z') || (nhap >= 'A' && nhap <= 'Z') && (int)nhap != 80 && (int)nhap != 72 && (int)nhap != 77 && (int)nhap != 75) {
@@ -4339,22 +4277,7 @@ while (chuyenBay != NULL && demqt < 8) {
 			}
 		}
 
-		
-			
-		
 //===========================================================================
-		//outtextxy(getmaxx() - 210, yg + 50, (char*)"CLEAR ");
-		//rectangle(getmaxx() - 230, yg + 50, getmaxx() - 100, yg + 70);
-		/*if (*x > getmaxx() - 230 && *x < getmaxx() - 100) {
-			if (*y > yg + 50 && *y < yg + 70) {
-				bar(getmaxx() - 745, yg + 100, getmaxx(), 750);
-				yve = 110;
-				xve = 720;
-				checktd = 1;
-				checktp = 1;
-			
-			}
-		}*/
 		yg = 10;
 //============================================
 		//cout << inma[2];
@@ -4368,12 +4291,9 @@ while (chuyenBay != NULL && demqt < 8) {
 		}
 
 //==================================
-		/*else {
-			nhap = '=';
-		}*/
-		//chuyenBay = cbtam;
+		
 		if (!mousePB(x, y)) {
-			if ((int)nhap == 80 && chuyenBay->next != NULL&& ldemqt==8) {
+			if ((int)nhap == 80 && chuyenBay != NULL&& ldemqt==8&& dung<i) {
 				demqt = 0;
 				page++;
 				bar(getmaxx() - 1000, yg + 45, getmaxx() - 750, yg + 750);
@@ -4460,6 +4380,7 @@ while (chuyenBay != NULL && demqt < 8) {
 					}
 					//cout << chuyenBay->cb.sh_Mb << endl;
 					demqt++;
+					dung++;
 					ldemqt = demqt;
 					yg = yg + 80;
 					chuyenBay = chuyenBay->next;
@@ -4481,6 +4402,7 @@ while (chuyenBay != NULL && demqt < 8) {
 				line(xg + 450, yg + 45, xg + getmaxx() - 800, yg + 45);
 				demqt = 0;
 				page--;
+				dung = page * 8;
 				if(page * 8 < i - 1 ) {
 					check = page*8;
 				}
@@ -4994,9 +4916,6 @@ while (chuyenBay != NULL && demqt < 8) {
 				cout << lcbi;
 				checkl = 0;
 				pagel = 0;
-				//cout << " "  << demCBBL(cbtam, lgio, lphut, lngay, lthang, lnam)<<" "<< endl;
-				/*outtextxy(getmaxx() - 700, yg + 50, (char*)"CHUYEN BAY MA: ");
-				rectangle(getmaxx() - 470, yg + 50, getmaxx() - 150, yg + 70)*/;
 				bar(xg + getmaxx() / 2 - 300, yg + 45, getmaxx() / 2 +50, yg + 750);
 				 line(getmaxx() - 750, 55, getmaxx() - 750, yg + 750);
 				 line(getmaxx() - 1000, 55, getmaxx() - 1000, yg + 750);
@@ -6910,10 +6829,7 @@ while (chuyenBay != NULL && demqt < 8) {
 				//=======================================================				 
 				nhap = 0;
 				ldemqtl = demqt;
-				//lcbdi += demqt;
-				cout << endl<<"demqt: " << demqt << endl;
-				//if (lgio!=0&&)
-				//ldemqtl = demqt;
+				
 			}
 				tempcb = chuyenBay;
 
@@ -6931,9 +6847,6 @@ while (chuyenBay != NULL && demqt < 8) {
 					pagel--;
 					checkl = pagel * 8;
 					cout << "checkl: " << checkl << endl;
-					//tempcb = cbtam;
-					//cout << check << " ";
-					//cout << check << " " << page << endl;
 					for (int j = 0; j < checkl; j++) {
 						tempcb = tempcb->next;
 						cout << tempcb->cb.trang_thai_cb << endl;

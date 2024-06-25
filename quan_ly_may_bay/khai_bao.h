@@ -27,7 +27,7 @@ struct DSMayBay {
 void ThemMayBay(MayBay, DSMayBay&);
 void HieuChinhMB(DSMayBay& DSMayBay ,MayBay* maybay, char sohieu[], char loai[], int soday, int sodong);
 void XoaMayBay(DSMayBay& , char[]);
-MayBay *TimSoHieu(char[], DSMayBay);
+MayBay *TimSoHieu(char[], DSMayBay); 
 //////
 ///////////struct chuyen bay
 struct Ve

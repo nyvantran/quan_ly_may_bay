@@ -1109,26 +1109,7 @@ void TraDongDay(char ve[], int& day, int& dong) {
 	}
 }
 
-// in so chuyen bay hoan tat
-//void demChuyenBayHT (PTRChuyenBay dau_chuyen_bay) 
-//{
-//	PTRChuyenBay tam1 = dau_chuyen_bay;
-//	PTRChuyenBay tam = dau_chuyen_bay;
-//	while (dau_chuyen_bay != NULL) {
-//		while (tam != NULL) { 
-//			if (strcmp(dau_chuyen_bay->cb.sh_Mb, tam->cb.sh_Mb) == 0 && tam->cb.trang_thai_cb == 3) {
-//				dau_chuyen_bay->dem++;
-//			}
-//			tam = tam->next;
-//		}
-//		tam = tam1;
-//		dau_chuyen_bay = dau_chuyen_bay->next;
-//	}
-//	dau_chuyen_bay = tam1;
-//
-//
-//}
-// Bublesort
+
 void Bublesort(PTRChuyenBay chuyenBay, DSMayBay &DsMayBay)
 {
 	MayBay* MBtemp;
@@ -1149,5 +1130,99 @@ void Bublesort(PTRChuyenBay chuyenBay, DSMayBay &DsMayBay)
 	
 	
 }
-
+//=============================
+int demCBBL(PTRChuyenBay chuyenbay, int gio, int phut, int ngay, int thang, int nam) {
+	int n = 0;
+	PTRChuyenBay q = chuyenbay;
+	//
+	if (gio != 0&&phut==0) {
+		while (q!=NULL) {
+			if (q->cb.ngay_gio_kh.gio_kh.gio == gio) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (gio == 0 && phut != 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.gio_kh.phut == phut) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (gio != 0 && phut != 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.gio_kh.phut == phut&& q->cb.ngay_gio_kh.gio_kh.gio == gio) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay != 0 && thang == 0 && nam == 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.ngay==ngay) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay == 0 && thang != 0 && nam == 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.thang == thang) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay == 0 && thang == 0 && nam != 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.nam == nam) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay != 0 && thang != 0 && nam == 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.thang == thang&& q->cb.ngay_gio_kh.ngay_kh.ngay==ngay) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay != 0 && thang == 0 && nam != 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.nam == nam && q->cb.ngay_gio_kh.ngay_kh.ngay == ngay) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+	//
+	if (ngay == 0 && thang != 0 && nam != 0) {
+		while (q != NULL) {
+			if (q->cb.ngay_gio_kh.ngay_kh.thang == thang && q->cb.ngay_gio_kh.ngay_kh.nam == nam) {
+				n++;
+			}
+			q = q->next;
+		}
+		return n;
+	}
+}
 

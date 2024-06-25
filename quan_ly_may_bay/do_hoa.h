@@ -5,6 +5,7 @@
 #include<Windows.h>
 #include"khai_bao.h"
 #include"graphics.h"
+
 #pragma comment(lib,"graphics.lib")
 using namespace std;
 void* Menu();
@@ -62,9 +63,10 @@ void dongho(int xi, int yi, int* x, int* y);
 void xuatSoCBHT(int*,int*,PTRChuyenBay,DSMayBay);
 //=================================
 void xuatSoVeTrong(int*, int*, PTRChuyenBay, DSMayBay);
-bool mousexv(int* , int* );
-void checkmouse(bool x);
+int mouseNhapSH(int*, int*);
 void locVeMB(int* , int* , PTRChuyenBay , DSMayBay );
+int mouseBL(int*, int*);
+int mousePB(int* , int* );
 //=======
 void xuatSoCBHT(int*,int*,PTRChuyenBay,DSMayBay);
 
